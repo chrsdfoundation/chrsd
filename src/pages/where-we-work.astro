@@ -1,0 +1,346 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+
+function slugify(name: string): string {
+  return name.toLowerCase().replace(/['']/g, '').replace(/\s+/g, '-');
+}
+
+const divisions = [
+  {
+    name: 'Barishal',
+    slug: 'barishal',
+    districts: ['Barguna', 'Barishal', 'Bhola', 'Jhalokati', 'Patuakhali', 'Pirojpur'],
+  },
+  {
+    name: 'Chattogram',
+    slug: 'chattogram',
+    districts: ['Bandarban', 'Brahmanbaria', 'Chandpur', 'Chattogram', "Cox's Bazar", 'Feni', 'Khagrachhari', 'Lakshmipur', 'Noakhali', 'Rangamati'],
+  },
+  {
+    name: 'Dhaka',
+    slug: 'dhaka',
+    districts: ['Dhaka', 'Gazipur', 'Gopalganj', 'Kishoreganj', 'Madaripur', 'Manikganj', 'Munshiganj', 'Narayanganj', 'Narsingdi', 'Rajbari', 'Shariatpur', 'Faridpur', 'Tangail'],
+  },
+  {
+    name: 'Khulna',
+    slug: 'khulna',
+    districts: ['Bagerhat', 'Chuadanga', 'Jessore', 'Jhenaidah', 'Khulna', 'Kushtia', 'Magura', 'Meherpur', 'Narail', 'Satkhira'],
+  },
+  {
+    name: 'Mymensingh',
+    slug: 'mymensingh',
+    districts: ['Jamalpur', 'Mymensingh', 'Netrokona', 'Sherpur'],
+  },
+  {
+    name: 'Rajshahi',
+    slug: 'rajshahi',
+    districts: ['Bogura', 'Joypurhat', 'Naogaon', 'Natore', 'Chapainawabganj', 'Pabna', 'Rajshahi', 'Sirajganj'],
+  },
+  {
+    name: 'Rangpur',
+    slug: 'rangpur',
+    districts: ['Dinajpur', 'Gaibandha', 'Kurigram', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Thakurgaon'],
+  },
+  {
+    name: 'Sylhet',
+    slug: 'sylhet',
+    districts: ['Habiganj', 'Moulvibazar', 'Sunamganj', 'Sylhet'],
+  },
+];
+
+const totalDistricts = divisions.reduce((sum, d) => sum + d.districts.length, 0);
+---
+<BaseLayout
+  title="Where We Work"
+  description="CHRSD operates across all 8 divisions and 64 districts of Bangladesh. Explore our regional field presence and active programme coverage."
+>
+  <PageHero
+    overline="Geography & operations"
+    title="Operating across every division of Bangladesh"
+    lead="CHRSD maintains field presence across all 8 administrative divisions and 64 districts of Bangladesh — a national operational footprint built over more than 50 years of community-embedded work."
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="summary-stats">
+        <div class="stat-item">
+          <span class="stat-item__number">8</span>
+          <span class="stat-item__label">Administrative Divisions</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__number">{totalDistricts}</span>
+          <span class="stat-item__label">Districts Covered</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__number">3</span>
+          <span class="stat-item__label">Active Programmes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-item__number">50+</span>
+          <span class="stat-item__label">Years of Operations</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="overline">Division coverage</p>
+      <h2>All 8 divisions, district by district</h2>
+      <p class="section-lead">
+        Select a district to explore CHRSD's programme activity, field office contacts, and
+        local impact data for that area.
+      </p>
+
+      <div class="division-grid">
+        {divisions.map((division) => (
+          <article class="division-card">
+            <header class="division-card__header">
+              <h3 class="division-card__name">{division.name} Division</h3>
+              <span class="division-card__badge">{division.districts.length} districts</span>
+            </header>
+            <ul class="district-list" role="list">
+              {division.districts.map((district) => (
+                <li>
+                  <a
+                    href={`/where-we-work/${division.slug}/${slugify(district)}/`}
+                    class="district-link"
+                  >
+                    {district}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Field telemetry</p>
+      <h2>Regional Field Office Telemetry</h2>
+      <p class="section-lead">
+        Live data integration is managed through Nevronus Systems' field verification platform,
+        providing near-real-time programme monitoring across all active districts.
+      </p>
+
+      <div class="telemetry-panel">
+        <div class="telemetry-panel__map" aria-label="Bangladesh administrative outline — telemetry coverage indicator">
+          <svg
+            viewBox="0 0 340 380"
+            xmlns="http://www.w3.org/2000/svg"
+            class="bd-outline"
+            aria-hidden="true"
+            role="img"
+          >
+            <defs>
+              <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#143C14" stop-opacity="0.12" />
+                <stop offset="100%" stop-color="#28A064" stop-opacity="0.18" />
+              </linearGradient>
+              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#C5DCCB" stroke-width="0.5" />
+              </pattern>
+            </defs>
+            <rect width="340" height="380" fill="url(#grid)" rx="8" />
+            <path
+              d="M 80 40 L 170 20 L 280 50 L 310 110 L 300 180 L 260 240 L 290 300 L 250 350 L 180 360 L 120 340 L 70 290 L 50 220 L 60 160 L 40 100 Z"
+              fill="url(#mapGrad)"
+              stroke="var(--color-institutional)"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+            <circle cx="160" cy="150" r="5" fill="var(--color-institutional)" opacity="0.8" />
+            <circle cx="200" cy="200" r="4" fill="var(--color-institutional)" opacity="0.7" />
+            <circle cx="130" cy="220" r="4" fill="var(--color-institutional)" opacity="0.7" />
+            <circle cx="230" cy="130" r="4" fill="var(--color-institutional)" opacity="0.7" />
+            <circle cx="110" cy="140" r="3" fill="var(--color-light-green)" opacity="0.8" />
+            <circle cx="175" cy="280" r="4" fill="var(--color-institutional)" opacity="0.6" />
+            <circle cx="240" cy="270" r="3" fill="var(--color-light-green)" opacity="0.7" />
+            <circle cx="90" cy="190" r="3" fill="var(--color-light-green)" opacity="0.6" />
+            <text x="170" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="var(--color-forest)" font-weight="600">Bangladesh</text>
+            <text x="170" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="var(--color-slate)">All 8 Divisions Active</text>
+          </svg>
+        </div>
+
+        <div class="telemetry-panel__info">
+          <p class="telemetry-panel__label">Regional Field Office Telemetry — Live data integration via Nevronus Systems</p>
+          <div class="telemetry-chips">
+            <div class="chip">
+              <span class="chip__key">Last sync</span>
+              <span class="chip__val">Q2 2026</span>
+            </div>
+            <div class="chip">
+              <span class="chip__key">Active nodes</span>
+              <span class="chip__val">64</span>
+            </div>
+            <div class="chip">
+              <span class="chip__key">Data latency</span>
+              <span class="chip__val">&lt; 5 min</span>
+            </div>
+          </div>
+          <div class="telemetry-status">
+            <span class="telemetry-status__dot" aria-hidden="true"></span>
+            <span>All field nodes reporting normally</span>
+          </div>
+          <p class="telemetry-note">
+            Field telemetry data is collected through Nevronus Systems' mobile verification platform,
+            aggregated at divisional hubs, and reviewed by CHRSD's Programme Management Unit on a
+            quarterly basis. Node counts reflect active data submission points across all 64 districts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-cta">
+        <div>
+          <p class="overline">Field offices</p>
+          <h2>Connect with a regional team</h2>
+          <p>
+            CHRSD field offices are embedded in local communities across all divisions. To reach
+            a specific field team, or to enquire about programme activity in a particular district,
+            contact our central coordination unit.
+          </p>
+        </div>
+        <a href="/get-involved/contact-us/" class="btn btn--solid btn--md">Contact field operations &rarr;</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .summary-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background: var(--color-border-green); border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .stat-item {
+    background: #fff; padding: 32px 28px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .stat-item__number {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(36px, 4vw, 52px); color: var(--color-forest);
+    line-height: 1; letter-spacing: -0.03em;
+  }
+  .stat-item__label {
+    font-size: 14px; color: var(--color-slate); font-weight: 500; line-height: 1.4;
+  }
+
+  .section-lead {
+    font-size: 16px; color: var(--color-slate); max-width: 65ch;
+    line-height: 1.7; margin-top: 14px; margin-bottom: 40px;
+  }
+
+  .division-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .division-card {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .division-card:hover { box-shadow: 0 6px 24px rgba(20, 60, 20, 0.1); }
+
+  .division-card__header {
+    background: var(--color-forest); padding: 16px 18px;
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .division-card__name {
+    font-family: var(--font-display); font-weight: 700; font-size: 15px;
+    color: #fff; margin: 0;
+  }
+  .division-card__badge {
+    background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: var(--radius-pill); white-space: nowrap; flex-shrink: 0;
+  }
+
+  .district-list {
+    list-style: none; padding: 14px 0; margin: 0;
+    display: flex; flex-direction: column;
+  }
+  .district-list li { border-bottom: 1px solid var(--color-border-green); }
+  .district-list li:last-child { border-bottom: none; }
+
+  .district-link {
+    display: block; padding: 9px 18px;
+    font-size: 14px; color: var(--color-forest); text-decoration: none;
+    font-weight: 500; transition: background 0.15s, color 0.15s;
+  }
+  .district-link:hover {
+    background: var(--color-tint); color: var(--color-institutional);
+  }
+
+  .telemetry-panel {
+    background: var(--color-forest); border-radius: var(--radius);
+    display: grid; grid-template-columns: 320px 1fr; gap: 0;
+    overflow: hidden; margin-top: 32px;
+  }
+  .telemetry-panel__map {
+    background: rgba(0,0,0,0.15); padding: 32px; display: flex; align-items: center; justify-content: center;
+  }
+  .bd-outline { width: 100%; max-width: 260px; height: auto; display: block; }
+  .telemetry-panel__info { padding: 36px 40px; color: #fff; }
+  .telemetry-panel__label {
+    font-family: var(--font-display); font-weight: 700; font-size: 17px;
+    color: #fff; line-height: 1.4; margin-bottom: 28px;
+  }
+
+  .telemetry-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
+  .chip {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius-sm); padding: 10px 16px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .chip__key { font-size: 10px; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 600; }
+  .chip__val { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: #fff; }
+
+  .telemetry-status {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 20px;
+  }
+  .telemetry-status__dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #4ade80; flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(74,222,128,0.25);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.25); }
+    50% { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
+  }
+  .telemetry-note {
+    font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65; margin: 0;
+  }
+
+  .contact-cta {
+    display: flex; align-items: center; justify-content: space-between; gap: 40px;
+    background: var(--color-tint); border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 40px 48px;
+  }
+  .contact-cta h2 { margin-top: 10px; margin-bottom: 14px; }
+  .contact-cta p { font-size: 15px; color: var(--color-slate); line-height: 1.7; max-width: 55ch; margin: 0; }
+
+  @media (max-width: 1200px) {
+    .division-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 1024px) {
+    .summary-stats { grid-template-columns: repeat(2, 1fr); }
+    .telemetry-panel { grid-template-columns: 1fr; }
+    .telemetry-panel__map { padding: 24px; }
+    .bd-outline { max-width: 200px; }
+    .division-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .summary-stats { grid-template-columns: 1fr 1fr; }
+    .division-grid { grid-template-columns: 1fr; }
+    .contact-cta { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
+  }
+</style>

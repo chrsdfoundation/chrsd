@@ -1,0 +1,111 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/Button.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+type Props = { entry: CollectionEntry<'projects'> };
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await entry.render();
+---
+<BaseLayout title={data.title} description={data.summary} image={data.coverImage}>
+  <article>
+    <!-- Programme header -->
+    <header class="phead section--dark">
+      <div class="container">
+        <p class="overline">{data.focusArea}</p>
+        <h1 class="phead__title">{data.title}</h1>
+        <p class="lead phead__lead">{data.summary}</p>
+        <ul class="phead__facts">
+          <li><span>Location</span>{data.country}</li>
+          {data.startYear && <li><span>Active since</span>{data.startYear}</li>}
+          <li><span>Status</span>{data.status[0].toUpperCase() + data.status.slice(1)}</li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Cover image with mandated metadata caption (Phase 1.4) -->
+    <figure class="pcover container">
+      <img src={data.coverImage} alt={data.coverAlt} width="1200" height="640" />
+      {data.imageMeta?.photographer && (
+        <figcaption class="meta">
+          Photo: {data.imageMeta.photographer}
+          {data.imageMeta.location && ` · ${data.imageMeta.location}`}
+          {data.imageMeta.program && ` · ${data.imageMeta.program}`}
+        </figcaption>
+      )}
+    </figure>
+
+    <!-- Metrics strip -->
+    {data.metrics.length > 0 && (
+      <section class="pmetrics section--alt">
+        <div class="container pmetrics__grid">
+          {data.metrics.map((m) => (
+            <div class="pmetric">
+              <span class="pmetric__value">{m.value}</span>
+              <span class="pmetric__label">{m.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Modular Challenge -> Approach -> Evidence (Phase 5, 3.4) -->
+    <section class="section">
+      <div class="container pbody">
+        {data.challenge && (
+          <div class="pblock">
+            <p class="overline">The challenge</p>
+            <p class="pblock__text">{data.challenge}</p>
+          </div>
+        )}
+        {data.approach && (
+          <div class="pblock">
+            <p class="overline">Our approach</p>
+            <p class="pblock__text">{data.approach}</p>
+          </div>
+        )}
+        <div class="prose pblock">
+          <p class="overline">The evidence</p>
+          <Content />
+        </div>
+
+        <div class="pcta">
+          <Button href="/our-work/" variant="outline">&larr; All programmes</Button>
+          <Button href="/get-involved/partnership/" variant="solid">Partner on this work</Button>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .phead { background: var(--color-forest); color: #fff; padding-block: 64px 56px; }
+  .phead__title { color: #fff; margin-top: 14px; max-width: 20ch; }
+  .phead__lead { color: rgba(255, 255, 255, 0.85); margin-top: 16px; max-width: 60ch; }
+  .phead__facts { list-style: none; padding: 0; display: flex; gap: 40px; margin-top: 28px; flex-wrap: wrap; }
+  .phead__facts li { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: #fff; }
+  .phead__facts span { display: block; font-family: var(--font-body); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 4px; }
+
+  .pcover { margin-top: -40px; position: relative; z-index: 2; }
+  .pcover img { border-radius: var(--radius); aspect-ratio: 15 / 8; object-fit: cover; box-shadow: var(--shadow-card-hover); width: 100%; }
+  .pcover figcaption { margin-top: 10px; }
+
+  .pmetrics { padding-block: 40px; }
+  .pmetrics__grid { display: flex; flex-wrap: wrap; gap: 48px; }
+  .pmetric__value { display: block; font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--color-institutional); line-height: 1; }
+  .pmetric__label { display: block; color: var(--text-muted); margin-top: 6px; font-size: 15px; }
+
+  .pbody { max-width: 760px; }
+  .pblock + .pblock { margin-top: 40px; }
+  .pblock__text { font-size: var(--fs-lead); line-height: 1.6; margin-top: 14px; }
+  .pcta { display: flex; gap: 14px; margin-top: 48px; flex-wrap: wrap; }
+</style>

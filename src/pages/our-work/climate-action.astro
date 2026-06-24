@@ -1,0 +1,612 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const heroStats = [
+  { n: '250 Million', l: 'Trees — national planting target' },
+  { n: '5 Years', l: 'Programme horizon' },
+  { n: '85–90%', l: 'Verified survival rate target' },
+  { n: 'BDT 200 Cr', l: 'Phase 1 programme budget' },
+];
+
+const pillars = [
+  {
+    num: '01',
+    title: 'Native & Climate-Resilient Species Selection',
+    body: 'Suitability mapping using Bangladesh Forest Department species databases cross-referenced with IPCC vulnerability zone data establishes which species are planted where. Priority species for coastal and saline zones include Hijal, Koroch, and Swamp Apple — species proven to withstand saltwater inundation and tidal stress. Upland and hill tract sites receive Teak, Bamboo, and Jackfruit, selected for rapid canopy establishment and community livelihood value. Neem, Arjun, and Shimul are deployed across plains and agricultural buffer zones for their carbon sequestration rate, nitrogen fixation capacity, and deep root stabilisation.',
+    detail: 'Each species is selected against three criteria: carbon sequestration rate, soil stabilisation capacity, and community livelihood value — ensuring ecological and human returns align.',
+  },
+  {
+    num: '02',
+    title: 'GIS Geospatial Tagging',
+    body: 'Every sapling receives a unique GIS Plot ID at the moment of planting. Field teams use the Nevronus Systems mobile application to record GPS coordinates to ±3 metre accuracy, planting date, species code, and the identity of the responsible custodian. This data syncs in real time to the NSADMP Central Dashboard — creating the first nationally verifiable, tree-level plantation registry in Bangladesh.',
+    detail: 'GIS tagging transforms plantation records from paper logs into a live, auditable national registry — enabling ministry oversight, donor verification, and independent audit without requiring physical site visits for every plot.',
+  },
+  {
+    num: '03',
+    title: 'Satellite-Enabled Remote Sensing — NDVI Analysis',
+    body: 'Bi-monthly Normalised Difference Vegetation Index (NDVI) analysis is conducted using Sentinel-2 and Landsat-8 satellite imagery. NDVI thresholds define three health classifications: Healthy (NDVI 0.4 or above), Stressed (0.2 to 0.39), and Critical/Replant (below 0.2). Automated alerts trigger field verification visits when NDVI drops below threshold for any registered plot — replacing manual visual inspection as the primary survival monitoring method.',
+    detail: 'Remote sensing at this scale replaces the most labour-intensive and least reliable element of traditional plantation monitoring — the manual walk-through — with continuous, objective, satellite-derived data.',
+  },
+  {
+    num: '04',
+    title: 'Mobile Field Verification',
+    body: 'Quarterly ground-truth audits are conducted by trained field foresters using the Nevronus mobile application. Verification data collected at each visit includes: photographic evidence, tree height measurement, canopy diameter, and pest or disease flags. All field verifications are timestamped and GPS-locked. Independent third-party audits are scheduled at 12-month, 24-month, and 48-month milestones to provide externally verified survival data for ministry reporting and donor accountability.',
+    detail: 'The combination of satellite monitoring and quarterly physical verification creates a two-layer accountability system that detects problems early and provides defensible evidence of programme performance.',
+  },
+];
+
+const alignments = [
+  { label: 'Paris Agreement', detail: 'Bangladesh Nationally Determined Contributions (NDCs)' },
+  { label: 'Mujib Climate Prosperity Plan', detail: 'GoB national climate strategy' },
+  { label: 'CBD Post-2020 Framework', detail: 'Convention on Biological Diversity Global Biodiversity Framework' },
+  { label: 'SDG 13', detail: 'Climate Action' },
+  { label: 'SDG 15', detail: 'Life on Land' },
+  { label: 'MoEFCC Formal Receipt', detail: 'Programme formally submitted and received, Q1 2026' },
+];
+---
+<BaseLayout
+  title="Climate Action — National Smart Afforestation Programme"
+  description="CHRSD's National Smart Afforestation and Digital Monitoring Programme (NSADMP) — targeting 250 million trees across Bangladesh using GIS tagging, satellite NDVI monitoring, and technology-verified survival tracking."
+>
+  <PageHero
+    overline="Our work · Climate action"
+    title="National Smart Afforestation & Digital Monitoring Programme"
+    lead="NSADMP is CHRSD's flagship climate intervention — formally submitted to the Ministry of Environment, Forest and Climate Change — targeting the plantation and verified survival of 250 million native and climate-resilient trees over five years, directly supporting Bangladesh's commitments under the Paris Agreement."
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Programme at a glance</p>
+      <div class="hero-stats">
+        {heroStats.map((s) => (
+          <div class="hero-stat">
+            <span class="hero-stat__n">{s.n}</span>
+            <span class="hero-stat__l">{s.l}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="overview-layout">
+        <div class="overview__text">
+          <p class="overline">Programme overview</p>
+          <h2>Afforestation at national scale</h2>
+          <p>
+            The National Smart Afforestation and Digital Monitoring Programme (NSADMP) represents
+            CHRSD's most ambitious climate intervention — and Bangladesh's most technologically
+            advanced publicly submitted plantation programme. NSADMP was formally submitted to and
+            received by the Ministry of Environment, Forest and Climate Change (MoEFCC), Government
+            of Bangladesh in Q1 2026.
+          </p>
+          <p>
+            The programme directly supports Bangladesh's Nationally Determined Contributions (NDCs)
+            under the Paris Agreement and the Mujib Climate Prosperity Plan — targeting the
+            plantation and independently verified survival of 250 million (25 crore) native and
+            climate-resilient trees over five years.
+          </p>
+          <p>
+            What distinguishes NSADMP from conventional plantation drives is its technology
+            architecture. Every tree is registered. Every plot is satellite-monitored. Every
+            survival claim is verified. The programme makes it impossible to count a dead tree as a
+            living one — replacing the opacity that has historically made national plantation
+            figures unreliable with a transparent, auditable, tree-level record open to ministerial
+            and independent review.
+          </p>
+        </div>
+        <div class="overview__aside">
+          <div class="aside-stat-card">
+            <p class="overline">Baseline comparison</p>
+            <h3>Why verification changes everything</h3>
+            <p>
+              The national average unverified plantation survival rate in Bangladesh is estimated at
+              40–55 percent, based on Bangladesh Forest Department data. Without systematic
+              verification, millions of planted trees are counted as surviving when they have
+              already died.
+            </p>
+            <p>
+              NSADMP targets an 85–90 percent verified survival rate at 12 months — more than
+              doubling the unverified national average — through technology-driven early warning,
+              custodian accountability, and systematic replanting protocols.
+            </p>
+            <div class="comparison">
+              <div class="comparison__bar">
+                <span class="comparison__label">National avg. (unverified)</span>
+                <div class="comparison__track">
+                  <div class="comparison__fill comparison__fill--baseline" style="width: 47.5%"></div>
+                  <span class="comparison__pct">40–55%</span>
+                </div>
+              </div>
+              <div class="comparison__bar">
+                <span class="comparison__label">NSADMP target (verified)</span>
+                <div class="comparison__track">
+                  <div class="comparison__fill comparison__fill--target" style="width: 87.5%"></div>
+                  <span class="comparison__pct comparison__pct--light">85–90%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="pillars-head">
+        <p class="overline">Technology architecture</p>
+        <h2>Four strategic pillars</h2>
+        <p class="pillars-intro">
+          NSADMP's performance depends on four interlocking technological and operational pillars
+          that together create a closed-loop monitoring system — from sapling selection through to
+          independently verified survival.
+        </p>
+      </div>
+      <div class="pillars">
+        {pillars.map((p) => (
+          <article class="pillar">
+            <div class="pillar__head">
+              <span class="pillar__num">{p.num}</span>
+              <h3 class="pillar__title">{p.title}</h3>
+            </div>
+            <p class="pillar__body">{p.body}</p>
+            <div class="pillar__callout">
+              <span class="pillar__callout-rule" aria-hidden="true"></span>
+              <p>{p.detail}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="methodology-layout">
+        <div class="methodology__text">
+          <p class="overline">Survival rate methodology</p>
+          <h2>How we measure — and guarantee — survival</h2>
+          <p>
+            NSADMP's 85–90 percent verified survival target at 12 months is not aspirational —
+            it is the designed outcome of a system built specifically to achieve it.
+          </p>
+          <p>
+            The four mechanisms that close the gap between planting and verified survival are:
+          </p>
+          <ul class="method-list">
+            <li>
+              <strong>Early-warning NDVI alerts.</strong> Bi-monthly satellite analysis detects
+              vegetation stress months before a tree dies — giving field teams time to intervene
+              with irrigation support, pest management, or replanting before loss is confirmed.
+            </li>
+            <li>
+              <strong>Custodian accountability via GIS registration.</strong> Every tree is
+              linked to a named, GPS-registered custodian. Custodian stewardship is tracked
+              through the Nevronus mobile platform. Accountability is built into the data
+              architecture.
+            </li>
+            <li>
+              <strong>Community stewardship incentives.</strong> Custodians and partner
+              communities receive structured incentives tied to verified survival rates — aligning
+              financial interest with ecological outcome.
+            </li>
+            <li>
+              <strong>Systematic replanting protocols.</strong> Any plot where NDVI falls into
+              the Critical classification triggers a mandatory replanting protocol within a
+              defined response window. Replanting is recorded in the central registry and counted
+              separately from first-planting survival data to ensure statistical integrity.
+            </li>
+          </ul>
+        </div>
+        <div class="methodology__visual">
+          <div class="ndvi-legend">
+            <p class="overline">NDVI health classifications</p>
+            <div class="ndvi-band ndvi-band--healthy">
+              <span class="ndvi-band__label">Healthy</span>
+              <span class="ndvi-band__range">NDVI ≥ 0.4</span>
+              <span class="ndvi-band__action">No action required</span>
+            </div>
+            <div class="ndvi-band ndvi-band--stressed">
+              <span class="ndvi-band__label">Stressed</span>
+              <span class="ndvi-band__range">NDVI 0.2 – 0.39</span>
+              <span class="ndvi-band__action">Field check triggered</span>
+            </div>
+            <div class="ndvi-band ndvi-band--critical">
+              <span class="ndvi-band__label">Critical / Replant</span>
+              <span class="ndvi-band__range">NDVI &lt; 0.2</span>
+              <span class="ndvi-band__action">Mandatory replanting protocol</span>
+            </div>
+            <p class="ndvi-source">
+              Derived from Sentinel-2 and Landsat-8 imagery. Thresholds validated against
+              Bangladesh Forest Department reference data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Policy alignment</p>
+      <h2>International and national frameworks</h2>
+      <p class="alignment-intro">
+        NSADMP is explicitly designed to advance Bangladesh's commitments under the following
+        international and national policy frameworks.
+      </p>
+      <div class="alignment-grid">
+        {alignments.map((a) => (
+          <div class="alignment-item">
+            <span class="alignment-item__rule" aria-hidden="true"></span>
+            <strong class="alignment-item__label">{a.label}</strong>
+            <span class="alignment-item__detail">{a.detail}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-block">
+        <div class="cta-block__text">
+          <p class="overline">Engage with NSADMP</p>
+          <h2>Partner with us on climate action</h2>
+          <p>
+            NSADMP is seeking strategic partners — including government bodies, international
+            development organisations, climate finance institutions, and corporate sustainability
+            programmes — to co-invest in verified, technology-tracked afforestation at national
+            scale in Bangladesh.
+          </p>
+          <p>
+            We welcome enquiries from parties interested in: programme co-funding, carbon credit
+            verification partnerships, technical collaboration, or policy-level engagement with
+            MoEFCC on NSADMP's formal implementation pathway.
+          </p>
+        </div>
+        <div class="cta-block__actions">
+          <Button href="/get-involved/partnership/" variant="solid">Explore partnership</Button>
+          <Button href={`mailto:${site.email}?subject=NSADMP%20Partnership%20Enquiry`} variant="outline">Email us directly</Button>
+          <Button href="/our-work/tree-planting/" variant="outline">Community tree planting</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 28px;
+    background: #fff;
+  }
+  .hero-stat {
+    padding: 36px 24px;
+    text-align: center;
+    border-right: 1px solid var(--color-border-green);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat__n {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--color-institutional);
+    line-height: 1.1;
+  }
+  .hero-stat__l {
+    display: block;
+    font-size: 13px;
+    color: var(--color-slate);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+
+  .overview-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 64px;
+    align-items: start;
+  }
+  .overview__text h2 { margin: 12px 0 20px; }
+  .overview__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 18px; }
+
+  .aside-stat-card {
+    background: var(--color-tint);
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 32px;
+    position: sticky;
+    top: 24px;
+  }
+  .aside-stat-card h3 { font-size: 19px; color: var(--color-forest); margin: 10px 0 16px; }
+  .aside-stat-card p { color: var(--color-slate); font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
+
+  .comparison { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+  .comparison__bar { display: flex; flex-direction: column; gap: 6px; }
+  .comparison__label { font-size: 12px; color: var(--color-slate); font-family: var(--font-display); font-weight: 600; }
+  .comparison__track {
+    position: relative;
+    background: var(--color-border-green);
+    border-radius: var(--radius-pill);
+    height: 28px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .comparison__fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: var(--radius-pill);
+    transition: width 0.6s var(--ease);
+  }
+  .comparison__fill--baseline { background: var(--color-border-green); }
+  .comparison__fill--target { background: var(--color-institutional); }
+  .comparison__pct {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--color-forest);
+    padding: 0 12px;
+  }
+  .comparison__pct--light { color: #fff; }
+
+  .pillars-head { max-width: 60ch; margin-bottom: 44px; }
+  .pillars-head h2 { margin-top: 12px; }
+  .pillars-intro { color: var(--color-slate); margin-top: 16px; line-height: 1.7; }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .pillar {
+    background: #fff;
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .pillar:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+
+  .pillar__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .pillar__num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--color-border-green);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .pillar__title {
+    font-size: 18px;
+    color: var(--color-forest);
+    line-height: 1.3;
+    margin: 0;
+  }
+  .pillar__body {
+    color: var(--color-slate);
+    font-size: 15px;
+    line-height: 1.78;
+    margin: 0 0 20px;
+  }
+  .pillar__callout {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border-green);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .pillar__callout-rule {
+    display: block;
+    width: 3px;
+    min-height: 100%;
+    background: var(--color-gold);
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+  .pillar__callout p {
+    font-size: 14px;
+    color: var(--color-slate);
+    line-height: 1.65;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .methodology-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 64px;
+    align-items: start;
+  }
+  .methodology__text h2 { margin: 12px 0 20px; }
+  .methodology__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+
+  .method-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .method-list li {
+    color: var(--color-slate);
+    font-size: 15px;
+    line-height: 1.75;
+    padding-left: 20px;
+    position: relative;
+  }
+  .method-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-institutional);
+  }
+  .method-list li strong { color: var(--color-forest); }
+
+  .ndvi-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: sticky;
+    top: 24px;
+  }
+  .ndvi-legend > .overline { margin-bottom: 16px; }
+
+  .ndvi-band {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 18px 20px;
+    border-radius: 0;
+    border: 1px solid var(--color-border-green);
+    border-bottom: none;
+  }
+  .ndvi-band:first-of-type { border-radius: var(--radius) var(--radius) 0 0; }
+  .ndvi-band:last-of-type { border-bottom: 1px solid var(--color-border-green); border-radius: 0 0 var(--radius) var(--radius); }
+
+  .ndvi-band--healthy { background: rgba(0, 120, 60, 0.08); }
+  .ndvi-band--stressed { background: rgba(180, 140, 40, 0.08); }
+  .ndvi-band--critical { background: rgba(180, 60, 40, 0.06); }
+
+  .ndvi-band__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-forest);
+  }
+  .ndvi-band--stressed .ndvi-band__label { color: var(--color-gold); }
+  .ndvi-band--critical .ndvi-band__label { color: #B43C28; }
+
+  .ndvi-band__range {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--color-slate);
+    font-variant-numeric: tabular-nums;
+  }
+  .ndvi-band__action {
+    font-size: 13px;
+    color: var(--color-slate);
+  }
+  .ndvi-source {
+    font-size: 12px;
+    color: var(--color-slate);
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+
+  .alignment-intro {
+    color: var(--color-slate);
+    max-width: 60ch;
+    line-height: 1.75;
+    margin-top: 14px;
+    margin-bottom: 36px;
+  }
+  .alignment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .alignment-item {
+    background: #fff;
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .alignment-item__rule {
+    display: block;
+    width: 36px;
+    height: 3px;
+    background: var(--color-institutional);
+    border-radius: 2px;
+    margin-bottom: 4px;
+  }
+  .alignment-item__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-forest);
+  }
+  .alignment-item__detail {
+    font-size: 14px;
+    color: var(--color-slate);
+    line-height: 1.55;
+  }
+
+  .cta-block {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 64px;
+    align-items: start;
+  }
+  .cta-block__text h2 { margin: 12px 0 20px; }
+  .cta-block__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+  .cta-block__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 60px;
+  }
+
+  @media (max-width: 1100px) {
+    .overview-layout { grid-template-columns: 1fr; gap: 40px; }
+    .aside-stat-card { position: static; }
+    .methodology-layout { grid-template-columns: 1fr; gap: 40px; }
+    .ndvi-legend { position: static; }
+    .cta-block { grid-template-columns: 1fr; gap: 32px; }
+    .cta-block__actions { padding-top: 0; flex-direction: row; flex-wrap: wrap; }
+  }
+  @media (max-width: 900px) {
+    .pillars { grid-template-columns: 1fr; }
+    .alignment-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .hero-stat:nth-child(2) { border-right: none; }
+    .hero-stat:nth-child(3),
+    .hero-stat:nth-child(4) { border-top: 1px solid var(--color-border-green); }
+    .alignment-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .hero-stat { border-right: none; border-bottom: 1px solid var(--color-border-green); }
+    .hero-stat:last-child { border-bottom: none; }
+  }
+</style>

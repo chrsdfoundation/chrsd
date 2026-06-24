@@ -1,0 +1,182 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const reports = [
+  { year: 'FY 2024–25', auditor: 'Rahman Mostafiz & Co., Chartered Accountants', status: 'Final', size: '2.4 MB' },
+  { year: 'FY 2023–24', auditor: 'Rahman Mostafiz & Co., Chartered Accountants', status: 'Final', size: '2.1 MB' },
+  { year: 'FY 2022–23', auditor: 'Islam & Partners, Chartered Accountants', status: 'Final', size: '1.9 MB' },
+  { year: 'FY 2021–22', auditor: 'Islam & Partners, Chartered Accountants', status: 'Final', size: '1.7 MB' },
+  { year: 'FY 2020–21', auditor: 'Islam & Partners, Chartered Accountants', status: 'Final', size: '1.5 MB' },
+];
+
+const principles = [
+  { title: 'Independent audit', body: 'Financial statements are examined annually by a registered firm of Chartered Accountants with no institutional ties to CHRSD.' },
+  { title: 'Board oversight', body: 'The Advisory Board reviews all financial reports before publication and may request additional scrutiny on any line item.' },
+  { title: 'Donor reporting', body: 'All donors receive project-specific financial reports aligned with their grant agreements, in addition to our annual audited accounts.' },
+  { title: 'Regulatory compliance', body: 'Accounts are filed annually with the Registrar of Joint Stock Companies and Firms under the Societies Registration Act, 1860.' },
+];
+---
+<BaseLayout
+  title="Financial Audits & External Reports"
+  description="CHRSD's audited annual accounts and external financial reports — an open record of how we use every taka."
+>
+  <PageHero
+    overline="Accountability hub · Financials"
+    title="Financial Audits & External Reports"
+    lead="We publish our independently audited financial statements every year. Transparency is not a donor requirement for us — it is a founding principle."
+  />
+
+  <!-- PRINCIPLES -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">How we manage funds</p>
+      <h2>Accountability principles</h2>
+      <div class="principles">
+        {principles.map((p) => (
+          <article class="principle">
+            <span class="principle__rule" aria-hidden="true"></span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AUDIT REPORTS TABLE -->
+  <section class="section">
+    <div class="container">
+      <div class="table-head">
+        <div>
+          <p class="overline">Audited accounts</p>
+          <h2>Annual financial reports</h2>
+          <p style="margin-top:12px;color:var(--color-slate);max-width:60ch">
+            Each report below has been independently examined and signed off by a
+            registered firm of Chartered Accountants. Reports are provided as
+            print-quality PDFs.
+          </p>
+        </div>
+        <Button href={`mailto:${site.email}?subject=Financial%20Report%20Request`} variant="outline">Request a copy by email</Button>
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="Annual financial reports">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Financial year</th>
+              <th scope="col">External auditor</th>
+              <th scope="col">Status</th>
+              <th scope="col">File size</th>
+              <th scope="col"><span class="visually-hidden">Download</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            {reports.map((r) => (
+              <tr>
+                <td class="year">{r.year}</td>
+                <td>{r.auditor}</td>
+                <td><span class="badge">{r.status}</span></td>
+                <td class="size">{r.size}</td>
+                <td class="action">
+                  <a
+                    href={`/reports/audit-${r.year.replace(/[^0-9]/g, '-')}.pdf`}
+                    class="dl-link"
+                    aria-label={`Download ${r.year} audit report (PDF, ${r.size})`}
+                  >
+                    Download PDF <span aria-hidden="true">↓</span>
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        Reports older than FY 2020–21 are available on request. Contact us at
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- EXTERNAL REVIEWS -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="ext">
+        <div>
+          <p class="overline">Beyond the accounts</p>
+          <h2>External programme evaluations</h2>
+          <p style="margin-top:12px;color:var(--color-slate)">
+            In addition to financial audits, CHRSD commissions independent programme
+            evaluations aligned with OECD-DAC criteria (relevance, coherence,
+            effectiveness, efficiency, impact, sustainability). Evaluation reports are
+            published in full on this page as they are finalised.
+          </p>
+          <p style="margin-top:12px;color:var(--color-slate)">
+            Upcoming evaluation reports for NSADMP Phase I and the SDAMSMP pilot
+            are expected Q3 2026.
+          </p>
+        </div>
+        <div class="contact-box">
+          <p class="overline">Questions?</p>
+          <h3>Contact our Finance team</h3>
+          <p>For detailed budget breakdowns, grant-specific reports, or queries about our financial management practices, get in touch.</p>
+          <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:12px">
+            <Button href="/get-involved/contact-us/" variant="solid">Contact us</Button>
+            <Button href="/about-us/governance-and-good-practices/partners/" variant="outline">View partners</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Principles */
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 36px; }
+  .principle { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 26px; }
+  .principle__rule { display: block; width: 40px; height: 3px; background: var(--color-gold); border-radius: 2px; margin-bottom: 16px; }
+  .principle h3 { font-size: 17px; color: var(--color-forest); margin-bottom: 10px; }
+  .principle p { font-size: 15px; color: var(--color-slate); line-height: 1.65; }
+
+  /* Table */
+  .table-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+  .table-head h2 { margin-top: 12px; }
+  .table-wrap { border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: #fff; }
+  thead { background: var(--color-forest); }
+  th {
+    padding: 14px 20px; text-align: left;
+    font-family: var(--font-display); font-weight: 600; font-size: 13px;
+    color: rgba(255,255,255,0.9); letter-spacing: 0.04em; white-space: nowrap;
+  }
+  td { padding: 16px 20px; border-bottom: 1px solid var(--color-border-green); vertical-align: middle; font-size: 15px; color: var(--color-slate); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--color-tint); }
+  .year { font-family: var(--font-display); font-weight: 700; color: var(--color-forest); }
+  .size { white-space: nowrap; font-size: 13px; }
+  .badge { display: inline-block; background: rgba(0,120,60,0.1); color: var(--color-institutional); font-family: var(--font-display); font-weight: 600; font-size: 12px; padding: 3px 10px; border-radius: var(--radius-pill); }
+  .dl-link { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--color-institutional); text-decoration: none; white-space: nowrap; }
+  .dl-link:hover { color: var(--color-forest); text-decoration: underline; }
+  .table-note { margin-top: 14px; font-size: 14px; color: var(--color-slate); }
+  .table-note a { color: var(--color-institutional); }
+
+  /* External section */
+  .ext { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .contact-box { background: var(--color-forest); color: #fff; border-radius: var(--radius); padding: 36px; }
+  .contact-box h3 { color: #fff; margin: 12px 0 14px; }
+  .contact-box p { color: rgba(255,255,255,0.82); line-height: 1.7; }
+
+  @media (max-width: 1024px) {
+    .principles { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .ext { grid-template-columns: 1fr; }
+    .table-head { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .principles { grid-template-columns: 1fr; }
+  }
+</style>

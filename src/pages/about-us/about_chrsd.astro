@@ -1,0 +1,344 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+
+const pillars = [
+  {
+    no: '01',
+    title: 'Environmental Sustainability & Climate Resilience',
+    body: 'Advancing afforestation, climate adaptation, ecosystem conservation, and nature-based solutions to strengthen resilience and protect biodiversity.',
+  },
+  {
+    no: '02',
+    title: 'Research, Innovation & Policy Development',
+    body: 'Producing rigorous, evidence-based research to inform public policy, including environmental and socio-economic impact assessments.',
+  },
+  {
+    no: '03',
+    title: 'Community Engagement & Participation',
+    body: 'Empowering communities through grassroots mobilisation, capacity building, and inclusive stakeholder engagement for locally owned outcomes.',
+  },
+  {
+    no: '04',
+    title: 'Technology-Enabled Development',
+    body: 'Applying digital tools — GIS monitoring, data analytics, and transparent reporting systems — to enhance efficiency, accountability, and measurable impact.',
+  },
+];
+
+const values = [
+  { title: 'Independent', body: 'We operate free from political, religious, or external influence of any kind.' },
+  { title: 'Rights-Based', body: 'All initiatives are grounded in international human rights principles and frameworks.' },
+  { title: 'Collaborative', body: 'We coordinate closely with government bodies, local administrations, and civil society.' },
+  { title: 'Accountable', body: 'We are committed to transparency, ethical data practices, and verifiable results.' },
+];
+
+const programmes = [
+  {
+    no: '1',
+    title: 'Environmental Sustainability & Climate Action',
+    body: 'Leading the National Smart Afforestation & Digital Monitoring Program (NSADMP) to plant and digitally track 25 crore trees, securing high survival rates through satellite and GIS technology.',
+    tags: ['NSADMP', '25 Crore Trees'],
+  },
+  {
+    no: '2',
+    title: 'Digital Governance & Education',
+    body: 'Implementing the Smart Digital Attendance Management System (SDAMSMP) to eliminate proxy attendance and strengthen teacher accountability across 65,000+ government primary schools.',
+    tags: ['SDAMSMP', '65,000+ Schools'],
+  },
+  {
+    no: '3',
+    title: 'Human Rights & Social Justice',
+    body: 'Providing free legal assistance to the destitute, advocating against human trafficking, and conducting investigative research into corruption and financial crime.',
+    tags: ['Legal Aid', 'Anti-Trafficking'],
+  },
+  {
+    no: '4',
+    title: 'Socio-Economic Research',
+    body: 'Analysing labour-market dynamics to address unemployment and running anti-terror awareness campaigns that promote public safety and national cohesion.',
+    tags: ['Policy Research', 'Labour Markets'],
+  },
+];
+---
+<BaseLayout
+  title="About CHRSD"
+  description="The Centre for Humanitarian Research and Social Development Foundation is an independent, non-profit organisation working at the intersection of environmental sustainability, evidence-based policy research, and community-centred development."
+>
+  <PageHero
+    overline="About the Foundation · Registered under the Societies Registration Act, 1860"
+    title="Centre for Humanitarian Research & Social Development Foundation"
+    lead="A multi-disciplinary foundation committed to protecting human rights, advancing social justice, and fostering institutional accountability across Bangladesh and globally."
+  />
+
+  <!-- WHO WE ARE -->
+  <section class="section">
+    <div class="container who">
+      <div class="who__head">
+        <p class="overline">Who we are</p>
+        <h2>An independent force for <em>lasting change</em></h2>
+      </div>
+      <div class="who__body">
+        <p class="lead">
+          The Centre for Humanitarian Research and Social Development Foundation (CHRSD)
+          is an independent, non-political, and non-profit organisation working at the
+          intersection of environmental sustainability, evidence-based policy research,
+          and community-centred development.
+        </p>
+        <p>
+          We operate as a multi-disciplinary foundation committed to protecting human
+          rights, advancing social justice, and fostering institutional accountability —
+          combining field evidence, technology-driven advocacy, and community action in
+          every programme we run.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMART APPROACH -->
+  <section class="section section--dark smart">
+    <div class="container">
+      <p class="overline overline--gold">Smart approach · Digital transformation</p>
+      <blockquote class="smart__quote">
+        In an era of rapid digital transformation, CHRSD bridges the gap between
+        <strong>humanitarian expertise</strong> and <strong>cutting-edge technology</strong>.
+      </blockquote>
+      <p class="smart__lead">
+        Through our strategic consortium with <strong>Nevronus Systems</strong>, we deploy
+        GIS, satellite remote sensing, and biometric verification so that every programme
+        achieves measurable, verifiable impact.
+      </p>
+      <ul class="smart__tags">
+        <li>GIS Mapping</li>
+        <li>Satellite Remote Sensing</li>
+        <li>Biometric Verification</li>
+        <li>Digital Monitoring</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- VISION & MISSION -->
+  <section class="section">
+    <div class="container">
+      <p class="overline">Our direction</p>
+      <div class="vm">
+        <article class="vm__card">
+          <h3>Our Vision</h3>
+          <p>
+            To build a greener, more climate-resilient, and digitally accountable nation,
+            aligned with the <strong>“Smart Bangladesh”</strong> framework.
+          </p>
+        </article>
+        <article class="vm__card">
+          <h3>Our Mission</h3>
+          <p>
+            To empower vulnerable communities through investigative research, advocacy for
+            rights-based laws, and the implementation of large-scale digital governance
+            programmes that ensure transparency and professional accountability.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUR CORE PILLARS -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Four core pillars</p>
+        <h2>Integrated, evidence-driven solutions</h2>
+        <p class="lead lede__sub">
+          CHRSD designs and delivers solutions that address environmental, social, and
+          economic challenges through four interconnected areas of work.
+        </p>
+      </div>
+      <div class="pillars">
+        {pillars.map((p) => (
+          <article class="pillar">
+            <span class="pillar__no">{p.no}</span>
+            <h3 class="pillar__title">{p.title}</h3>
+            <p class="pillar__body">{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUR CORE VALUES -->
+  <section class="section">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Strategic approach</p>
+        <h2>Guided by <em>four core values</em></h2>
+        <p class="lead lede__sub">
+          These values are not aspirational — they are operational commitments embedded in
+          every programme we run.
+        </p>
+      </div>
+      <div class="values">
+        {values.map((v) => (
+          <article class="value">
+            <span class="value__rule" aria-hidden="true"></span>
+            <h3 class="value__title">{v.title}</h3>
+            <p class="value__body">{v.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGH-IMPACT PROGRAMMES -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">What we do</p>
+        <h2>High-impact <em>programmes</em></h2>
+        <p class="lead lede__sub">
+          Four primary thematic pillars — each backed by digital infrastructure, field
+          evidence, and community ownership.
+        </p>
+      </div>
+      <div class="prog">
+        {programmes.map((p) => (
+          <article class="prog__item">
+            <span class="prog__no" aria-hidden="true">{p.no}</span>
+            <div class="prog__content">
+              <h3 class="prog__title">{p.title}</h3>
+              <p class="prog__body">{p.body}</p>
+              <ul class="prog__tags">
+                {p.tags.map((t) => <li>{t}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--dark cta">
+    <div class="container cta__inner">
+      <p class="cta__text">
+        CHRSD supports national development priorities through scalable, transparent, and
+        data-driven interventions — guided by strong governance and a results-oriented approach.
+      </p>
+      <div class="cta__actions">
+        <Button href="/our-work/" variant="solid">Our Work</Button>
+        <Button href="/impact/" variant="outline">See Impact</Button>
+        <Button href="https://donate.chrsd.org" variant="donate" external>Donate Now</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  em { font-style: normal; color: var(--color-institutional); }
+  .section--dark em { color: var(--color-light-green); }
+  .overline--gold { color: var(--color-gold); }
+
+  /* Who we are — asymmetric split */
+  .who { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
+  .who__head h2 { margin-top: 12px; }
+  .who__body p + p { margin-top: 18px; color: var(--text-muted); }
+
+  /* Smart approach */
+  .smart { background: var(--color-forest); color: #fff; }
+  .smart__quote {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(24px, 3.4vw, 38px); line-height: 1.25;
+    max-width: 24ch; margin: 22px 0 28px;
+    border-left: 4px solid var(--color-gold); padding-left: 26px;
+  }
+  .smart__quote strong { color: var(--color-gold); font-weight: 700; }
+  .smart__lead { color: rgba(255,255,255,0.85); max-width: 62ch; font-size: var(--fs-lead); }
+  .smart__lead strong { color: #fff; }
+  .smart__tags {
+    list-style: none; padding: 0; margin: 30px 0 0;
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  .smart__tags li {
+    font-family: var(--font-display); font-size: 14px; font-weight: 600;
+    color: #fff; border: 1px solid rgba(255,255,255,0.28);
+    padding: 8px 16px; border-radius: var(--radius-pill);
+  }
+
+  /* Vision & Mission */
+  .vm { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; }
+  .vm__card {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-top: 4px solid var(--color-institutional);
+    border-radius: var(--radius); padding: 34px;
+  }
+  .vm__card h3 { color: var(--color-forest); margin-bottom: 12px; }
+  .vm__card p { color: var(--text-muted); }
+  .vm__card strong { color: var(--color-ink); }
+
+  /* Shared lede */
+  .lede { max-width: 62ch; margin-bottom: 44px; }
+  .lede h2 { margin-top: 12px; }
+  .lede__sub { margin-top: 16px; color: var(--text-muted); }
+
+  /* Pillars */
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .pillar {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 32px; position: relative;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .pillar:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+  .pillar__no {
+    font-family: var(--font-display); font-weight: 800; font-size: 14px;
+    color: var(--color-gold); letter-spacing: 0.08em;
+  }
+  .pillar__title { color: var(--color-forest); margin: 10px 0 12px; font-size: 21px; line-height: 1.3; }
+  .pillar__body { color: var(--text-muted); font-size: 16px; }
+
+  /* Values */
+  .values { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .value { padding-top: 20px; }
+  .value__rule { display: block; width: 44px; height: 3px; background: var(--color-gold); border-radius: 2px; }
+  .value__title { color: var(--color-forest); margin: 16px 0 10px; }
+  .value__body { color: var(--text-muted); font-size: 16px; }
+
+  /* Programmes */
+  .prog { display: grid; gap: 18px; }
+  .prog__item {
+    display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start;
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 30px 34px;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .prog__item:hover { box-shadow: var(--shadow-card-hover); }
+  .prog__no {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 40px; line-height: 1; color: var(--color-border-green);
+  }
+  .prog__title { color: var(--color-forest); font-size: 22px; margin-bottom: 8px; }
+  .prog__body { color: var(--text-muted); max-width: 70ch; }
+  .prog__tags { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .prog__tags li {
+    font-size: 13px; font-weight: 600; color: var(--color-institutional);
+    background: var(--color-tint); border: 1px solid var(--color-border-green);
+    padding: 5px 12px; border-radius: var(--radius-pill);
+  }
+
+  /* CTA */
+  .cta { background: var(--color-forest); }
+  .cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .cta__text { color: rgba(255,255,255,0.88); max-width: 56ch; font-size: var(--fs-lead); }
+  .cta__actions { display: flex; flex-wrap: wrap; gap: 14px; flex-shrink: 0; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .values { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .who { grid-template-columns: 1fr; gap: 20px; }
+    .vm, .pillars { grid-template-columns: 1fr; }
+    .cta__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .values { grid-template-columns: 1fr; }
+    .prog__item { grid-template-columns: 1fr; gap: 10px; }
+    .prog__no { font-size: 30px; }
+  }
+</style>

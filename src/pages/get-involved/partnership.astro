@@ -1,0 +1,270 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const types = [
+  {
+    label: 'Government & Institutional',
+    title: 'Public sector partnerships',
+    body: 'We work alongside government ministries, district administrations, and statutory bodies to co-design and implement large-scale programmes — particularly in digital governance, afforestation, and community welfare.',
+    examples: ['Ministry of Environment, Forest & Climate Change', 'Local Government Division', 'District & Upazila Administrations'],
+  },
+  {
+    label: 'Academic & Research',
+    title: 'Research collaborations',
+    body: 'We co-author studies, share field data, and embed academic researchers within our programme teams. Partners gain access to unique longitudinal datasets; CHRSD gains methodological rigour.',
+    examples: ['Universities & research institutes', 'Think tanks and policy centres', 'International academic consortia'],
+  },
+  {
+    label: 'Civil Society & NGOs',
+    title: 'Civil society alliances',
+    body: 'We coordinate with local and national NGOs to avoid duplication, pool community trust, and deliver complementary services — especially in human rights advocacy and community welfare.',
+    examples: ['Community-based organisations', 'Rights-focused NGOs', 'International humanitarian agencies'],
+  },
+  {
+    label: 'Private Sector & CSR',
+    title: 'Corporate partnerships',
+    body: 'Mission-aligned businesses can support our programmes through CSR funding, secondment of skilled staff, pro-bono services, or technology provision — contributing directly to measurable SDG outcomes.',
+    examples: ['Environmental & impact investors', 'Technology and GIS firms', 'Corporate CSR programmes'],
+  },
+];
+
+const principles = [
+  { title: 'Mission alignment', body: 'Every partner relationship must advance CHRSD\'s mandate. We do not accept partnerships that compromise our independence or conflict with our values.' },
+  { title: 'Mutual accountability', body: 'We share progress data, field reports, and audited financials with all formal partners. We expect the same in return.' },
+  { title: 'Community primacy', body: 'Partnership decisions are assessed against their benefit to the communities we serve — not institutional convenience.' },
+  { title: 'No conditions on advocacy', body: 'Funding partnerships do not restrict our right to advocate on any policy issue relevant to our mission.' },
+];
+---
+<BaseLayout
+  title="Partner With Us"
+  description="Explore partnership opportunities with CHRSD — government, academic, civil society, and private sector collaboration."
+>
+  <PageHero
+    overline="Get involved · Partnership"
+    title="Build impact together"
+    lead="CHRSD partners with governments, universities, NGOs, and businesses that share our commitment to evidence-based, community-centred development. A formal partnership means co-designing, co-delivering, and co-owning results."
+  />
+
+  <!-- PARTNERSHIP TYPES -->
+  <section class="section">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Partnership types</p>
+        <h2>Four models of collaboration</h2>
+        <p class="lead lede__sub">
+          We tailor each partnership to the partner's mandate, capacity, and geography.
+          Formal agreements are underpinned by a Memorandum of Understanding and a
+          jointly agreed work plan with measurable deliverables.
+        </p>
+      </div>
+      <div class="types">
+        {types.map((t) => (
+          <article class="ptype">
+            <span class="ptype__label">{t.label}</span>
+            <h3 class="ptype__title">{t.title}</h3>
+            <p class="ptype__body">{t.body}</p>
+            <ul class="ptype__examples">
+              {t.examples.map((ex) => <li>{ex}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="section section--dark">
+    <div class="container">
+      <p class="overline">How we work</p>
+      <h2>Our partnership principles</h2>
+      <div class="principles">
+        {principles.map((p) => (
+          <article class="principle">
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">How to begin</p>
+      <h2>The partnership process</h2>
+      <div class="process">
+        {[
+          { no: '01', title: 'Submit an expression of interest', body: 'Use the form below to introduce your organisation and describe your proposed collaboration.' },
+          { no: '02', title: 'Scoping conversation', body: 'Our partnerships team will arrange a call or meeting within ten working days to explore alignment and feasibility.' },
+          { no: '03', title: 'Due diligence', body: 'We conduct a straightforward partner assessment covering governance, financials, and mission compatibility.' },
+          { no: '04', title: 'MOU & work plan', body: 'Successful partnerships are formalised through a Memorandum of Understanding and a jointly agreed work plan.' },
+          { no: '05', title: 'Delivery & review', body: 'We co-deliver activities, share progress data quarterly, and conduct an annual partnership review.' },
+        ].map((s) => (
+          <article class="process__step">
+            <span class="process__no" aria-hidden="true">{s.no}</span>
+            <div>
+              <h3 class="process__title">{s.title}</h3>
+              <p class="process__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="section" id="apply">
+    <div class="container">
+      <div class="form-wrap">
+        <div class="form-intro">
+          <p class="overline">Get in touch</p>
+          <h2>Express your interest</h2>
+          <p class="lead" style="margin-top:14px">
+            Tell us about your organisation and the kind of collaboration you have in
+            mind. Our partnerships team reviews all enquiries and responds within ten
+            working days.
+          </p>
+          <p style="margin-top:16px;color:var(--color-slate)">
+            Prefer email?
+            <a href={`mailto:${site.email}`} style="color:var(--color-institutional)">{site.email}</a>
+            — subject line: "Partnership enquiry".
+          </p>
+        </div>
+
+        <form
+          class="form"
+          action={import.meta.env.PUBLIC_CONTACT_ENDPOINT}
+          method="POST"
+          id="partner-form"
+          novalidate
+        >
+          <input type="hidden" name="_subject" value="Partnership Enquiry" />
+          <div class="form__row">
+            <div class="field">
+              <label for="p-org">Organisation name <span aria-hidden="true">*</span></label>
+              <input type="text" id="p-org" name="organisation" required placeholder="Your organisation" />
+            </div>
+            <div class="field">
+              <label for="p-type">Organisation type <span aria-hidden="true">*</span></label>
+              <select id="p-type" name="type" required>
+                <option value="" disabled selected>Select type</option>
+                <option>Government / Public sector</option>
+                <option>University / Research institution</option>
+                <option>NGO / Civil society</option>
+                <option>Private sector / Corporate</option>
+                <option>International organisation</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label for="p-name">Contact person <span aria-hidden="true">*</span></label>
+              <input type="text" id="p-name" name="name" required placeholder="Full name" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="p-email">Contact email <span aria-hidden="true">*</span></label>
+              <input type="email" id="p-email" name="email" required placeholder="you@org.example" autocomplete="email" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="p-proposal">Describe your proposed collaboration <span aria-hidden="true">*</span></label>
+            <textarea id="p-proposal" name="proposal" rows="6" required placeholder="What area of CHRSD's work are you interested in? What would your organisation contribute? What outcomes do you hope to achieve?"></textarea>
+          </div>
+          <div class="form__footer">
+            <button type="submit" class="btn btn--solid btn--lg">Submit enquiry</button>
+            <p id="partner-status" class="form__status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('partner-form') as HTMLFormElement | null;
+  const status = document.getElementById('partner-status');
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true; btn.textContent = 'Submitting…';
+      status.textContent = '';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (res.ok) {
+          status.textContent = 'Thank you — we\'ll be in touch within ten working days.';
+          status.style.color = 'var(--color-institutional)';
+          form.reset();
+        } else { throw new Error(); }
+      } catch {
+        status.textContent = 'Something went wrong. Please email us directly.';
+        status.style.color = '#c0392b';
+      } finally { btn.disabled = false; btn.textContent = 'Submit enquiry'; }
+    });
+  }
+</script>
+
+<style>
+  .lede { max-width: 62ch; margin-bottom: 44px; }
+  .lede h2 { margin-top: 12px; }
+  .lede__sub { margin-top: 16px; color: var(--color-slate); }
+
+  /* Partnership type cards */
+  .types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .ptype {
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius);
+    border-top: 4px solid var(--color-institutional); padding: 30px 34px;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .ptype:hover { box-shadow: var(--shadow-card-hover); }
+  .ptype__label { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-gold); }
+  .ptype__title { color: var(--color-forest); font-size: 22px; margin: 10px 0 12px; }
+  .ptype__body { color: var(--color-slate); line-height: 1.7; }
+  .ptype__examples { margin-top: 18px; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .ptype__examples li { font-size: 14px; color: var(--color-slate); }
+
+  /* Dark section */
+  .section--dark h2 { color: #fff; margin-top: 14px; }
+  .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; }
+  .principle { border-left: 3px solid var(--color-gold); padding-left: 20px; }
+  .principle h3 { color: #fff; font-size: 18px; margin-bottom: 10px; }
+  .principle p { color: rgba(255,255,255,0.80); font-size: 15px; line-height: 1.65; }
+
+  /* Process */
+  .process { display: grid; gap: 14px; margin-top: 36px; }
+  .process__step { display: flex; gap: 24px; align-items: flex-start; background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 26px 30px; }
+  .process__no { font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--color-border-green); line-height: 1; flex-shrink: 0; width: 50px; }
+  .process__title { color: var(--color-forest); font-size: 18px; margin-bottom: 6px; }
+  .process__body { color: var(--color-slate); font-size: 15px; }
+
+  /* Form */
+  .form-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+  .form-intro h2 { margin-top: 12px; }
+  .form { display: flex; flex-direction: column; gap: 20px; }
+  .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--color-forest); }
+  label span { color: var(--color-donate); }
+  input, select, textarea { border: 1.5px solid var(--color-border-green); border-radius: var(--radius-sm); padding: 11px 14px; font-family: var(--font-body); font-size: 16px; color: var(--color-ink); background: #fff; transition: border-color var(--dur) var(--ease); }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--color-institutional); box-shadow: 0 0 0 3px rgba(0,120,60,0.12); }
+  textarea { resize: vertical; }
+  .form__footer { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .form__status { font-size: 15px; }
+
+  @media (max-width: 1024px) {
+    .principles { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .types { grid-template-columns: 1fr; }
+    .form-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .form__row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .principles { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,245 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const openings = [
+  {
+    title: 'Programme Officer — Environmental Sustainability',
+    type: 'Full-time',
+    location: 'Dhaka (with field travel)',
+    division: 'Programmes',
+    closing: '15 July 2026',
+    summary: 'Support delivery of NSADMP Phase II across coastal districts, including field coordination, community liaison, and GIS data verification.',
+    requirements: ['Bachelor\'s degree in Environmental Science, Development Studies, or related field', '2+ years of relevant field programme experience', 'Proficiency in Bengali (written and spoken); English working level', 'Willingness to travel to field sites (up to 40% of time)'],
+  },
+  {
+    title: 'Research Analyst — Socio-Economic Studies',
+    type: 'Full-time',
+    location: 'Dhaka',
+    division: 'Research & Evidence',
+    closing: '30 July 2026',
+    summary: 'Contribute to CHRSD\'s socio-economic research agenda, including survey design, data analysis, and co-authoring of research papers and policy briefs.',
+    requirements: ['Master\'s degree in Economics, Statistics, Development Studies, or related field', 'Strong quantitative skills (STATA, R, or Python)', 'Experience with household surveys or longitudinal data', 'Track record of research writing (samples required at application)'],
+  },
+  {
+    title: 'Field Coordinator — Human Rights Programme',
+    type: 'Full-time',
+    location: 'Rajshahi (field-based)',
+    division: 'Human Rights & Legal Aid',
+    closing: '20 July 2026',
+    summary: 'Coordinate CHRSD\'s human rights monitoring, community legal literacy workshops, and case referral system across northern Bangladesh.',
+    requirements: ['Degree in Law, Social Work, or Human Rights', '3+ years of field-based NGO experience', 'Understanding of Bangladesh legal aid system', 'Community mobilisation experience'],
+  },
+  {
+    title: 'Digital Systems Officer — SDAMSMP',
+    type: 'Full-time',
+    location: 'Dhaka',
+    division: 'Technology & Digital Governance',
+    closing: '10 July 2026',
+    summary: 'Provide technical support for the Smart Digital Attendance Management System across government primary schools — including user training, data management, and system troubleshooting.',
+    requirements: ['Degree in Computer Science, Information Systems, or related field', 'Experience with database management and MIS systems', 'Strong training and communication skills', 'Experience working with government partners is an advantage'],
+  },
+];
+
+const internships = [
+  { area: 'Research & Data', duration: '3–6 months', stipend: 'Yes', remote: 'Partial' },
+  { area: 'Communications & Social Media', duration: '3 months', stipend: 'Yes', remote: 'Yes' },
+  { area: 'Environmental Field Programmes', duration: '2–4 months', stipend: 'Yes', remote: 'No' },
+  { area: 'Legal Aid Support', duration: '3–6 months', stipend: 'Yes', remote: 'No' },
+];
+---
+<BaseLayout
+  title="Jobs & Internships"
+  description="Open positions and internship opportunities at CHRSD — join a mission-driven team working at the intersection of research, community development, and digital governance."
+>
+  <PageHero
+    overline="Get involved · Careers"
+    title="Jobs & Internships"
+    lead="CHRSD brings together researchers, field practitioners, legal professionals, and digital specialists united by a single mandate: measurable, community-owned change. If that resonates, we'd like to hear from you."
+  />
+
+  <!-- VALUES -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Why join CHRSD</p>
+      <h2>What we offer</h2>
+      <div class="offer-grid">
+        {[
+          { icon: '🌍', title: 'Real-world impact', body: 'Every role contributes directly to programmes affecting thousands of communities across Bangladesh.' },
+          { icon: '📈', title: 'Professional growth', body: 'Regular training, cross-team learning, and opportunities to co-author research and contribute to publications.' },
+          { icon: '⚖️', title: 'Values-aligned culture', body: 'An independent, non-political organisation where evidence and community interest come before institutional convenience.' },
+          { icon: '🤝', title: 'Collaborative teams', body: 'Small, skilled, multidisciplinary teams where your contribution is visible and your voice is heard.' },
+        ].map((o) => (
+          <article class="offer">
+            <span class="offer__icon" aria-hidden="true">{o.icon}</span>
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN POSITIONS -->
+  <section class="section" id="openings">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="overline">Current openings</p>
+          <h2>Open positions</h2>
+        </div>
+        <p class="opening-count"><strong>{openings.length}</strong> positions open as of June 2026</p>
+      </div>
+
+      <div class="positions">
+        {openings.map((j) => (
+          <article class="position">
+            <div class="position__header">
+              <div>
+                <span class="position__division">{j.division}</span>
+                <h3 class="position__title">{j.title}</h3>
+                <div class="position__meta">
+                  <span class="meta-tag">{j.type}</span>
+                  <span class="meta-tag">{j.location}</span>
+                  <span class="meta-tag meta-tag--deadline">Closes {j.closing}</span>
+                </div>
+              </div>
+            </div>
+            <p class="position__summary">{j.summary}</p>
+            <div class="position__reqs">
+              <p class="reqs__label">Key requirements</p>
+              <ul>
+                {j.requirements.map((r: string) => <li>{r}</li>)}
+              </ul>
+            </div>
+            <div class="position__actions">
+              <a
+                href={`mailto:${site.email}?subject=Application: ${encodeURIComponent(j.title)}`}
+                class="btn btn--solid btn--md"
+              >
+                Apply by email
+              </a>
+              <span class="position__note">Send CV + cover letter to {site.email}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIPS -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Early career</p>
+      <h2>Internship programme</h2>
+      <p style="margin-top:14px;color:var(--color-slate);max-width:62ch">
+        CHRSD runs a rolling internship programme for students and recent graduates who
+        want to build practical experience in development research and community
+        programmes. Interns are supervised, paid a monthly stipend, and — where
+        appropriate — credited as co-contributors on research outputs.
+      </p>
+
+      <div class="intern-table-wrap">
+        <table class="intern-table">
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>Duration</th>
+              <th>Stipend</th>
+              <th>Remote possible</th>
+            </tr>
+          </thead>
+          <tbody>
+            {internships.map((i) => (
+              <tr>
+                <td class="area-cell">{i.area}</td>
+                <td>{i.duration}</td>
+                <td><span class={i.stipend === 'Yes' ? 'yes-badge' : ''}>{i.stipend}</span></td>
+                <td>{i.remote}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px">
+        <Button href={`mailto:${site.email}?subject=Internship%20Enquiry`} variant="solid">Apply for an internship</Button>
+        <Button href="/get-involved/volunteer/" variant="outline">Explore volunteering instead</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECULATIVE -->
+  <section class="section section--dark">
+    <div class="container spec-cta">
+      <div>
+        <p class="overline">Don't see a fit?</p>
+        <h2 style="color:#fff;margin-top:10px">Send a speculative application</h2>
+        <p style="color:rgba(255,255,255,0.82);margin-top:12px;max-width:52ch">
+          We periodically open positions that aren't always advertised widely. If you
+          have strong skills in field research, law, GIS, or community development —
+          send us your CV and a covering note explaining the kind of role you're looking for.
+        </p>
+      </div>
+      <Button href={`mailto:${site.email}?subject=Speculative%20Application`} variant="solid" external>Send your CV</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Offer */
+  .offer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
+  .offer { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 24px; }
+  .offer__icon { font-size: 26px; display: block; margin-bottom: 14px; }
+  .offer h3 { font-size: 17px; color: var(--color-forest); margin-bottom: 10px; }
+  .offer p { font-size: 14px; color: var(--color-slate); line-height: 1.65; }
+
+  /* Section head */
+  .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 32px; }
+  .section-head h2 { margin-top: 10px; }
+  .opening-count { font-size: 15px; color: var(--color-slate); }
+  .opening-count strong { color: var(--color-institutional); font-family: var(--font-display); font-size: 22px; }
+
+  /* Positions */
+  .positions { display: flex; flex-direction: column; gap: 20px; }
+  .position { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 30px 34px; }
+  .position__header { margin-bottom: 16px; }
+  .position__division { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-gold); }
+  .position__title { font-size: 21px; color: var(--color-forest); margin: 8px 0 12px; }
+  .position__meta { display: flex; flex-wrap: wrap; gap: 8px; }
+  .meta-tag { font-size: 13px; font-weight: 600; color: var(--color-institutional); background: var(--color-tint); border: 1px solid var(--color-border-green); padding: 4px 10px; border-radius: var(--radius-pill); }
+  .meta-tag--deadline { color: var(--color-slate); }
+  .position__summary { color: var(--color-slate); line-height: 1.7; margin-bottom: 20px; }
+  .position__reqs { background: var(--color-tint); border-radius: var(--radius-sm); padding: 18px 20px; margin-bottom: 22px; }
+  .reqs__label { font-family: var(--font-display); font-weight: 700; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-slate); margin-bottom: 10px; }
+  .position__reqs ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .position__reqs li { font-size: 14px; color: var(--color-slate); line-height: 1.6; }
+  .position__actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .position__note { font-size: 13px; color: var(--color-slate); }
+
+  /* Intern table */
+  .intern-table-wrap { margin-top: 28px; border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden; overflow-x: auto; }
+  .intern-table { width: 100%; border-collapse: collapse; background: #fff; }
+  .intern-table thead { background: var(--color-forest); }
+  .intern-table th { padding: 13px 20px; text-align: left; font-family: var(--font-display); font-weight: 600; font-size: 13px; color: rgba(255,255,255,0.9); }
+  .intern-table td { padding: 15px 20px; border-bottom: 1px solid var(--color-border-green); font-size: 15px; color: var(--color-slate); }
+  .intern-table tr:last-child td { border-bottom: none; }
+  .area-cell { font-weight: 600; color: var(--color-forest); }
+  .yes-badge { background: rgba(0,120,60,0.1); color: var(--color-institutional); font-weight: 600; font-size: 13px; padding: 3px 10px; border-radius: var(--radius-pill); }
+
+  /* Speculative CTA */
+  .spec-cta { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  @media (max-width: 1024px) {
+    .offer-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .spec-cta { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .position { padding: 22px; }
+  }
+</style>

@@ -1,0 +1,404 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+
+const principles = [
+  {
+    icon: '🏆',
+    title: 'Best value for money',
+    body: 'Decisions consider total cost of ownership, quality, technical suitability, delivery performance, and sustainability. Lowest price alone does not determine award.',
+  },
+  {
+    icon: '⚖️',
+    title: 'Fair competition',
+    body: 'Open competition, equal treatment of all bidders, impartial evaluation processes, and no restrictive specifications.',
+  },
+  {
+    icon: '📋',
+    title: 'Transparency',
+    body: 'All procurement actions are properly documented, auditable, and available for donor review. Written records are maintained at every stage.',
+  },
+  {
+    icon: '🛡️',
+    title: 'Integrity',
+    body: 'Zero tolerance for fraud, bribery, kickbacks, collusion, bid rigging, and corruption — applied to all staff, consultants, and suppliers.',
+  },
+  {
+    icon: '🌱',
+    title: 'Sustainability',
+    body: 'Where feasible, CHRSD prioritises environmentally responsible products, local sourcing, ethical labour practices, gender-responsive suppliers, and social enterprises.',
+  },
+  {
+    icon: '🤝',
+    title: 'Accountability',
+    body: 'Individuals involved in procurement are personally responsible for compliance. All decisions are supported by documented justification.',
+  },
+];
+
+const authorityMatrix = [
+  { range: 'Up to $500',        method: 'Direct purchase',             authority: 'Department Head' },
+  { range: '$501 – $3,000',     method: 'Minimum 3 quotations',        authority: 'Procurement Committee' },
+  { range: '$3,001 – $15,000',  method: 'RFQ / Competitive quotations',authority: 'Executive Director' },
+  { range: '$15,001 – $50,000', method: 'Formal tender',               authority: 'Procurement Committee + ED' },
+  { range: 'Above $50,000',     method: 'Open competitive tender',     authority: 'Board of Directors' },
+];
+
+const evalCriteria = [
+  { label: 'Technical compliance', weight: '40%' },
+  { label: 'Experience & track record', weight: '20%' },
+  { label: 'Financial proposal', weight: '20%' },
+  { label: 'Delivery capacity', weight: '10%' },
+  { label: 'Sustainability', weight: '10%' },
+];
+
+const bidStages = [
+  { no: '01', title: 'Procurement requisition', body: 'Initiating department submits need justification, budget confirmation, and technical specifications.' },
+  { no: '02', title: 'Solicitation', body: 'Published via website, email invitation, supplier database, or newspaper advertisement for high-value procurement.' },
+  { no: '03', title: 'Bid receipt', body: 'Secure, confidential submission enforced. Late submissions are not accepted under any circumstances.' },
+  { no: '04', title: 'Bid opening', body: 'Opening committee records submissions, registers bidders, and documents all proceedings.' },
+  { no: '05', title: 'Evaluation', body: 'Committee members sign Confidentiality and Conflict of Interest Declarations before evaluation begins.' },
+  { no: '06', title: 'Award recommendation', body: 'Report includes evaluation methodology, scores, risk assessment, and justification for recommended award.' },
+  { no: '07', title: 'Contract award', body: 'Award communicated in writing. Unsuccessful bidders may request a debriefing.' },
+];
+
+const codeItems = [
+  { heading: 'Legal compliance', text: 'Adhere to national laws, tax and labour regulations, environmental laws, and applicable international standards.' },
+  { heading: 'Human rights', text: 'Respect internationally recognised human rights principles — UDHR, ILO conventions, and UN Global Compact.' },
+  { heading: 'Labour standards', text: 'Zero tolerance for child labour, forced labour, harassment, and discrimination on any grounds.' },
+  { heading: 'Health & safety', text: 'Provide safe workplaces, safety equipment, emergency procedures, first aid facilities, and accident reporting.' },
+  { heading: 'Environmental responsibility', text: 'Reduce waste, conserve energy, minimise pollution, manage hazardous materials, and cut greenhouse gas emissions.' },
+  { heading: 'Ethical conduct', text: 'No fraud, corruption, bribery, extortion, or money laundering — and no gifts or hospitality intended to influence CHRSD decisions.' },
+  { heading: 'Data protection', text: 'Protect personal information, beneficiary data, project information, and proprietary data. Use data only for authorised purposes.' },
+  { heading: 'Safeguarding', text: 'Full compliance with CHRSD\'s PSEA policy, child safeguarding standards, and anti-harassment requirements. Zero tolerance.' },
+];
+---
+<BaseLayout
+  title="Procurement & E-Tender"
+  description="CHRSD procurement policy, supplier code of conduct, authority matrix, and tender opportunities. Aligned with UN/UNICEF-level governance standards."
+>
+  <PageHero
+    overline="Get involved · Procurement"
+    title="Procurement & E-Tender"
+    lead="CHRSD maintains a transparent, competitive, and ethical procurement system aligned with UN and international NGO governance standards. All suppliers are held to our Supplier Code of Conduct."
+  />
+
+  <!-- PRINCIPLES -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Policy v1.0 · Approved by Board of Directors</p>
+        <h2>Six guiding principles</h2>
+        <p class="lead lede__sub">
+          Every CHRSD procurement decision — from a $50 supply run to a $50,000 contract — is
+          governed by the same six principles.
+        </p>
+      </div>
+      <div class="principles">
+        {principles.map((p) => (
+          <article class="principle">
+            <span class="principle__icon" aria-hidden="true">{p.icon}</span>
+            <h3 class="principle__title">{p.title}</h3>
+            <p class="principle__body">{p.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHORITY MATRIX -->
+  <section class="section">
+    <div class="container">
+      <p class="overline">Section 4</p>
+      <h2>Procurement authority matrix</h2>
+      <p class="section-lead">
+        Approval authority scales with contract value. Donor-specific thresholds prevail where
+        stricter requirements apply.
+      </p>
+      <div class="table-wrap">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th>Procurement value (USD equivalent)</th>
+              <th>Method</th>
+              <th>Approval authority</th>
+            </tr>
+          </thead>
+          <tbody>
+            {authorityMatrix.map((row, i) => (
+              <tr class={i === authorityMatrix.length - 1 ? 'row--highlight' : ''}>
+                <td class="cell--value">{row.range}</td>
+                <td>{row.method}</td>
+                <td class="cell--auth">{row.authority}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- BID PROCESS -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Section 7</p>
+      <h2>Bid management process</h2>
+      <p class="section-lead">Seven stages govern every formal procurement from requisition to award.</p>
+      <div class="stages">
+        {bidStages.map((s) => (
+          <article class="stage">
+            <span class="stage__no" aria-hidden="true">{s.no}</span>
+            <div>
+              <h3 class="stage__title">{s.title}</h3>
+              <p class="stage__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EVALUATION CRITERIA -->
+  <section class="section">
+    <div class="container eval-wrap">
+      <div class="eval__text">
+        <p class="overline">Section 8</p>
+        <h2>Evaluation criteria</h2>
+        <p>
+          Standard weights are applied across five dimensions. Weights may vary depending on
+          procurement category — consultancy and ICT assignments typically place higher weight
+          on technical quality.
+        </p>
+        <p>
+          All evaluation committee members sign Confidentiality and Conflict of Interest Declarations
+          before scoring begins. Evaluation reports document methodology, individual scores, and the
+          final justification for award.
+        </p>
+      </div>
+      <div class="eval__chart">
+        {evalCriteria.map((c) => (
+          <div class="eval-row">
+            <span class="eval-row__label">{c.label}</span>
+            <div class="eval-row__bar-wrap">
+              <div class="eval-row__bar" style={`width:${c.weight}`}></div>
+            </div>
+            <span class="eval-row__weight">{c.weight}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPLIER CODE OF CONDUCT -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Part II · Supplier Code of Conduct</p>
+        <h2>Standards every supplier must meet</h2>
+        <p class="lead lede__sub">
+          Compliance with the CHRSD Supplier Code of Conduct is a condition of doing business
+          with us. The Code is mandatory for all vendors, contractors, consultants, and business
+          partners.
+        </p>
+      </div>
+      <div class="code-grid">
+        {codeItems.map((c) => (
+          <div class="code-item">
+            <h3 class="code-item__heading">{c.heading}</h3>
+            <p class="code-item__text">{c.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPLIER REGISTRATION + CONTACT -->
+  <section class="section">
+    <div class="container">
+      <div class="register-wrap">
+        <div class="register__info">
+          <p class="overline">Supplier due diligence</p>
+          <h2>Register as a supplier</h2>
+          <p>
+            All suppliers undergo verification before being considered for contract award. The
+            due diligence process covers legal registration, tax and VAT status, bank information,
+            financial statements, sanctions screening, and reference checks.
+          </p>
+          <p>
+            Minimum two references are required for significant contracts. Supplier performance
+            is rated after contract completion across quality, delivery, responsiveness,
+            compliance, and sustainability dimensions.
+          </p>
+          <div class="retention-note">
+            <span class="retention-note__icon" aria-hidden="true">📂</span>
+            <p>Procurement records are retained for a minimum of <strong>7 years</strong>, or longer where donor regulations require.</p>
+          </div>
+        </div>
+        <div class="register__contact">
+          <div class="contact-card">
+            <p class="overline">Get in touch</p>
+            <h3>Procurement enquiries</h3>
+            <p>To register as a supplier, request tender documents, or submit a procurement grievance:</p>
+            <div class="contact-links">
+              <a href="mailto:procurement@chrsd.org" class="contact-link">
+                <span class="contact-link__icon" aria-hidden="true">✉️</span>
+                procurement@chrsd.org
+              </a>
+              <a href="mailto:ethics@chrsd.org" class="contact-link">
+                <span class="contact-link__icon" aria-hidden="true">🔒</span>
+                ethics@chrsd.org
+                <span class="contact-link__note">Grievances & misconduct reports</span>
+              </a>
+              <a href={`mailto:${site.email}`} class="contact-link">
+                <span class="contact-link__icon" aria-hidden="true">📬</span>
+                {site.email}
+                <span class="contact-link__note">General enquiries</span>
+              </a>
+            </div>
+            <p class="whistle-note">
+              Individuals reporting procurement misconduct in good faith are protected from
+              retaliation under CHRSD's Whistleblower Protection Policy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-TENDER LINK -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="tender-banner">
+        <div>
+          <p class="overline">Live opportunities</p>
+          <h2>Current tenders & e-procurement</h2>
+          <p>
+            All active tender notices, request-for-quotation invitations, and contract awards
+            are published on our dedicated procurement portal. Registered suppliers receive
+            email notifications for relevant categories.
+          </p>
+        </div>
+        <div class="tender-banner__cta">
+          <a href={site.tenderUrl} class="btn btn--solid btn--lg" target="_blank" rel="noopener noreferrer">
+            Visit E-Tender portal
+          </a>
+          <a href="/get-involved/contact-us/" class="btn btn--outline btn--lg">
+            Contact procurement team
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lede { max-width: 60ch; margin-bottom: 44px; }
+  .lede h2 { margin-top: 12px; }
+  .lede__sub { margin-top: 16px; color: var(--color-slate); }
+  .section-lead { color: var(--color-slate); max-width: 70ch; margin: 10px 0 32px; line-height: 1.75; }
+
+  /* Principles */
+  .principles { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .principle {
+    background: #fff; border: 1.5px solid var(--color-border-green); border-radius: var(--radius);
+    padding: 28px; transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .principle:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+  .principle__icon { font-size: 28px; display: block; }
+  .principle__title { font-size: 18px; color: var(--color-forest); margin: 14px 0 10px; }
+  .principle__body { color: var(--color-slate); font-size: 15px; line-height: 1.7; }
+
+  /* Authority matrix */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1.5px solid var(--color-border-green); margin-top: 28px; }
+  .matrix { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .matrix thead tr { background: var(--color-forest); }
+  .matrix th { padding: 14px 20px; text-align: left; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 13px; letter-spacing: 0.04em; white-space: nowrap; }
+  .matrix td { padding: 14px 20px; border-bottom: 1px solid var(--color-border-green); color: var(--color-ink); vertical-align: middle; }
+  .matrix tbody tr:last-child td { border-bottom: none; }
+  .matrix tbody tr:nth-child(even) { background: var(--color-tint); }
+  .row--highlight td { background: #EAF2EC !important; font-weight: 600; }
+  .cell--value { font-family: var(--font-display); font-weight: 600; color: var(--color-institutional); white-space: nowrap; }
+  .cell--auth { color: var(--color-forest); font-weight: 600; }
+
+  /* Bid stages */
+  .stages { display: grid; gap: 14px; margin-top: 36px; }
+  .stage { display: flex; gap: 28px; align-items: flex-start; background: #fff; border: 1.5px solid var(--color-border-green); border-radius: var(--radius); padding: 24px 32px; }
+  .stage__no { font-family: var(--font-display); font-weight: 800; font-size: 32px; color: var(--color-border-green); line-height: 1; flex-shrink: 0; width: 52px; }
+  .stage__title { color: var(--color-forest); font-size: 17px; margin-bottom: 6px; }
+  .stage__body { color: var(--color-slate); font-size: 15px; line-height: 1.65; }
+
+  /* Eval criteria */
+  .eval-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .eval__text h2 { margin: 12px 0 20px; }
+  .eval__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; font-size: 15px; }
+  .eval__chart { display: flex; flex-direction: column; gap: 16px; padding-top: 4px; }
+  .eval-row { display: grid; grid-template-columns: 1fr 120px 44px; align-items: center; gap: 14px; }
+  .eval-row__label { font-size: 14px; color: var(--color-ink); font-family: var(--font-display); font-weight: 600; }
+  .eval-row__bar-wrap { background: var(--color-tint); border-radius: var(--radius-pill); height: 10px; overflow: hidden; border: 1px solid var(--color-border-green); }
+  .eval-row__bar { height: 100%; background: var(--color-institutional); border-radius: var(--radius-pill); }
+  .eval-row__weight { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--color-institutional); text-align: right; }
+
+  /* Supplier Code */
+  .code-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .code-item { background: #fff; border: 1.5px solid var(--color-border-green); border-radius: var(--radius); padding: 24px 28px; }
+  .code-item__heading { font-size: 16px; color: var(--color-forest); margin-bottom: 8px; }
+  .code-item__text { color: var(--color-slate); font-size: 14px; line-height: 1.7; }
+
+  /* Registration */
+  .register-wrap { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: start; }
+  .register__info h2 { margin: 12px 0 20px; }
+  .register__info p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; font-size: 15px; }
+  .retention-note {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--color-tint); border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 18px 20px; margin-top: 24px;
+  }
+  .retention-note__icon { font-size: 20px; flex-shrink: 0; }
+  .retention-note p { color: var(--color-slate); font-size: 14px; line-height: 1.65; margin: 0; }
+
+  .contact-card { background: var(--color-forest); border-radius: var(--radius); padding: 36px; }
+  .contact-card .overline { color: #A8D4BC; }
+  .contact-card h3 { color: #fff; font-size: 20px; margin: 10px 0 14px; }
+  .contact-card > p { color: #C5DCCB; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    color: #fff; text-decoration: none; font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    transition: background var(--dur) var(--ease);
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.15); }
+  .contact-link__icon { font-size: 16px; }
+  .contact-link__note { display: block; width: 100%; padding-left: 26px; font-family: var(--font-body); font-weight: 400; font-size: 12px; color: #A8D4BC; }
+  .whistle-note { margin-top: 20px; font-size: 13px; color: #A8D4BC; line-height: 1.65; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 16px; }
+
+  /* Tender banner */
+  .tender-banner { display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center; }
+  .tender-banner h2 { margin: 12px 0 16px; }
+  .tender-banner p { color: var(--color-slate); line-height: 1.8; max-width: 60ch; }
+  .tender-banner__cta { display: flex; flex-direction: column; gap: 12px; min-width: 220px; }
+
+  /* Buttons (fallback if Button component unavailable) */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-display); font-weight: 700; border-radius: var(--radius-pill); text-decoration: none; cursor: pointer; transition: all var(--dur) var(--ease); border: 2px solid transparent; }
+  .btn--solid { background: var(--color-institutional); color: #fff; border-color: var(--color-institutional); }
+  .btn--solid:hover { background: var(--color-forest); border-color: var(--color-forest); }
+  .btn--outline { background: transparent; color: var(--color-institutional); border-color: var(--color-institutional); }
+  .btn--outline:hover { background: var(--color-tint); }
+  .btn--lg { padding: 14px 28px; font-size: 15px; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .principles { grid-template-columns: repeat(2,1fr); }
+    .eval-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .register-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .tender-banner { grid-template-columns: 1fr; gap: 32px; }
+    .tender-banner__cta { flex-direction: row; flex-wrap: wrap; }
+    .code-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 680px) {
+    .principles { grid-template-columns: 1fr; }
+    .stage { padding: 20px; gap: 18px; }
+    .stage__no { font-size: 24px; width: 40px; }
+  }
+</style>

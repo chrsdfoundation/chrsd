@@ -1,0 +1,198 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+
+const categories = [
+  {
+    label: 'Government & Institutional',
+    partners: [
+      { name: 'Ministry of Environment, Forest & Climate Change', country: 'Bangladesh', type: 'Programme partner' },
+      { name: 'Ministry of Primary and Mass Education', country: 'Bangladesh', type: 'Programme partner' },
+      { name: 'Local Government Division', country: 'Bangladesh', type: 'Implementation partner' },
+      { name: 'Department of Forests', country: 'Bangladesh', type: 'Technical partner' },
+      { name: 'District Administrations — 14 districts', country: 'Bangladesh', type: 'Field implementation' },
+    ],
+  },
+  {
+    label: 'Technology & Innovation',
+    partners: [
+      { name: 'Nevronus Systems Ltd.', country: 'Bangladesh', type: 'Strategic consortium partner — GIS, satellite & digital systems' },
+    ],
+  },
+  {
+    label: 'Civil Society & NGO',
+    partners: [
+      { name: 'Manusher Jonno Foundation', country: 'Bangladesh', type: 'Advocacy partner' },
+      { name: 'BRAC', country: 'Bangladesh', type: 'Field coordination' },
+      { name: 'Transparency International Bangladesh', country: 'Bangladesh', type: 'Governance partner' },
+      { name: 'Ain o Salish Kendra (ASK)', country: 'Bangladesh', type: 'Legal aid partner' },
+    ],
+  },
+  {
+    label: 'Academic & Research',
+    partners: [
+      { name: 'University of Dhaka — Department of Environmental Science', country: 'Bangladesh', type: 'Research partner' },
+      { name: 'BIDS (Bangladesh Institute of Development Studies)', country: 'Bangladesh', type: 'Research partner' },
+      { name: 'International Centre for Climate Change and Development (ICCCAD)', country: 'Bangladesh', type: 'Climate research partner' },
+    ],
+  },
+  {
+    label: 'International & Multilateral',
+    partners: [
+      { name: 'UNDP Bangladesh', country: 'United Nations', type: 'Funding & technical partner' },
+      { name: 'UN Women Bangladesh', country: 'United Nations', type: 'Gender programme partner' },
+      { name: 'UNICEF Bangladesh', country: 'United Nations', type: 'Child rights partner' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Partners"
+  description="CHRSD's institutional partners across government, civil society, academia, and international development."
+>
+  <PageHero
+    overline="Accountability hub · Partners"
+    title="Our partners"
+    lead="CHRSD works with a diverse network of government bodies, civil society organisations, academic institutions, and international agencies. Every partnership is underpinned by a shared commitment to community-centred, evidence-driven outcomes."
+  />
+
+  <!-- PARTNERSHIP APPROACH -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="approach">
+        <div>
+          <p class="overline">Our approach</p>
+          <h2>What a partnership with CHRSD means</h2>
+          <p class="lead" style="margin-top:14px">
+            We do not maintain a long list of nominal partners. Every organisation listed
+            here has an active, formalised relationship — underpinned by a Memorandum of
+            Understanding, a joint work plan, and mutual accountability reporting.
+          </p>
+          <p style="margin-top:16px;color:var(--color-slate)">
+            We update this list annually. If your organisation is in an active partnership
+            with CHRSD and is not listed here, please <a href="/get-involved/contact-us/" style="color:var(--color-institutional)">contact us</a>.
+          </p>
+        </div>
+        <div class="approach-stats">
+          {[
+            { n: '20+', l: 'Active partners' },
+            { n: '5', l: 'Partnership categories' },
+            { n: '100%', l: 'Formalised with MOU' },
+          ].map((s) => (
+            <div class="astat">
+              <span class="astat__n">{s.n}</span>
+              <span class="astat__l">{s.l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER LISTING -->
+  <section class="section">
+    <div class="container">
+      <p class="overline">Current partnerships</p>
+      <h2>Partners by category</h2>
+
+      <div class="categories">
+        {categories.map((cat) => (
+          <div class="category">
+            <h3 class="category__label">{cat.label}</h3>
+            <div class="partner-list">
+              {cat.partners.map((p) => (
+                <article class="partner">
+                  <div class="partner__logo-placeholder" aria-hidden="true">
+                    <span>{p.name.split(' ').slice(0, 2).map((w: string) => w[0]).join('')}</span>
+                  </div>
+                  <div class="partner__info">
+                    <h4 class="partner__name">{p.name}</h4>
+                    <p class="partner__country">{p.country}</p>
+                    <p class="partner__type">{p.type}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BECOME A PARTNER -->
+  <section class="section section--dark">
+    <div class="container partner-cta">
+      <div>
+        <p class="overline">New partnerships</p>
+        <h2 style="color:#fff;margin-top:10px">Interested in working together?</h2>
+        <p style="color:rgba(255,255,255,0.82);margin-top:12px;max-width:54ch">
+          If your organisation shares our commitment to rights-based, evidence-driven
+          development, we welcome formal partnership conversations. Learn more about how
+          we work with partner organisations.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;flex-shrink:0">
+        <Button href="/get-involved/partnership/" variant="solid">Explore partnership</Button>
+        <Button href="/get-involved/contact-us/" variant="outline">Contact us</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Approach */
+  .approach { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: start; }
+  .approach h2 { margin-top: 12px; }
+  .approach-stats { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden; background: #fff; flex-shrink: 0; }
+  .astat { padding: 28px 40px; border-bottom: 1px solid var(--color-border-green); text-align: center; }
+  .astat:last-child { border-bottom: none; }
+  .astat__n { display: block; font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--color-institutional); line-height: 1; }
+  .astat__l { display: block; font-size: 13px; color: var(--color-slate); margin-top: 6px; }
+
+  /* Categories */
+  .categories { display: flex; flex-direction: column; gap: 48px; margin-top: 44px; }
+  .category__label {
+    font-family: var(--font-display); font-weight: 700; font-size: 13px;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-gold);
+    padding-bottom: 14px; border-bottom: 2px solid var(--color-border-green);
+    margin-bottom: 20px;
+  }
+  .partner-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .partner {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 18px 20px;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .partner:hover { box-shadow: var(--shadow-card-hover); }
+  .partner__logo-placeholder {
+    width: 44px; height: 44px; border-radius: var(--radius-sm); flex-shrink: 0;
+    background: var(--color-tint); border: 1px solid var(--color-border-green);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .partner__logo-placeholder span { font-family: var(--font-display); font-weight: 800; font-size: 14px; color: var(--color-forest); }
+  .partner__name { font-size: 14px; font-weight: 600; color: var(--color-forest); line-height: 1.4; margin-bottom: 4px; }
+  .partner__country { font-size: 12px; color: var(--color-slate); }
+  .partner__type { font-size: 12px; color: var(--color-institutional); font-weight: 600; margin-top: 4px; }
+
+  /* CTA */
+  .partner-cta { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  @media (max-width: 1024px) {
+    .partner-list { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .approach { grid-template-columns: 1fr; }
+    .approach-stats { flex-direction: row; }
+    .astat { border-bottom: none; border-right: 1px solid var(--color-border-green); }
+    .astat:last-child { border-right: none; }
+    .partner-cta { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .partner-list { grid-template-columns: 1fr; }
+    .approach-stats { flex-direction: column; }
+    .astat { border-right: none; border-bottom: 1px solid var(--color-border-green); }
+  }
+</style>

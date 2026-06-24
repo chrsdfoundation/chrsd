@@ -1,0 +1,40 @@
+---
+import Button from './Button.astro';
+---
+<section class="section section--dark about">
+  <div class="container grid-12 about__grid">
+    <div class="about__left">
+      <p class="overline">Who we are</p>
+      <h2>Building pathways out of extreme poverty since 1972.</h2>
+    </div>
+    <div class="about__right">
+      <p class="lead">
+        CHRSD architects dual-engine solutions that combine digital administrative
+        monitoring with scalable community development &mdash; turning evidence into
+        durable change for the families who need it most.
+      </p>
+      <p>
+        From climate-resilient livelihoods to socio-economic research and human-rights
+        advocacy, our programmes are designed, measured, and led alongside the
+        communities they serve.
+      </p>
+      <div class="about__cta">
+        <Button href="/about-us/" variant="outline">Our story</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid { align-items: center; }
+  .about__left { grid-column: span 5; }
+  .about__right { grid-column: span 7; }
+  .about__left h2 { margin-top: 16px; }
+  .about__right p + p { margin-top: 18px; }
+  .about__cta { margin-top: 28px; }
+
+  @media (max-width: 1024px) {
+    .about__left, .about__right { grid-column: 1 / -1; }
+    .about__right { margin-top: 8px; }
+  }
+</style>

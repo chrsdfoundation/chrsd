@@ -1,0 +1,326 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+
+const studies = [
+  {
+    id: 'rmg-vision',
+    category: 'RMG',
+    type: 'Controlled Operational Pilot',
+    title: 'AI Vision Screening Pilot: RMG Factory, Dhaka Export Processing Zone',
+    location: 'BGMEA-affiliated export garment factory, Dhaka EPZ',
+    date: 'Q1–Q2 2026',
+    subjects: '847 sewing operators (screening cohort)',
+    technology: 'Nevronus Systems AI computer vision diagnostic pipeline',
+    findings: [
+      { label: 'Uncorrected refractive errors above clinical threshold', value: '61.3%' },
+      { label: 'Vision within acceptable range — no intervention required', value: '38.7%' },
+      { label: 'Production rate increase post-correction (8-week cohort, n=312)', value: '+8.2% units/hr' },
+      { label: 'QC error-rejection rate reduction vs. control group', value: '−14.6%' },
+      { label: 'Worker fatigue score — baseline (validated Likert scale)', value: '6.8 / 10' },
+      { label: 'Worker fatigue score — post-correction', value: '4.1 / 10' },
+    ],
+    costNote: 'BDT 1,100 per worker (screening + eyewear). Estimated employer payback period: 4.8 months.',
+    methodology: 'Stratified random sampling; double-blind QC measurement; pre/post design with matched control group.',
+    speciesTable: null,
+  },
+  {
+    id: 'sdamsmp-schools',
+    category: 'Education',
+    type: 'Administrative Efficiency Pilot',
+    title: 'SDAMSMP Pilot: Dhaka District Primary School Network',
+    location: '951 government primary schools, Dhaka District',
+    date: 'Q4 2025 – Q1 2026',
+    subjects: '7,740 teachers enrolled in biometric attendance system',
+    technology: 'Nevronus Systems Smart Digital Attendance Platform (fingerprint + facial recognition)',
+    findings: [
+      { label: 'Headmaster daily admin time — baseline', value: '47 min/day' },
+      { label: 'Headmaster daily admin time — post-deployment', value: '11 min/day' },
+      { label: 'Reduction in manual processing time', value: '76.6%' },
+      { label: 'Data transmission lag — paper-based baseline', value: '3–5 days' },
+      { label: 'Data transmission lag — post-deployment', value: '< 4 hours' },
+      { label: 'Teachers flagged for anomalies requiring HR review', value: '2.3%' },
+      { label: 'Headmaster satisfaction score (n=847 surveyed)', value: '4.3 / 5.0' },
+    ],
+    costNote: 'BDT 48,000 per school (hardware + installation).',
+    methodology: 'Pre-post comparative design; matched control schools in adjacent upazilas.',
+    speciesTable: null,
+  },
+  {
+    id: 'nsadmp-reforestation',
+    category: 'Environment',
+    type: 'Reforestation Survival Audit',
+    title: 'NSADMP Field Verification: Sonaimuri Upazila, Noakhali',
+    location: 'Sonaimuri Upazila, Noakhali District, Chattogram Division',
+    date: 'June 2026 (World Environment Day plantation event)',
+    subjects: '5,000 native species saplings across GIS-registered plots',
+    technology: 'GIS Plot ID assignment; NDVI baseline via Sentinel-2 (10m); field audit by trained verifiers',
+    findings: [
+      { label: 'Total saplings planted', value: '5,000' },
+      { label: 'Saplings confirmed living at Day 30', value: '4,712' },
+      { label: '30-day survival rate', value: '94.2%' },
+      { label: 'NDVI mean across plantation zone', value: '0.47 (Healthy)' },
+      { label: 'Community custodian households registered', value: '186' },
+    ],
+    costNote: null,
+    methodology: 'Every sapling GIS-tagged at planting. NDVI baseline captured via Sentinel-2. 30-day field audit by trained verifiers with photographic documentation per plot.',
+    speciesTable: [
+      { species: 'Koroch', count: '1,800' },
+      { species: 'Hijal', count: '1,200' },
+      { species: 'Neem', count: '1,000' },
+      { species: 'Arjun', count: '600' },
+      { species: 'Bamboo', count: '400' },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Clinical Case Studies"
+  description="Peer-reviewed operational case studies from CHRSD field pilots — AI vision screening, biometric attendance, and reforestation verification in Bangladesh."
+>
+  <PageHero
+    overline="Impact & evidence · Case studies"
+    title="Clinical case studies"
+    lead="Controlled operational pilots, documented with independent methodology, measurable outcomes, and transparent cost analysis."
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Browse by sector</p>
+      <div class="filter-bar" role="group" aria-label="Filter case studies by sector">
+        <button class="filter-btn filter-btn--active" data-filter="all">All studies</button>
+        <button class="filter-btn" data-filter="RMG">RMG &amp; Labour</button>
+        <button class="filter-btn" data-filter="Education">Education</button>
+        <button class="filter-btn" data-filter="Environment">Environment</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container studies-list">
+      {studies.map((s) => (
+        <article class="study" data-category={s.category} id={s.id}>
+          <header class="study__header">
+            <div class="study__meta-top">
+              <span class="study__type-badge">{s.type}</span>
+              <span class={`study__cat-badge study__cat-badge--${s.category.toLowerCase()}`}>{s.category}</span>
+            </div>
+            <h2 class="study__title">{s.title}</h2>
+          </header>
+
+          <div class="study__body">
+            <div class="study__left">
+              <dl class="study__dl">
+                <dt>Location</dt>
+                <dd>{s.location}</dd>
+                <dt>Date</dt>
+                <dd>{s.date}</dd>
+                <dt>Study subjects</dt>
+                <dd>{s.subjects}</dd>
+                <dt>Technology</dt>
+                <dd>{s.technology}</dd>
+              </dl>
+
+              {s.costNote && (
+                <div class="study__note">
+                  <span class="note-label">Cost analysis</span>
+                  <p>{s.costNote}</p>
+                </div>
+              )}
+
+              <div class="study__note">
+                <span class="note-label">Methodology</span>
+                <p>{s.methodology}</p>
+              </div>
+            </div>
+
+            <div class="study__right">
+              <h3 class="findings-heading">Key findings</h3>
+              <table class="findings-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Indicator</th>
+                    <th scope="col">Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.findings.map((f) => (
+                    <tr>
+                      <td>{f.label}</td>
+                      <td class="findings-table__value">{f.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {s.speciesTable && (
+                <div style="margin-top:28px">
+                  <h3 class="findings-heading">Species composition</h3>
+                  <table class="findings-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Species</th>
+                        <th scope="col">Saplings planted</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {s.speciesTable.map((row) => (
+                        <tr>
+                          <td>{row.species}</td>
+                          <td class="findings-table__value">{row.count}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;
+  }
+  .filter-btn {
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    padding: 9px 20px; border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-border-green);
+    background: #fff; color: var(--color-slate);
+    cursor: pointer; transition: all var(--dur) var(--ease);
+  }
+  .filter-btn:hover {
+    border-color: var(--color-institutional); color: var(--color-institutional);
+  }
+  .filter-btn--active {
+    background: var(--color-institutional); border-color: var(--color-institutional); color: #fff;
+  }
+
+  .studies-list { display: flex; flex-direction: column; gap: 40px; }
+
+  .study {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); overflow: hidden;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .study:hover { box-shadow: var(--shadow-card-hover); }
+  .study[data-hidden] { display: none; }
+
+  .study__header {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--color-border-green);
+    background: var(--color-tint);
+  }
+  .study__meta-top {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center;
+  }
+  .study__type-badge {
+    font-family: var(--font-display); font-weight: 600; font-size: 11px;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: var(--radius-pill);
+    background: #fff; border: 1px solid var(--color-border-green); color: var(--color-slate);
+  }
+  .study__cat-badge {
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: var(--radius-pill); color: #fff;
+  }
+  .study__cat-badge--rmg { background: var(--color-forest); }
+  .study__cat-badge--education { background: var(--color-institutional); }
+  .study__cat-badge--environment { background: var(--color-light-green); }
+
+  .study__title {
+    font-size: clamp(18px, 2.2vw, 24px); color: var(--color-forest); line-height: 1.3; margin: 0;
+  }
+
+  .study__body {
+    display: grid; grid-template-columns: 340px 1fr;
+  }
+
+  .study__left {
+    padding: 28px 28px 28px 32px;
+    border-right: 1px solid var(--color-border-green);
+  }
+  .study__right { padding: 28px 32px; }
+
+  .study__dl {
+    display: grid; grid-template-columns: auto 1fr; gap: 8px 16px;
+    font-size: 14px; margin: 0 0 24px;
+  }
+  .study__dl dt {
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--color-gold); padding-top: 2px; white-space: nowrap;
+  }
+  .study__dl dd { color: var(--color-ink); line-height: 1.55; margin: 0; }
+
+  .study__note {
+    background: var(--color-tint); border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 14px;
+    font-size: 13px; color: var(--color-slate); line-height: 1.6;
+  }
+  .note-label {
+    display: block; font-family: var(--font-display); font-weight: 700; font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-gold); margin-bottom: 6px;
+  }
+  .study__note p { margin: 0; }
+
+  .findings-heading {
+    font-size: 15px; font-weight: 700; color: var(--color-forest);
+    margin: 0 0 14px; font-family: var(--font-display);
+  }
+
+  .findings-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  .findings-table th {
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--color-slate); background: var(--color-tint);
+    padding: 10px 14px; text-align: left;
+    border-bottom: 2px solid var(--color-border-green);
+  }
+  .findings-table td {
+    padding: 11px 14px; border-bottom: 1px solid var(--color-border-green);
+    color: var(--color-ink); line-height: 1.5; vertical-align: top;
+  }
+  .findings-table tr:last-child td { border-bottom: none; }
+  .findings-table__value {
+    font-family: var(--font-display); font-weight: 700;
+    color: var(--color-institutional); white-space: nowrap; text-align: right;
+  }
+
+  @media (max-width: 1024px) {
+    .study__body { grid-template-columns: 1fr; }
+    .study__left { border-right: none; border-bottom: 1px solid var(--color-border-green); }
+  }
+  @media (max-width: 640px) {
+    .study__header { padding: 20px; }
+    .study__left, .study__right { padding: 20px; }
+    .findings-table__value { text-align: left; }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const studies = document.querySelectorAll<HTMLElement>('.study');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('filter-btn--active'));
+      btn.classList.add('filter-btn--active');
+      const filter = btn.dataset.filter;
+      studies.forEach((s) => {
+        if (filter === 'all' || s.dataset.category === filter) {
+          s.removeAttribute('data-hidden');
+        } else {
+          s.setAttribute('data-hidden', '');
+        }
+      });
+    });
+  });
+</script>

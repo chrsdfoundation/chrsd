@@ -1,0 +1,437 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+
+/* ── BOARD OF DIRECTORS ── */
+const boardLeaders = [
+  {
+    name: 'Capt. Md Salehuddin',
+    role: 'Chair of the Board',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Capt.-Md-Salehuddin.png',
+    bio: 'A distinguished Master Mariner, accomplished entrepreneur, and dedicated humanitarian with decades of international leadership experience. Alumnus of Blackpool Nautical College (UK), his background spans maritime operations, corporate governance, and sustainable social development. As Chairman, Captain Salehuddin provides the overarching strategic vision and governance that drives CHRSD\'s research, human rights, and community resilience initiatives.',
+  },
+  {
+    name: 'MD Masud Alam Bhuiayan',
+    role: 'Deputy Chair of the Board',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/deputy-chair.png',
+    bio: 'A seasoned management professional with 14+ years of experience as Regional Sales Manager at Partex Star Group and Square Toiletries Limited. He holds an MBA in Business Management from Islamic University, Bangladesh. As Deputy Chair, he brings expertise in strategic leadership, organisational development, and business operations to guide CHRSD\'s sustainable development initiatives.',
+  },
+  {
+    name: 'Razib Mustafiz',
+    role: 'Organizing Secretary',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Screenshot-2026-06-02-161515.png',
+    bio: 'An experienced Business Analyst with a proven track record in education management and academic lecturing, bringing expertise in Advanced Data Analytics, Machine Learning, and Project Management. He holds a Master\'s in Applied Statistics and Data Science from Jahangirnagar University, Dhaka. Actively involved in humanitarian work through CHRSD, contributing to community development and social welfare initiatives.',
+    linkedin: 'https://www.linkedin.com/in/razibmustafiz/',
+  },
+];
+
+const secretaryGeneral = {
+  name: 'Md. Motalib Hossain',
+  role: 'Secretary General',
+  photo: 'https://chrsd.org/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-02-at-02.44.40.jpeg',
+  bio: 'An entrepreneur and human rights advocate, serving as Founder & CEO of Tahsin International and Secretary General of CHRSD. A member of Amnesty International and the Dhaka Chamber of Commerce & Industry (DCCI), he has been active in social work and human rights advocacy since 2016. He has led humanitarian initiatives across Bangladesh, supporting over 1,000 families and reaching 5,000+ people with awareness on public health, human trafficking, and migration risks.',
+};
+
+const boardMembers = [
+  {
+    name: 'Md Ibrahim',
+    role: 'Treasurer',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Md-Ibrahim2.png',
+  },
+  {
+    name: 'Md Imran Khan',
+    role: 'Board Member',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Md-Imran-Khan.png',
+  },
+  {
+    name: 'Md Yeasir Arafat',
+    role: 'Executive Member',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Md-Yeasir-Arafat.jpeg',
+    bio: 'A Bangladeshi social activist, entrepreneur, and human rights advocate. He studied Geography and Environmental Science at Dhaka College (National University, 2010–2014). An active member of the Bangladesh Red Crescent Society, he works on humanitarian, community development, environmental awareness, and social justice initiatives.',
+  },
+  {
+    name: 'Advocate Jannatun Naim (Maria)',
+    role: 'Board Member',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Jannatun-Naim.jpg',
+    bio: 'A dedicated legal practitioner and human rights advocate at the District & Session Judge Court, Dhaka. She holds an LL.B. (Honours) and LL.M. from Bangladesh University of Professionals (BUP) and specialises in High Court matters, writ petitions, civil and criminal cases, family disputes, company law, and VAT issues.',
+  },
+];
+
+/* ── EXECUTIVE OFFICE ── */
+const executiveDirector = {
+  name: 'M.A. Ramim',
+  role: 'Executive Director',
+  photo: 'https://chrsd.org/wp-content/uploads/2026/06/output-1.png',
+  bio: [
+    'M.A. Ramim leads CHRSD\'s strategic direction, programmes, and operations. He has experience in human rights advocacy, research, and community engagement, with a focus on strengthening democratic values and protecting vulnerable communities.',
+    'He has previously worked as a human rights activist, collaborating with international organisations including Human Rights Watch and Digital Defenders Partnership, as well as with the European Union and various diplomatic missions. He holds an MSc in Management from the University of Edinburgh, United Kingdom.',
+  ],
+  credentials: ['Climate Action', 'Human Rights Watch', 'Socio-Economic Research', 'Diplomatic Missions'],
+};
+
+const seniorStaff = [
+  {
+    name: 'Ibrahim Khalil Firoz',
+    role: 'Project Director',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Ibrahim-Khalil-Firoz.png',
+    bio: 'A youth leader and social development strategist with experience in organisational leadership, grassroots mobilisation, and stakeholder engagement. He holds a Bachelor\'s and Master\'s in Islamic Studies from the University of Dhaka and is currently pursuing an LL.B. to deepen his expertise in governance and public policy.',
+  },
+  {
+    name: 'Md. Arifuzzaman',
+    role: 'Fundraising & Development Director',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/MD.-ARIFUZZAMAN.jpeg',
+    bio: 'A humanitarian and development professional who began his service journey with the Leo and Lions Clubs. He holds an advanced degree from a UK university and has led human rights and community development initiatives across Bangladesh, while complementing his social activism through work in the international garments export industry.',
+  },
+  {
+    name: 'Shakhawat Hossain',
+    role: 'Environment & Climate Action Director',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/Shakhawat-Hossain.jpg',
+    bio: 'A social entrepreneur and development professional with over a decade of experience in climate action and environmental sustainability. He holds a Master\'s in Social Science from the University of Dhaka and leads CHRSD\'s climate portfolio — driving environmental conservation, climate adaptation, and community resilience initiatives across Bangladesh.',
+  },
+  {
+    name: 'Md. Mushfiqus Salehin',
+    role: 'Director of Youth Empowerment & Entrepreneurship',
+    photo: 'https://chrsd.org/wp-content/uploads/2026/06/salehin.png',
+    bio: 'Brings extensive experience in youth development and entrepreneurship. With an MBA from North South University Bangladesh, he combines strategic business acumen with a genuine passion for empowering young people, creating pathways for meaningful opportunities and sustainable development.',
+  },
+];
+
+const programmeTeam = [
+  { name: 'Monir Hossen', role: 'Programme Manager', photo: 'https://chrsd.org/wp-content/uploads/2026/06/MONIR-HOSSAIN.jpeg' },
+  { name: 'Research Manager', role: 'Research Manager', photo: '' },
+  { name: 'Communications Manager', role: 'Communications Manager', photo: '' },
+  { name: 'Finance Manager', role: 'Finance Manager', photo: '' },
+  { name: 'M&E Officer', role: 'Monitoring & Evaluation Officer', photo: '' },
+  { name: 'Project Coordinator', role: 'Project Coordinator', photo: '' },
+  { name: 'Advocacy Officer', role: 'Advocacy Officer', photo: '' },
+  { name: 'Administrative Officer', role: 'Administrative Officer', photo: '' },
+];
+---
+<BaseLayout
+  title="Our Team"
+  description="Meet the Board of Directors, Advisory Committee, and Executive Office driving CHRSD's mission across Bangladesh."
+>
+  <PageHero
+    overline="About · Governance"
+    title="The people behind the mission"
+    lead="A diverse team of advocates, researchers, and governance experts united by a shared commitment to a greener, more just Bangladesh."
+  />
+
+  <!-- ════ BOARD OF DIRECTORS ════ -->
+  <section class="section" id="board">
+    <div class="container">
+      <p class="overline">Governance</p>
+      <h2>Board of Directors</h2>
+      <div class="intro-box">
+        <p>CHRSD is governed by a Board of Directors responsible for strategic direction, oversight, and accountability. The Board provides leadership on organisational priorities, governance, and long-term development, ensuring that CHRSD operates with integrity, transparency, and effectiveness.</p>
+      </div>
+
+      <!-- Top 3 leaders -->
+      <div class="leaders-grid">
+        {boardLeaders.map((m) => (
+          <article class="leader-card">
+            <div class="leader-photo">
+              {m.photo
+                ? <img src={m.photo} alt={m.name} loading="lazy" />
+                : <span class="avatar-initials">{m.name.split(' ').slice(-2).map((w: string) => w[0]).join('')}</span>
+              }
+            </div>
+            <div class="leader-body">
+              <span class="role-label">{m.role}</span>
+              <h3 class="leader-name">{m.name}</h3>
+              <p class="leader-bio">{m.bio}</p>
+              {m.linkedin && (
+                <a href={m.linkedin} class="linkedin-link" target="_blank" rel="noopener noreferrer">
+                  LinkedIn Profile →
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Secretary General — wide bio card -->
+      <article class="bio-card">
+        <div class="bio-photo">
+          {secretaryGeneral.photo
+            ? <img src={secretaryGeneral.photo} alt={secretaryGeneral.name} loading="lazy" />
+            : <span class="avatar-initials">{secretaryGeneral.name.split(' ').slice(-2).map((w: string) => w[0]).join('')}</span>
+          }
+        </div>
+        <div class="bio-body">
+          <span class="role-label">{secretaryGeneral.role}</span>
+          <h3 class="bio-name">{secretaryGeneral.name}</h3>
+          <hr class="bio-rule" />
+          <p class="bio-text">{secretaryGeneral.bio}</p>
+        </div>
+      </article>
+
+      <!-- Board Members grid -->
+      <p class="grid-label">Board Members</p>
+      <div class="members-grid">
+        {boardMembers.map((m) => (
+          <article class="member-card">
+            <div class="member-photo">
+              {m.photo
+                ? <img src={m.photo} alt={m.name} loading="lazy" />
+                : <span class="avatar-initials sm">{m.name.split(' ').slice(-2).map((w: string) => w[0]).join('')}</span>
+              }
+            </div>
+            <div class="member-foot">
+              <h4 class="m-name">{m.name}</h4>
+              <p class="m-role">{m.role}</p>
+              {m.bio && <p class="m-bio">{m.bio}</p>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ ADVISORY COMMITTEE ════ -->
+  <section class="section section--alt" id="advisory">
+    <div class="container">
+      <p class="overline">Expert Guidance</p>
+      <h2>Advisory Committee</h2>
+      <div class="intro-box intro-box--light">
+        <p>CHRSD's Advisory Committee comprises distinguished experts from the fields of human rights, climate policy, public health, international development, and governance who provide independent counsel to the organisation.</p>
+        <p style="margin-top:10px">Advisory Committee members guide our strategic priorities, strengthen the credibility of our research and advocacy, and help ensure our programmes remain evidence-based, contextually relevant, and globally informed.</p>
+        <p style="margin-top:16px;font-style:italic;color:var(--color-institutional)">Advisory Committee appointments are currently being finalised and will be published here shortly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ EXECUTIVE OFFICE ════ -->
+  <section class="section" id="executive">
+    <div class="container">
+      <p class="overline">Leadership & Operations</p>
+      <h2>Executive Office & Staff</h2>
+      <div class="intro-box intro-box--light">
+        <p>CHRSD staff are responsible for implementing the organisation's strategy and programmes. Our team works in a collaborative, inclusive, and results-driven environment, bringing together diverse expertise and perspectives.</p>
+      </div>
+
+      <!-- Executive Director — hero card -->
+      <article class="exec-card">
+        <div class="exec-photo">
+          <img src={executiveDirector.photo} alt={executiveDirector.name} loading="lazy" />
+        </div>
+        <div class="exec-body">
+          <span class="role-label role-label--light">{executiveDirector.role}</span>
+          <h3 class="exec-name">{executiveDirector.name}</h3>
+          <span class="exec-subtitle">Leading Strategy, Programmes & Operations</span>
+          <hr class="exec-rule" />
+          {executiveDirector.bio.map((p: string) => <p class="exec-bio">{p}</p>)}
+          <ul class="cred-list">
+            {executiveDirector.credentials.map((c: string) => <li>{c}</li>)}
+          </ul>
+        </div>
+      </article>
+
+      <!-- Senior Staff -->
+      <p class="grid-label">Senior Staff</p>
+      <div class="senior-grid">
+        {seniorStaff.map((m) => (
+          <article class="member-card member-card--detail">
+            <div class="member-photo">
+              {m.photo
+                ? <img src={m.photo} alt={m.name} loading="lazy" />
+                : <span class="avatar-initials sm">{m.name.split(' ').slice(-2).map((w: string) => w[0]).join('')}</span>
+              }
+            </div>
+            <div class="member-foot">
+              <h4 class="m-name">{m.name}</h4>
+              <p class="m-role">{m.role}</p>
+              <p class="m-bio">{m.bio}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Programme & Operations Team -->
+      <p class="grid-label" style="margin-top:52px">Programme & Operations Team</p>
+      <div class="members-grid">
+        {programmeTeam.map((m) => (
+          <article class="member-card">
+            <div class="member-photo">
+              {m.photo
+                ? <img src={m.photo} alt={m.name} loading="lazy" />
+                : <span class="avatar-initials sm">{m.name.split(' ').slice(-1).map((w: string) => w[0]).join('')}?</span>
+              }
+            </div>
+            <div class="member-foot">
+              <h4 class="m-name">{m.name !== m.role ? m.name : 'Position Open'}</h4>
+              <p class="m-role">{m.role}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ INTERNS & FELLOWS ════ -->
+  <section class="section section--alt" id="interns">
+    <div class="container">
+      <p class="overline">Early Careers</p>
+      <h2>Interns & Fellows</h2>
+      <div class="interns-box">
+        <p class="lead">
+          Meet the talented, passionate people gaining experience at CHRSD — bringing a fresh perspective to our activities. Our internships and fellowships provide hands-on experience working for an international NGO, contributing to human rights defence, coalition building, and systemic human rights advocacy.
+        </p>
+        <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:14px">
+          <Button href="/get-involved/jobs-and-internships/" variant="solid">View internship openings</Button>
+          <Button href="/get-involved/volunteer/" variant="outline">Become a volunteer</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CTA ════ -->
+  <section class="section section--dark">
+    <div class="container cta__inner">
+      <div>
+        <p class="overline">Join the team</p>
+        <h2 style="color:#fff;margin-top:10px">Work with us</h2>
+        <p style="color:rgba(255,255,255,0.82);margin-top:12px;max-width:52ch">
+          We hire researchers, programme officers, field coordinators, legal professionals, and digital specialists. See our current openings or submit a general enquiry.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;flex-shrink:0">
+        <Button href="/get-involved/jobs-and-internships/" variant="solid">See open roles</Button>
+        <Button href="/get-involved/contact-us/" variant="outline">Send an enquiry</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h2 { margin-top: 12px; }
+
+  /* Intro box */
+  .intro-box {
+    background: var(--color-forest); color: rgba(255,255,255,0.72);
+    border-radius: var(--radius); padding: 32px 38px;
+    margin: 28px 0 44px; position: relative; overflow: hidden;
+  }
+  .intro-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--color-gold), transparent); }
+  .intro-box p { font-size: 16px; line-height: 1.8; }
+  .intro-box--light { background: #fff; border: 1px solid var(--color-border-green); color: var(--color-slate); }
+  .intro-box--light::before { background: linear-gradient(90deg, var(--color-gold), transparent); }
+  .intro-box--light p { color: var(--color-slate); }
+
+  /* LEADERS GRID — top 3 */
+  .leaders-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+  .leader-card {
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .leader-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card-hover); }
+  .leader-photo { width: 100%; aspect-ratio: 4/3; background: var(--color-tint); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .leader-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .leader-body { padding: 20px 22px 26px; }
+  .role-label { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-gold); display: block; margin-bottom: 6px; }
+  .leader-name { font-size: 20px; color: var(--color-forest); margin-bottom: 12px; }
+  .leader-bio { font-size: 14px; color: var(--color-slate); line-height: 1.75; }
+  .linkedin-link { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--color-institutional); text-decoration: none; }
+  .linkedin-link:hover { color: var(--color-forest); text-decoration: underline; }
+
+  /* BIO CARD — wide */
+  .bio-card {
+    display: grid; grid-template-columns: 200px 1fr;
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 40px;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .bio-card:hover { box-shadow: var(--shadow-card-hover); }
+  .bio-photo { background: var(--color-tint); display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+  .bio-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .bio-body { padding: 28px 32px; border-left: 1px solid var(--color-border-green); }
+  .bio-name { font-size: 24px; color: var(--color-forest); margin: 8px 0; }
+  .bio-rule { border: none; border-top: 2px solid var(--color-gold); width: 36px; margin: 14px 0; opacity: 0.6; }
+  .bio-text { font-size: 15px; color: var(--color-slate); line-height: 1.8; }
+
+  /* GRID LABEL */
+  .grid-label {
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-gold);
+    margin: 40px 0 18px; display: block;
+  }
+
+  /* MEMBERS GRID — 4-col */
+  .members-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .member-card {
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius);
+    overflow: hidden; transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .member-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+  .member-photo { width: 100%; aspect-ratio: 1/1; background: var(--color-tint); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .member-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .member-foot { padding: 14px 14px 16px; }
+  .m-name { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--color-forest); line-height: 1.3; margin-bottom: 4px; }
+  .m-role { font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-gold); }
+  .m-bio { font-size: 13px; color: var(--color-slate); line-height: 1.6; margin-top: 10px; }
+
+  /* Avatar initials fallback */
+  .avatar-initials {
+    font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--color-forest);
+    background: var(--color-border-green); width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .avatar-initials.sm { font-size: 20px; }
+
+  /* EXEC CARD */
+  .exec-card {
+    display: grid; grid-template-columns: 280px 1fr;
+    background: var(--color-forest); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 40px; position: relative;
+  }
+  .exec-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--color-gold), transparent); z-index: 2; }
+  .exec-photo { width: 280px; min-height: 340px; overflow: hidden; background: rgba(0,80,40,0.4); display: flex; align-items: flex-start; }
+  .exec-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .exec-body { padding: 38px 40px; border-left: 1px solid rgba(255,255,255,0.07); }
+  .role-label--light { color: rgba(200,180,80,0.9); }
+  .exec-name { font-size: clamp(28px, 4vw, 44px); color: #fff; margin: 10px 0 6px; line-height: 1.05; }
+  .exec-subtitle { font-size: 16px; color: var(--color-light-green); font-style: italic; display: block; margin-bottom: 20px; }
+  .exec-rule { border: none; border-top: 2px solid var(--color-gold); width: 40px; margin-bottom: 20px; opacity: 0.7; }
+  .exec-bio { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.8; }
+  .exec-bio + .exec-bio { margin-top: 12px; }
+  .cred-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .cred-list li { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--color-light-green); background: rgba(61,191,114,0.08); border: 1px solid rgba(61,191,114,0.2); border-radius: var(--radius-sm); padding: 4px 12px; }
+
+  /* Senior staff grid — 4-col with detail bio */
+  .senior-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .member-card--detail .member-photo { aspect-ratio: 3/4; }
+
+  /* Interns box */
+  .interns-box { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 44px; margin-top: 28px; }
+  .interns-box .lead { color: var(--color-slate); max-width: 72ch; }
+
+  /* CTA */
+  .cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .senior-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 960px) {
+    .leaders-grid { grid-template-columns: 1fr 1fr; }
+    .members-grid { grid-template-columns: repeat(2, 1fr); }
+    .exec-card { grid-template-columns: 220px 1fr; }
+    .exec-photo { width: 220px; }
+  }
+  @media (max-width: 700px) {
+    .bio-card { grid-template-columns: 1fr; }
+    .bio-photo { height: 240px; }
+    .exec-card { grid-template-columns: 1fr; }
+    .exec-photo { width: 100%; height: 260px; min-height: unset; }
+    .exec-body { border-left: none; border-top: 1px solid rgba(255,255,255,0.07); padding: 28px; }
+    .cta__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .leaders-grid { grid-template-columns: 1fr; }
+    .senior-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 460px) {
+    .members-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>

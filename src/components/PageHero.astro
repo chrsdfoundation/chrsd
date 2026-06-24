@@ -1,0 +1,34 @@
+---
+interface Props {
+  overline?: string;
+  title: string;
+  lead?: string;
+}
+const { overline, title, lead } = Astro.props;
+---
+<section class="pagehero section--dark">
+  <div class="container">
+    {overline && <p class="overline">{overline}</p>}
+    <h1 class="pagehero__title">{title}</h1>
+    {lead && <p class="lead pagehero__lead">{lead}</p>}
+  </div>
+</section>
+
+<style>
+  .pagehero {
+    background: var(--color-forest);
+    color: #fff;
+    padding-block: 72px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pagehero::after {
+    content: ""; position: absolute; right: -80px; top: -80px;
+    width: 360px; height: 360px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(40, 160, 100, 0.22), transparent 70%);
+  }
+  .pagehero__title { color: #fff; margin-top: 14px; max-width: 18ch; position: relative; }
+  .pagehero__lead { color: rgba(255, 255, 255, 0.85); margin-top: 18px; max-width: 60ch; position: relative; }
+
+  @media (max-width: 768px) { .pagehero { padding-block: 48px 44px; } }
+</style>

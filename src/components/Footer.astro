@@ -1,0 +1,148 @@
+---
+import { site, footerColumns } from '@data/navigation';
+const year = new Date().getFullYear();
+const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
+---
+<footer class="footer">
+  <!-- Newsletter band -->
+  <div class="footer__newsletter">
+    <div class="container news__grid">
+      <div>
+        <p class="overline">Stay connected</p>
+        <h3 class="news__title">Let&rsquo;s keep in touch!</h3>
+        <p class="news__sub">Field updates, research, and impact stories — a few times a month, no noise.</p>
+      </div>
+      <form class="news__form" action={newsletterEndpoint} method="POST" data-newsletter>
+        <label class="visually-hidden" for="nl-email">Email address</label>
+        <input id="nl-email" type="email" name="email" placeholder="you@example.org" required autocomplete="email" />
+        <button type="submit" class="news__btn">Subscribe</button>
+        <p class="news__status" role="status" aria-live="polite" data-status></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Nav columns -->
+  <div class="footer__main">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <div class="footer__logo"><span aria-hidden="true">C</span> CHRSD</div>
+        <p class="footer__about">{site.legalName}</p>
+        <p class="footer__founded">Building pathways out of extreme poverty since {site.founded}.</p>
+      </div>
+
+      {footerColumns.map((col) => (
+        <nav class="footer__col" aria-label={col.title}>
+          <p class="footer__heading">{col.title}</p>
+          <ul>
+            {col.links.map((link) => (
+              <li>
+                <a href={link.url} {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+  </div>
+
+  <!-- Legal bar -->
+  <div class="footer__legal">
+    <div class="container legal__inner">
+      <div class="legal__contact">
+        <p>{site.address}</p>
+        <p>
+          <a href={`mailto:${site.email}`}>{site.email}</a> &nbsp;|&nbsp;
+          <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}>{site.phone}</a>
+        </p>
+        <p class="legal__copy">&copy; {year} CHRSD. All rights reserved. &nbsp;|&nbsp; Reg No. {site.regNo}</p>
+      </div>
+      <ul class="legal__social" aria-label="Social media">
+        <li><a href={site.social.facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer">FB</a></li>
+        <li><a href={site.social.x} aria-label="X" target="_blank" rel="noopener noreferrer">X</a></li>
+        <li><a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer">IG</a></li>
+        <li><a href={site.social.youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer">YT</a></li>
+        <li><a href={site.social.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">IN</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--color-forest); color: rgba(255, 255, 255, 0.82); }
+
+  .footer__newsletter { background: var(--color-institutional); }
+  .news__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding-block: 48px; }
+  .news__title { color: #fff; margin-top: 10px; }
+  .news__sub { color: rgba(255, 255, 255, 0.85); margin-top: 8px; }
+  .footer__newsletter .overline { color: #fff; }
+  .footer__newsletter .overline::before { background: #fff; }
+
+  .news__form { display: flex; flex-wrap: wrap; gap: 12px; }
+  .news__form input {
+    flex: 1 1 240px; min-width: 0;
+    padding: 15px 18px; border: 0; border-radius: var(--radius-pill);
+    font-family: var(--font-body); font-size: 16px; color: var(--color-ink);
+  }
+  .news__btn {
+    padding: 15px 28px; border: 0; border-radius: var(--radius-pill);
+    background: var(--color-forest); color: #fff;
+    font-family: var(--font-display); font-weight: 600; font-size: 15px; cursor: pointer;
+    transition: background var(--dur) var(--ease);
+  }
+  .news__btn:hover { background: var(--color-ink); }
+  .news__status { flex-basis: 100%; font-size: 14px; color: #fff; min-height: 1em; margin: 0; }
+
+  .footer__main { padding-block: 64px; }
+  .footer__grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
+  .footer__logo { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: #fff; display: flex; align-items: center; gap: 10px; }
+  .footer__logo span { width: 36px; height: 36px; display: grid; place-items: center; background: var(--color-institutional); border-radius: 8px; font-size: 20px; }
+  .footer__about { margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.7); max-width: 30ch; }
+  .footer__founded { margin-top: 12px; font-size: 14px; color: rgba(255, 255, 255, 0.6); max-width: 32ch; }
+
+  .footer__heading { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 16px; }
+  .footer__col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .footer__col a { color: rgba(255, 255, 255, 0.8); font-size: 15px; }
+  .footer__col a:hover { color: #fff; }
+
+  .footer__legal { border-top: 1px solid rgba(255, 255, 255, 0.12); padding-block: 28px; }
+  .legal__inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .legal__contact p { font-size: 13px; color: rgba(255, 255, 255, 0.65); line-height: 1.7; }
+  .legal__contact a { color: rgba(255, 255, 255, 0.85); }
+  .legal__copy { margin-top: 6px; }
+  .legal__social { list-style: none; padding: 0; display: flex; gap: 10px; }
+  .legal__social a {
+    width: 38px; height: 38px; display: grid; place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 50%;
+    color: #fff; font-size: 12px; font-weight: 700; font-family: var(--font-display);
+  }
+  .legal__social a:hover { background: var(--color-institutional); border-color: var(--color-institutional); }
+
+  @media (max-width: 1024px) {
+    .news__grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+  @media (max-width: 640px) {
+    .footer__grid { grid-template-columns: 1fr; }
+    .legal__inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<script>
+  // Progressive-enhancement submit; falls back to native POST if JS off.
+  const form = document.querySelector<HTMLFormElement>('[data-newsletter]');
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+  form?.addEventListener('submit', async (e) => {
+    if (!form.action) return; // no endpoint configured -> let native submit / no-op
+    e.preventDefault();
+    if (status) status.textContent = 'Subscribing\u2026';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (status) status.textContent = res.ok ? 'Thanks \u2014 please check your inbox to confirm.' : 'Something went wrong. Please try again.';
+      if (res.ok) form.reset();
+    } catch {
+      if (status) status.textContent = 'Network error. Please try again.';
+    }
+  });
+</script>

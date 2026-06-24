@@ -1,0 +1,413 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+
+const summaryStats = [
+  { n: '1972', l: 'Year founded' },
+  { n: 'S-14480/2026', l: 'NGO Registration No.' },
+  { n: '3', l: 'Active programmes' },
+  { n: '2', l: 'Ministry submissions' },
+];
+
+const timeline = [
+  {
+    period: 'Institutional',
+    quarter: 'Registration & Compliance',
+    items: [
+      {
+        institution: 'NGO Affairs Bureau, Government of Bangladesh',
+        badge: 'Reg No. S-14480/2026',
+        category: 'Registration',
+        body: 'CHRSD formally registered with the NGO Affairs Bureau under the Government of Bangladesh. This registration establishes CHRSD\'s legal standing to operate development programmes nationally and to receive foreign assistance for approved projects.',
+      },
+      {
+        institution: 'National Social Welfare Council',
+        badge: 'Enlisted Member',
+        category: 'Compliance',
+        body: 'CHRSD holds active enlistment with the National Social Welfare Council — a prerequisite for engagement with government-coordinated social welfare programmes and ministry-level partnerships.',
+      },
+      {
+        institution: 'National Board of Revenue (NBR), Bangladesh',
+        badge: 'Tax Exemption Certificate',
+        category: 'Compliance',
+        body: 'Income Tax Exemption Certificate issued by the National Board of Revenue. Donations and institutional grants received by CHRSD qualify for tax benefit under the relevant provisions of the Income Tax Ordinance.',
+      },
+      {
+        institution: 'Microfinance Regulatory Authority (MRA)',
+        badge: 'Compliance Clearance',
+        category: 'Regulatory',
+        body: 'MRA compliance clearance issued following regulatory review of CHRSD\'s microfinance and community-credit activities. CHRSD operates within the statutory framework governing microfinance institutions in Bangladesh.',
+      },
+    ],
+  },
+  {
+    period: 'Q1 2026',
+    quarter: 'Programme Validations — Ministry Receipts',
+    items: [
+      {
+        institution: 'Ministry of Environment, Forest and Climate Change (MoEFCC)',
+        badge: 'Formal Programme Receipt',
+        category: 'Submission',
+        body: 'The National Smart Afforestation and Digital Monitoring Programme (NSADMP) was formally submitted to and received by MoEFCC. The programme targets the verified plantation and survival of 250 million native and climate-resilient trees over five years, directly supporting Bangladesh\'s NDCs under the Paris Agreement and the Mujib Climate Prosperity Plan.',
+      },
+      {
+        institution: 'Ministry of Primary and Mass Education (MoPME) / Directorate of Primary Education (DPE)',
+        badge: 'Formal Programme Receipt',
+        category: 'Submission',
+        body: 'The Smart Digital Attendance Management System and Monitoring Programme (SDAMSMP) was formally submitted to and received by MoPME/DPE. The programme targets 379,624 primary school teachers across 65,566+ government primary schools, deploying biometric attendance technology and real-time monitoring infrastructure to strengthen public education accountability nationwide.',
+      },
+    ],
+  },
+  {
+    period: 'Q2 2026',
+    quarter: 'Technology Partner Validations',
+    items: [
+      {
+        institution: 'Bangladesh National Data Centre (NDC)',
+        badge: 'Technical Vetting Completed',
+        category: 'Security Review',
+        body: 'The National Data Centre completed a technical vetting and security architecture review of the Smart Digital Attendance Platform developed by Nevronus Systems. The review assessed system architecture, data security protocols, and infrastructure readiness for national-scale deployment across Bangladesh\'s primary education network.',
+      },
+      {
+        institution: 'ISO 27001 — Information Security Management',
+        badge: 'Nevronus Systems Alignment · 2025',
+        category: 'Technology Partner',
+        body: 'Nevronus Systems, CHRSD\'s technology implementation partner, operates in alignment with ISO 27001 Information Security Management standards — the internationally recognised benchmark for information security governance applied to the biometric datasets, teacher records, and attendance data processed under CHRSD programmes.',
+      },
+      {
+        institution: 'Bangladesh Computer Council (BCC)',
+        badge: 'Registered Technology Vendor · Nevronus Systems',
+        category: 'Technology Partner',
+        body: 'Nevronus Systems holds registration as an approved technology vendor with the Bangladesh Computer Council — the national government body responsible for ICT policy, technology standards, and vendor certification in Bangladesh.',
+      },
+      {
+        institution: 'Bangladesh Association of Software and Information Services (BASIS)',
+        badge: 'Member Organisation · Nevronus Systems',
+        category: 'Technology Partner',
+        body: 'Nevronus Systems holds active membership with BASIS — the apex body representing Bangladesh\'s software and IT services industry. BASIS membership signals adherence to industry codes of practice and institutional standing within the national technology sector.',
+      },
+    ],
+  },
+  {
+    period: '2026',
+    quarter: 'Field Programme Recognitions',
+    items: [
+      {
+        institution: 'UNEP Bangladesh',
+        badge: 'Model Community-Led Initiative — World Environment Day 2026',
+        category: 'Recognition',
+        body: 'The Sonaimuri Tree Plantation Festival — CHRSD\'s World Environment Day 2026 community reforestation event — was cited by UNEP Bangladesh as a model community-led reforestation initiative. The festival planted over 5,000 native and climate-resilient trees in the ecologically sensitive delta region of Bangladesh, demonstrating that national policy targets can be translated into verifiable, community-owned ecological action.',
+      },
+      {
+        institution: 'Bangladesh Garment Manufacturers and Exporters Association (BGMEA)',
+        badge: 'Partnership Acknowledgement — Signed May 2026',
+        category: 'Partnership',
+        body: 'BGMEA formally acknowledged CHRSD\'s AI Vision Care Initiative — a programme providing AI-assisted eye screening and vision care to workers in Bangladesh\'s ready-made garment (RMG) sector. The partnership targets improved worker welfare outcomes across affiliated garment factories and represents CHRSD\'s expanding presence in occupational health and worker rights programming.',
+      },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Awards, Recognitions & Compliance"
+  description="CHRSD's institutional registrations, programme validations, ministry submissions, and field programme recognitions — a transparent record of our compliance and accountability standing."
+>
+  <PageHero
+    overline="About CHRSD · Accountability"
+    title="Awards, Recognitions & Compliance"
+    lead="A transparent, chronological record of CHRSD's institutional registrations, regulatory compliance standing, government ministry receipts, technology validations, and field programme recognitions."
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Compliance integrity</p>
+      <h2>Our standing at a glance</h2>
+      <div class="summary-bar">
+        {summaryStats.map((s) => (
+          <div class="summary-stat">
+            <span class="summary-stat__n">{s.n}</span>
+            <span class="summary-stat__l">{s.l}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="overline">Full record</p>
+      <h2>Timeline of registrations and recognitions</h2>
+      <p class="section-lead">All entries reflect formally issued certificates, official receipts, or documented acknowledgements from the named institutions.</p>
+
+      <div class="timeline" role="list">
+        {timeline.map((group) => (
+          <div class="tl-group" role="listitem">
+            <div class="tl-marker" aria-hidden="true">
+              <span class="tl-marker__period">{group.period}</span>
+              <span class="tl-marker__line"></span>
+            </div>
+            <div class="tl-content">
+              <p class="tl-content__quarter overline">{group.quarter}</p>
+              <div class="tl-items">
+                {group.items.map((item) => (
+                  <article class="tl-card">
+                    <div class="tl-card__head">
+                      <span class="tl-card__category">{item.category}</span>
+                      <span class="tl-card__badge">{item.badge}</span>
+                    </div>
+                    <h3 class="tl-card__institution">{item.institution}</h3>
+                    <p class="tl-card__body">{item.body}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="integrity-banner">
+        <div class="integrity-banner__text">
+          <p class="overline">Commitment to accountability</p>
+          <h2>Compliance as a founding principle</h2>
+          <p>
+            CHRSD does not treat regulatory compliance as a checkbox exercise. Every registration,
+            clearance, and submission listed on this page reflects our ongoing commitment to operating
+            with institutional integrity — accountable to the Government of Bangladesh, to our
+            programme beneficiaries, and to the communities we serve.
+          </p>
+          <p>
+            We proactively pursue compliance across all regulatory domains — legal registration,
+            tax status, programme-level government approvals, technology security standards, and
+            international frameworks — because accountability is the foundation of trust, and trust
+            is the foundation of sustainable development.
+          </p>
+        </div>
+        <div class="integrity-banner__contact">
+          <p class="overline">Documentation requests</p>
+          <h3>Request certificates or verification</h3>
+          <p>
+            Certified copies of any registration certificate or compliance document are available on
+            written request. Partner organisations and institutional donors may contact our
+            administration office for verification.
+          </p>
+          <a href={`mailto:${site.email}?subject=Compliance%20Documentation%20Request`} class="contact-link">
+            {site.email}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .summary-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-top: 32px;
+    background: #fff;
+  }
+  .summary-stat {
+    padding: 36px 24px;
+    text-align: center;
+    border-right: 1px solid var(--color-border-green);
+  }
+  .summary-stat:last-child { border-right: none; }
+  .summary-stat__n {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--color-institutional);
+    line-height: 1.1;
+  }
+  .summary-stat__l {
+    display: block;
+    font-size: 13px;
+    color: var(--color-slate);
+    margin-top: 8px;
+  }
+
+  .section-lead {
+    color: var(--color-slate);
+    margin-top: 14px;
+    margin-bottom: 56px;
+    max-width: 65ch;
+  }
+
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+
+  .tl-group {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0 48px;
+    position: relative;
+  }
+
+  .tl-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 4px;
+    position: relative;
+  }
+  .tl-marker__period {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--color-institutional);
+    white-space: nowrap;
+    text-align: right;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+    padding: 4px 0;
+  }
+  .tl-marker__line {
+    position: absolute;
+    top: 0;
+    right: -25px;
+    width: 2px;
+    height: 100%;
+    background: var(--color-border-green);
+  }
+  .tl-marker::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: -31px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-institutional);
+    z-index: 2;
+  }
+
+  .tl-content {
+    padding-bottom: 56px;
+  }
+  .tl-content__quarter {
+    margin-bottom: 20px;
+    margin-top: 4px;
+  }
+
+  .tl-items { display: flex; flex-direction: column; gap: 16px; }
+
+  .tl-card {
+    background: #fff;
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .tl-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .tl-card__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tl-card__category {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+  }
+  .tl-card__badge {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--color-institutional);
+    background: rgba(0, 120, 60, 0.08);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+  }
+  .tl-card__institution {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 0 0 10px;
+    line-height: 1.35;
+  }
+  .tl-card__body {
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .integrity-banner {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 64px;
+    align-items: start;
+  }
+  .integrity-banner__text h2 { margin: 12px 0 20px; }
+  .integrity-banner__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+
+  .integrity-banner__contact {
+    background: var(--color-forest);
+    border-radius: var(--radius);
+    padding: 36px;
+    color: #fff;
+  }
+  .integrity-banner__contact h3 { color: #fff; margin: 12px 0 14px; font-size: 20px; }
+  .integrity-banner__contact p { color: rgba(255,255,255,0.82); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+
+  .contact-link {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: #A8D4BC;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(168,212,188,0.4);
+    padding-bottom: 2px;
+    transition: color var(--dur) var(--ease);
+  }
+  .contact-link:hover { color: #fff; }
+
+  @media (max-width: 1024px) {
+    .tl-group { grid-template-columns: 140px 1fr; gap: 0 32px; }
+    .integrity-banner { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 720px) {
+    .summary-bar { grid-template-columns: repeat(2, 1fr); }
+    .summary-stat:nth-child(2) { border-right: none; }
+    .summary-stat:nth-child(3),
+    .summary-stat:nth-child(4) { border-top: 1px solid var(--color-border-green); }
+    .tl-group { grid-template-columns: 1fr; gap: 8px; }
+    .tl-marker {
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+    .tl-marker__period { text-align: left; }
+    .tl-marker__line { display: none; }
+    .tl-marker::before { display: none; }
+    .tl-content { padding-bottom: 40px; }
+  }
+  @media (max-width: 480px) {
+    .summary-bar { grid-template-columns: 1fr; }
+    .summary-stat { border-right: none; border-bottom: 1px solid var(--color-border-green); }
+    .summary-stat:last-child { border-bottom: none; }
+  }
+</style>

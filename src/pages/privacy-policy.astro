@@ -1,0 +1,230 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+const updated = '23 June 2026';
+---
+<BaseLayout
+  title="Privacy Policy"
+  description="How CHRSD collects, uses, and protects your personal information."
+>
+  <PageHero
+    overline="Legal · Privacy"
+    title="Privacy Policy"
+    lead={`This policy explains what data we collect, why we collect it, and how we protect it. Last updated: ${updated}.`}
+  />
+
+  <section class="section">
+    <div class="container prose-wrap">
+
+      <nav class="toc" aria-label="On this page">
+        <p class="toc__label">On this page</p>
+        <ol>
+          <li><a href="#who">Who we are</a></li>
+          <li><a href="#data">Data we collect</a></li>
+          <li><a href="#use">How we use it</a></li>
+          <li><a href="#sharing">Sharing & disclosure</a></li>
+          <li><a href="#cookies">Cookies</a></li>
+          <li><a href="#retention">Data retention</a></li>
+          <li><a href="#rights">Your rights</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#contact">Contact us</a></li>
+        </ol>
+      </nav>
+
+      <div class="prose">
+
+        <h2 id="who">1. Who we are</h2>
+        <p>
+          The Centre for Humanitarian Research and Social Development Foundation
+          (<strong>CHRSD</strong>, "we", "us", "our") is a non-profit organisation
+          registered under the Societies Registration Act, 1860 (Reg. No. {site.regNo}),
+          with its principal office at {site.address}. CHRSD is the data controller for
+          all personal information collected through this website.
+        </p>
+
+        <h2 id="data">2. Data we collect</h2>
+        <p>We only collect information you actively provide or that arises from normal
+        website operation. This includes:</p>
+        <ul>
+          <li>
+            <strong>Contact enquiries</strong> — name, email address, subject, and the
+            message body submitted through our contact form.
+          </li>
+          <li>
+            <strong>Newsletter subscriptions</strong> — email address submitted via the
+            footer subscription form.
+          </li>
+          <li>
+            <strong>Volunteer and partnership applications</strong> — name, email, phone
+            number, and any supporting information you choose to provide.
+          </li>
+          <li>
+            <strong>Technical data</strong> — IP address, browser type, pages visited,
+            and referrer URL collected automatically via server logs and analytics. This
+            data is aggregated and not linked to individuals.
+          </li>
+        </ul>
+        <p>We do <strong>not</strong> collect payment card data, government identification
+        numbers, or sensitive personal data as defined under Bangladeshi and international
+        data protection frameworks.</p>
+
+        <h2 id="use">3. How we use your information</h2>
+        <p>We use the information you provide solely to:</p>
+        <ul>
+          <li>Respond to enquiries and provide requested information.</li>
+          <li>Send newsletters and programme updates (only where you have subscribed).</li>
+          <li>Process volunteer or partnership applications.</li>
+          <li>Improve website content, accessibility, and performance.</li>
+          <li>Meet our legal and regulatory obligations.</li>
+        </ul>
+        <p>We will never use your data for automated decision-making or profiling.</p>
+
+        <h2 id="sharing">4. Sharing and disclosure</h2>
+        <p>We do not sell, rent, or trade personal data. We may share data only with:</p>
+        <ul>
+          <li>
+            <strong>Formspree Inc.</strong> — our form processing service provider,
+            acting as a data processor under a data processing agreement. See
+            <a href="https://formspree.io/legal/privacy-policy/" rel="noopener noreferrer" target="_blank">Formspree's Privacy Policy</a>.
+          </li>
+          <li>
+            <strong>Regulatory authorities</strong> — if required by applicable law or
+            a lawful court order.
+          </li>
+        </ul>
+        <p>Any third-party processors are contractually bound to handle data only on our
+        instructions and in compliance with applicable privacy law.</p>
+
+        <h2 id="cookies">5. Cookies</h2>
+        <p>
+          This website uses a minimal set of cookies. A <strong>strictly necessary</strong>
+          cookie stores your cookie consent preference. We do not currently deploy
+          advertising or cross-site tracking cookies.
+        </p>
+        <p>
+          You may withdraw cookie consent at any time by clearing your browser cookies.
+          The site will continue to function correctly without optional cookies.
+        </p>
+
+        <h2 id="retention">6. Data retention</h2>
+        <p>
+          Contact enquiry data is retained for up to <strong>24 months</strong> from the
+          date of submission, after which it is securely deleted. Newsletter subscriber
+          data is retained until you unsubscribe. Technical logs are retained for up to
+          90 days for security purposes.
+        </p>
+
+        <h2 id="rights">7. Your rights</h2>
+        <p>You have the right to:</p>
+        <ul>
+          <li><strong>Access</strong> — request a copy of personal data we hold about you.</li>
+          <li><strong>Rectification</strong> — ask us to correct inaccurate data.</li>
+          <li><strong>Erasure</strong> — request deletion of your data where no legal
+          obligation requires retention.</li>
+          <li><strong>Portability</strong> — receive your data in a structured,
+          machine-readable format.</li>
+          <li><strong>Objection</strong> — object to processing based on legitimate
+          interests.</li>
+          <li><strong>Withdraw consent</strong> — unsubscribe from newsletters at any
+          time via the link in each email.</li>
+        </ul>
+        <p>To exercise any right, contact us using the details in Section 9. We will
+        respond within 30 calendar days.</p>
+
+        <h2 id="security">8. Security</h2>
+        <p>
+          We apply industry-standard technical and organisational measures to protect
+          your data — including TLS encryption in transit, access controls, and regular
+          security reviews. No method of transmission over the internet is completely
+          secure; we take all reasonable steps to minimise risk.
+        </p>
+
+        <h2 id="contact">9. Contact us</h2>
+        <p>
+          For privacy enquiries, data subject requests, or to file a complaint, please
+          contact our Privacy Lead:
+        </p>
+        <address>
+          <strong>CHRSD Foundation</strong><br />
+          {site.address}<br />
+          Email: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+          Phone: <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}>{site.phone}</a>
+        </address>
+        <p>
+          We aim to resolve all privacy concerns promptly. If you remain unsatisfied, you
+          have the right to lodge a complaint with the relevant data protection authority
+          in your jurisdiction.
+        </p>
+
+        <p class="updated">This policy was last reviewed and updated on <strong>{updated}</strong>.</p>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose-wrap {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Table of contents */
+  .toc {
+    position: sticky;
+    top: 100px;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .toc__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+    margin-bottom: 14px;
+  }
+  .toc ol {
+    padding-left: 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .toc a {
+    font-size: 14px;
+    color: var(--color-slate);
+    text-decoration: none;
+  }
+  .toc a:hover { color: var(--color-institutional); }
+
+  /* Prose */
+  .prose { max-width: 70ch; }
+  .prose h2 {
+    font-size: 22px;
+    color: var(--color-forest);
+    margin: 44px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border-green);
+  }
+  .prose h2:first-child { margin-top: 0; }
+  .prose p { color: var(--color-slate); line-height: 1.75; margin-bottom: 14px; }
+  .prose ul, .prose ol { color: var(--color-slate); padding-left: 22px; margin-bottom: 14px; }
+  .prose li { margin-bottom: 8px; line-height: 1.7; }
+  .prose strong { color: var(--color-ink); font-weight: 600; }
+  .prose a { color: var(--color-institutional); text-underline-offset: 3px; }
+  .prose a:hover { color: var(--color-forest); }
+  .prose address { font-style: normal; background: var(--color-tint); border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 20px 24px; margin: 16px 0; line-height: 2; }
+  .updated { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--color-border-green); font-size: 14px; color: var(--color-slate); }
+
+  @media (max-width: 860px) {
+    .prose-wrap { grid-template-columns: 1fr; gap: 32px; }
+    .toc { position: static; }
+  }
+</style>

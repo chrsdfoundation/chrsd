@@ -1,0 +1,342 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const stats = [
+  { n: '5,000+', l: 'Trees planted — Sonaimuri 2026' },
+  { n: '250M',   l: "Bangladesh's national tree target" },
+  { n: '14',     l: 'Districts where CHRSD operates' },
+  { n: '1972',   l: 'Year CHRSD was established' },
+];
+
+const outcomes = [
+  {
+    icon: '🌿',
+    title: 'Carbon sequestration',
+    body: 'Native, climate-resilient species lock carbon at the local level — complementing the macro-level frameworks that larger climate negotiations pursue.',
+  },
+  {
+    icon: '🌡️',
+    title: 'Microclimate regulation',
+    body: 'Tree canopy cools rising local temperatures and reduces heat stress on crops — a direct buffer for food security in Bangladesh\'s delta communities.',
+  },
+  {
+    icon: '🦋',
+    title: 'Biodiversity restoration',
+    body: 'Restored habitat corridors bring back native birds, insects, and small mammals — the invisible workforce that keeps ecosystems functioning.',
+  },
+  {
+    icon: '💧',
+    title: 'Soil & water health',
+    body: 'Deep root systems stabilise eroding soil, reduce salinity intrusion, and improve water retention — reversing decades of land degradation.',
+  },
+  {
+    icon: '🌾',
+    title: 'Livelihood stability',
+    body: 'Shade, fruit, timber, and windbreak protection strengthen the natural infrastructure rural families depend on for survival and dignity.',
+  },
+  {
+    icon: '⚖️',
+    title: 'Environmental justice',
+    body: 'Reforestation is a human rights imperative. Shrinking forests and degraded soils collapse livelihoods — restoration rebuilds them.',
+  },
+];
+
+const partners = [
+  'Local schools & youth environmental clubs',
+  'Women-led cooperatives',
+  'Farmer collectives & smallholder networks',
+  'Upazila government offices',
+  'National tree-planting campaign (GoB)',
+];
+---
+<BaseLayout
+  title="Community Tree Planting & Sapling Distribution"
+  description="CHRSD's Sonaimuri Tree Plantation Festival — planting 5,000+ native trees in support of Bangladesh's national commitment to 250 million trees and the Paris Agreement NDCs."
+>
+  <PageHero
+    overline="Our work · Environmental sustainability"
+    title="Community Tree Planting & Sapling Distribution"
+    lead="On World Environment Day 2026, CHRSD launched the Sonaimuri Tree Plantation Festival — a community-led effort planting over 5,000 native trees in Bangladesh's climate-vulnerable delta, turning national policy into neighbourhood reality."
+  />
+
+  <!-- STATS -->
+  <section class="section section--alt">
+    <div class="container stats-row">
+      {stats.map((s) => (
+        <div class="stat">
+          <span class="stat__n">{s.n}</span>
+          <span class="stat__l">{s.l}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- WHY SONAIMURI -->
+  <section class="section">
+    <div class="container feature">
+      <div class="feature__text">
+        <p class="overline">The frontline</p>
+        <h2>Why Sonaimuri?</h2>
+        <p>
+          Located in the ecologically sensitive delta region of Bangladesh, Sonaimuri Upazila is a
+          landscape where climate vulnerability is not a future prediction — it is a daily reality.
+          Shifting rainfall patterns, rising soil salinity, intensifying extreme weather events, and
+          gradual land degradation press hard against the livelihoods of farming communities here.
+        </p>
+        <p>
+          From an eco-justice perspective — which lies at the core of CHRSD's mandate —
+          environmental decline and human rights erosion are not separate crises. They are two faces
+          of the same storm. When forests shrink, soils weaken. When soils weaken, harvests fail.
+          When harvests fail, families go hungry, children leave school, and communities lose the
+          buffer zones that once protected them from floods and cyclones.
+        </p>
+        <p class="pull-quote">
+          "Reforestation is not merely an environmental activity. It is a human rights imperative."
+        </p>
+        <p>
+          By concentrating our 2026 Festival in Sonaimuri, CHRSD selects endemic, climate-resilient
+          species to restore soil health, revive local biodiversity, strengthen carbon capture, and
+          rebuild the natural infrastructure that rural families depend on for survival and dignity.
+        </p>
+      </div>
+      <div class="feature__aside">
+        <div class="aside-card">
+          <p class="overline">National alignment</p>
+          <h3>From local soil to national strategy</h3>
+          <p>
+            Our 5,000 trees in Sonaimuri are one thread in a larger national tapestry. The
+            Government of Bangladesh's commitment to plant <strong>250 million trees</strong> is one
+            of the most ambitious nature-based climate strategies in South Asia — directly aligned
+            with Bangladesh's NDCs under the Paris Agreement and the Mujib Climate Prosperity Plan.
+          </p>
+          <p>
+            Policies do not plant trees. People do. CHRSD translates national targets into
+            neighbourhood realities — turning "250 million trees" from a statistic into a shared,
+            lived endeavour.
+          </p>
+          <ul class="aside-list">
+            <li>Paris Agreement NDC alignment</li>
+            <li>Mujib Climate Prosperity Plan</li>
+            <li>GoB 250-million-tree national drive</li>
+            <li>UNEP nature-based solutions framework</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES GRID -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Why it matters</p>
+        <h2>Six outcomes of community reforestation</h2>
+        <p class="lead lede__sub">
+          Reforestation is not a single solution — it is a multi-layered strategy delivering
+          ecological, climatic, and social outcomes simultaneously.
+        </p>
+      </div>
+      <div class="outcomes">
+        {outcomes.map((o) => (
+          <article class="outcome">
+            <span class="outcome__icon" aria-hidden="true">{o.icon}</span>
+            <h3 class="outcome__title">{o.title}</h3>
+            <p class="outcome__body">{o.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY MODEL -->
+  <section class="section">
+    <div class="container">
+      <div class="model-wrap">
+        <div class="model__intro">
+          <p class="overline">Our approach</p>
+          <h2>Community-led ecology</h2>
+          <p>
+            No tree survives without a custodian. No custodian commits without ownership. That is
+            why the Sonaimuri Tree Plantation Festival is not a top-down planting drive — it is a
+            civic mobilisation.
+          </p>
+          <p>
+            Long-term monitoring matters. Sapling survival rates matter. Community stewardship is
+            not a feel-good add-on; it is the only scientifically proven path to reforestation that
+            lasts. Every tree sponsored, every volunteer trained, every local family engaged moves
+            us closer to ecological restoration that is both sustainable and just.
+          </p>
+        </div>
+        <div class="model__partners">
+          <p class="overline">Our co-leaders</p>
+          <ul class="partner-list">
+            {partners.map((p) => (
+              <li class="partner-item">
+                <span class="partner-dot" aria-hidden="true"></span>
+                {p}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORLD ENVIRONMENT DAY CONTEXT -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="wed-banner">
+        <div class="wed-banner__text">
+          <p class="overline">World Environment Day 2026</p>
+          <h2>Global spotlight, local action</h2>
+          <p>
+            World Environment Day 2026 was hosted by the Republic of Azerbaijan under an
+            intensifying global spotlight on the climate crisis. While global attention rightly
+            turned to macro-level negotiations, CHRSD answered the same emergency with hands in the
+            soil of Sonaimuri — because the climate fight will not be won solely in conference
+            centres.
+          </p>
+          <p>
+            It will be won in places like Sonaimuri — where vulnerability meets courage, where
+            policy meets practice, and where ordinary people do extraordinary things with simple
+            tools: soil, saplings, and solidarity.
+          </p>
+        </div>
+        <div class="wed-banner__quote">
+          <blockquote>
+            "The roots we lay down today in this small corner of Bangladesh are not just for
+            Sonaimuri. They are foundations for a climate-secure, ecologically rich, and human
+            rights-centred world."
+          </blockquote>
+          <cite>— CHRSD, World Environment Day 2026</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-panel">
+        <div class="cta-panel__text">
+          <p class="overline">Get involved</p>
+          <h2>Join the movement</h2>
+          <p>
+            The climate fight needs more than distant applause. Partner, learn, or plant alongside
+            us — wherever you are.
+          </p>
+          <ul class="cta-list">
+            <li><strong>Partner with us</strong> — fund, provide technical expertise, or amplify our advocacy.</li>
+            <li><strong>Learn with us</strong> — study community-led reforestation models and adapt them to your landscape.</li>
+            <li><strong>Plant with us</strong> — if you cannot hold a shovel in Sonaimuri, find the vulnerable ground nearest to you.</li>
+          </ul>
+        </div>
+        <div class="cta-panel__actions">
+          <Button href="/get-involved/partnership/" variant="solid">Partner with CHRSD</Button>
+          <Button href="/get-involved/volunteer/" variant="outline">Become a volunteer</Button>
+          <Button href={`mailto:${site.email}?subject=Tree Planting Partnership`} variant="outline">Email us directly</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Stats */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden;
+  }
+  .stat { padding: 36px 24px; text-align: center; background: #fff; border-right: 1px solid var(--color-border-green); }
+  .stat:last-child { border-right: none; }
+  .stat__n { display: block; font-family: var(--font-display); font-weight: 800; font-size: 42px; color: var(--color-institutional); line-height: 1; }
+  .stat__l { display: block; font-size: 13px; color: var(--color-slate); margin-top: 8px; }
+
+  /* Feature layout */
+  .feature { display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: start; }
+  .feature__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 18px; }
+  .feature__text h2 { margin: 12px 0 20px; }
+  .pull-quote {
+    font-family: var(--font-display); font-size: 18px; font-weight: 700;
+    color: var(--color-forest); border-left: 4px solid var(--color-institutional);
+    padding-left: 20px; margin: 28px 0; line-height: 1.5;
+  }
+
+  /* Aside card */
+  .aside-card {
+    background: var(--color-tint); border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 32px; position: sticky; top: 24px;
+  }
+  .aside-card h3 { font-size: 20px; margin: 10px 0 16px; color: var(--color-forest); }
+  .aside-card p { color: var(--color-slate); font-size: 15px; line-height: 1.75; margin-bottom: 14px; }
+  .aside-list { list-style: none; padding: 0; margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .aside-list li { font-size: 14px; color: var(--color-forest); padding-left: 20px; position: relative; }
+  .aside-list li::before { content: '✓'; position: absolute; left: 0; color: var(--color-institutional); font-weight: 700; }
+
+  /* Lede */
+  .lede { max-width: 60ch; margin-bottom: 44px; }
+  .lede h2 { margin-top: 12px; }
+  .lede__sub { margin-top: 16px; color: var(--color-slate); }
+
+  /* Outcomes */
+  .outcomes { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .outcome {
+    background: #fff; border: 1.5px solid var(--color-border-green); border-radius: var(--radius);
+    padding: 28px; transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .outcome:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+  .outcome__icon { font-size: 28px; display: block; }
+  .outcome__title { font-size: 18px; color: var(--color-forest); margin: 14px 0 10px; }
+  .outcome__body { color: var(--color-slate); font-size: 15px; line-height: 1.7; }
+
+  /* Community model */
+  .model-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .model__intro h2 { margin: 12px 0 20px; }
+  .model__intro p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+  .partner-list { list-style: none; padding: 0; margin-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .partner-item { display: flex; align-items: center; gap: 14px; font-size: 15px; color: var(--color-ink); }
+  .partner-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-institutional); flex-shrink: 0; }
+
+  /* WED banner */
+  .wed-banner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .wed-banner__text h2 { margin: 12px 0 20px; }
+  .wed-banner__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+  .wed-banner__quote {
+    background: var(--color-forest); border-radius: var(--radius); padding: 40px;
+    display: flex; flex-direction: column; justify-content: center; height: 100%;
+  }
+  blockquote {
+    font-family: var(--font-display); font-size: 17px; font-weight: 600;
+    color: #fff; line-height: 1.65; margin: 0 0 20px; font-style: italic;
+  }
+  cite { font-size: 13px; color: #A8D4BC; font-style: normal; }
+
+  /* CTA panel */
+  .cta-panel { display: grid; grid-template-columns: 1fr 280px; gap: 64px; align-items: start; }
+  .cta-panel__text h2 { margin: 12px 0 16px; }
+  .cta-panel__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+  .cta-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+  .cta-list li { color: var(--color-slate); font-size: 15px; padding-left: 20px; position: relative; line-height: 1.6; }
+  .cta-list li::before { content: '→'; position: absolute; left: 0; color: var(--color-institutional); }
+  .cta-panel__actions { display: flex; flex-direction: column; gap: 12px; padding-top: 60px; }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .outcomes { grid-template-columns: repeat(2,1fr); }
+    .feature { grid-template-columns: 1fr; }
+    .feature__aside { position: static; }
+    .wed-banner { grid-template-columns: 1fr; }
+    .model-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .cta-panel { grid-template-columns: 1fr; gap: 32px; }
+    .cta-panel__actions { padding-top: 0; flex-direction: row; flex-wrap: wrap; }
+  }
+  @media (max-width: 700px) {
+    .stats-row { grid-template-columns: repeat(2,1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--color-border-green); }
+    .outcomes { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/Button.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  // Only generate detail pages for internally-hosted items. Items with an
+  // externalUrl link straight out, so they need no local page.
+  const items = await getCollection(
+    'news',
+    ({ data }) => !data.draft && !data.externalUrl
+  );
+  return items.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+type Props = { entry: CollectionEntry<'news'> };
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await entry.render();
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<BaseLayout title={data.title} description={data.excerpt} image={data.coverImage}>
+  <article class="post">
+    <header class="post__head">
+      <div class="container post__head-inner">
+        <p class="meta"><a href="/stay-informed/news/">News &amp; Press</a> · {data.type}</p>
+        <h1 class="post__title">{data.title}</h1>
+        <p class="lead post__desc">{data.excerpt}</p>
+        <p class="meta post__byline">{fmt(data.pubDate)}</p>
+      </div>
+    </header>
+
+    <figure class="container post__cover">
+      <img src={data.coverImage} alt={data.coverAlt} width="1200" height="640" loading="eager" />
+      {data.imageMeta?.photographer && (
+        <figcaption class="meta">Photo: {data.imageMeta.photographer}{data.imageMeta.location && ` · ${data.imageMeta.location}`}</figcaption>
+      )}
+    </figure>
+
+    <div class="container post__body">
+      <div class="prose">
+        <Content />
+      </div>
+      <div class="post__foot">
+        <Button href="/stay-informed/news/" variant="outline">&larr; Back to news</Button>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post__head { padding-block: 56px 32px; }
+  .post__head-inner { max-width: 760px; }
+  .post__title { margin: 12px 0 16px; font-size: 44px; line-height: 1.15; }
+  .post__desc { color: var(--text-muted); }
+  .post__byline { margin-top: 16px; }
+  .post__cover img { border-radius: var(--radius); aspect-ratio: 15 / 8; object-fit: cover; width: 100%; }
+  .post__cover figcaption { margin-top: 10px; }
+  .post__body { max-width: 760px; padding-block: 48px 80px; }
+  .post__foot { margin-top: 40px; }
+  @media (max-width: 768px) { .post__title { font-size: 32px; } }
+</style>

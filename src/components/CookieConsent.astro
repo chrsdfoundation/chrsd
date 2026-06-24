@@ -1,0 +1,102 @@
+---
+// 2026 Block 9 — GDPR-style cookie consent. Decline disables analytics,
+// Manage opens granular toggles, Accept stores consent. No external deps.
+---
+<div class="cookie" id="cookie-banner" hidden role="dialog" aria-modal="false" aria-labelledby="cookie-title">
+  <div class="container cookie__inner">
+    <div class="cookie__text">
+      <p id="cookie-title">
+        We use cookies to enhance your experience and analyse site traffic.
+        Click <strong>Accept</strong> to consent, or manage your preferences.
+      </p>
+    </div>
+    <div class="cookie__actions">
+      <button class="ck ck--text" data-consent="decline">Decline</button>
+      <button class="ck ck--outline" data-consent="manage">Manage</button>
+      <button class="ck ck--solid" data-consent="accept">Accept</button>
+    </div>
+  </div>
+
+  <div class="cookie__manage" id="cookie-manage" hidden>
+    <div class="container">
+      <label class="toggle">
+        <input type="checkbox" checked disabled />
+        <span><strong>Essential</strong> — required for the site to function. Always on.</span>
+      </label>
+      <label class="toggle">
+        <input type="checkbox" id="ck-analytics" />
+        <span><strong>Analytics</strong> — anonymous usage data to improve the site.</span>
+      </label>
+      <label class="toggle">
+        <input type="checkbox" id="ck-marketing" />
+        <span><strong>Marketing</strong> — measure campaign and outreach effectiveness.</span>
+      </label>
+      <button class="ck ck--solid" data-consent="save">Save preferences</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cookie {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: #1A1A1A; color: rgba(255, 255, 255, 0.9);
+    z-index: var(--z-cookie);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.25);
+  }
+  .cookie[hidden] { display: none; }
+  .cookie__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 18px; flex-wrap: wrap; }
+  .cookie__text p { font-size: 14px; line-height: 1.5; max-width: 70ch; }
+  .cookie__text strong { color: #fff; }
+  .cookie__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .ck { font-family: var(--font-display); font-weight: 600; font-size: 14px; padding: 11px 20px; border-radius: var(--radius-pill); cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
+  .ck--text { background: none; color: rgba(255, 255, 255, 0.7); }
+  .ck--text:hover { color: #fff; }
+  .ck--outline { background: none; color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+  .ck--outline:hover { border-color: #fff; }
+  .ck--solid { background: var(--color-institutional); color: #fff; }
+  .ck--solid:hover { background: var(--color-light-green); }
+
+  .cookie__manage { border-top: 1px solid rgba(255, 255, 255, 0.15); padding-block: 20px; }
+  .cookie__manage[hidden] { display: none; }
+  .toggle { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; font-size: 14px; }
+  .toggle input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--color-institutional); }
+  .cookie__manage .ck { margin-top: 12px; }
+
+  @media (max-width: 640px) {
+    .cookie__inner { flex-direction: column; align-items: flex-start; }
+    .cookie__actions { width: 100%; }
+    .cookie__actions .ck { flex: 1; }
+  }
+</style>
+
+<script>
+  const KEY = 'chrsd-consent';
+  const banner = document.getElementById('cookie-banner');
+  const managePanel = document.getElementById('cookie-manage');
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; }
+  }
+  function setConsent(value: Record<string, boolean>) {
+    localStorage.setItem(KEY, JSON.stringify({ ...value, ts: Date.now() }));
+    banner?.setAttribute('hidden', '');
+    // Hook: load analytics here when value.analytics === true
+  }
+
+  if (!getConsent()) banner?.removeAttribute('hidden');
+
+  banner?.addEventListener('click', (e) => {
+    const action = (e.target as HTMLElement).closest<HTMLElement>('[data-consent]')?.dataset.consent;
+    if (action === 'accept') setConsent({ essential: true, analytics: true, marketing: true });
+    if (action === 'decline') setConsent({ essential: true, analytics: false, marketing: false });
+    if (action === 'manage') managePanel?.toggleAttribute('hidden');
+    if (action === 'save') {
+      setConsent({
+        essential: true,
+        analytics: (document.getElementById('ck-analytics') as HTMLInputElement)?.checked || false,
+        marketing: (document.getElementById('ck-marketing') as HTMLInputElement)?.checked || false,
+      });
+    }
+  });
+</script>

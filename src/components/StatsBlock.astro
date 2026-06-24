@@ -1,0 +1,80 @@
+---
+// Validated baseline metrics from the latest annual report (Phase 5, 1.3 —
+// no "0" placeholders). Values count up when scrolled into view.
+const stats = [
+  { value: 2.3, suffix: 'M+', label: 'Households', desc: 'Escaped extreme poverty via verified pathways' },
+  { value: 16, suffix: 'M+', label: 'Microfinance Users', desc: 'Financial inclusion at scale' },
+  { value: 15, suffix: 'M+', label: 'School Graduates', desc: 'Shaping future generations' },
+];
+---
+<section class="section section--dark stats" style="--bg-dark: var(--color-forest)">
+  <div class="container">
+    <p class="overline">Unlocking potential</p>
+    <div class="stats__grid" data-stats>
+      {stats.map((s) => (
+        <a class="stat" href="/impact/live-impact-counters/">
+          <span
+            class="stat__value"
+            data-target={s.value}
+            data-suffix={s.suffix}
+            aria-label={`${s.value}${s.suffix} ${s.label}`}
+          >0{s.suffix}</span>
+          <span class="stat__label">{s.label}</span>
+          <span class="stat__desc">{s.desc}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
+  .stat {
+    display: block; padding: 36px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.14); border-radius: var(--radius);
+    color: #fff; transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease), background var(--dur) var(--ease);
+  }
+  .stat:hover { border-color: var(--color-light-green); transform: translateY(-4px); background: rgba(40, 160, 100, 0.08); color: #fff; }
+  .stat__value { display: block; font-family: var(--font-display); font-weight: 800; font-size: 56px; line-height: 1; color: var(--color-light-green); }
+  .stat__label { display: block; font-family: var(--font-display); font-weight: 700; font-size: 19px; margin-top: 12px; }
+  .stat__desc { display: block; font-size: 15px; color: rgba(255, 255, 255, 0.72); margin-top: 8px; line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .stats__grid { grid-template-columns: 1fr; gap: 16px; }
+    .stat__value { font-size: 44px; }
+  }
+</style>
+
+<script>
+  const wrap = document.querySelector('[data-stats]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function runCount(el: HTMLElement) {
+    const target = parseFloat(el.dataset.target || '0');
+    const suffix = el.dataset.suffix || '';
+    const decimals = target % 1 !== 0 ? 1 : 0;
+    if (reduce) { el.textContent = target.toFixed(decimals) + suffix; return; }
+    const duration = 1600;
+    const start = performance.now();
+    function tick(now: number) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(decimals) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if (wrap) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          wrap.querySelectorAll<HTMLElement>('.stat__value').forEach(runCount);
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(wrap);
+  }
+</script>

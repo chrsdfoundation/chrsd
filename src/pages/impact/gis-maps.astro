@@ -1,0 +1,567 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+
+const divisions = [
+  { name: 'Dhaka', districts: 13, nsadmp: true, sdamsmp: true },
+  { name: 'Chittagong', districts: 11, nsadmp: true, sdamsmp: true },
+  { name: 'Rajshahi', districts: 8, nsadmp: true, sdamsmp: false },
+  { name: 'Khulna', districts: 10, nsadmp: true, sdamsmp: true },
+  { name: 'Barisal', districts: 6, nsadmp: true, sdamsmp: false },
+  { name: 'Sylhet', districts: 4, nsadmp: false, sdamsmp: true },
+  { name: 'Rangpur', districts: 8, nsadmp: true, sdamsmp: false },
+  { name: 'Mymensingh', districts: 4, nsadmp: false, sdamsmp: true },
+];
+
+const techParams = [
+  { label: 'Coordinate system', value: 'WGS84 / EPSG:4326' },
+  { label: 'Current scale', value: '1:250,000' },
+  { label: 'Nevronus nodes', value: '64' },
+  { label: 'Data latency', value: '< 5 minutes' },
+  { label: 'Last satellite pass', value: 'Q2 2026' },
+  { label: 'Plot IDs registered', value: '5,247' },
+  { label: 'Schools loaded', value: '65,566' },
+];
+---
+<BaseLayout
+  title="GIS Tree Tracking Maps"
+  description="CHRSD NSADMP and SDAMSMP geospatial telemetry platform — NDVI vegetation index monitoring and primary school infrastructure mapping across Bangladesh."
+>
+  <PageHero
+    overline="Impact & Evidence · Spatial Data"
+    title="GIS Tree Tracking Maps"
+    lead="Live geospatial telemetry covering NSADMP reforestation plots and SDAMSMP school network infrastructure across all 64 districts of Bangladesh. Powered by Nevronus Systems."
+  />
+
+  <section class="section section--alt">
+    <div class="container panel-layout">
+
+      <aside class="sidebar">
+        <p class="overline sidebar-overline">Data layers</p>
+
+        <div class="layer-card layer-card--a">
+          <div class="layer-card__top">
+            <span class="prog-badge prog-badge--nsadmp">NSADMP</span>
+            <span class="status-pill status-pill--on">Active</span>
+          </div>
+          <h3 class="layer-card__title">NDVI Vegetation Index</h3>
+          <p class="layer-card__desc">Normalised Difference Vegetation Index monitoring across all GIS-registered reforestation plots.</p>
+          <dl class="layer-dl">
+            <dt>Coverage</dt>
+            <dd>64 districts · 5,247 active Plot IDs</dd>
+            <dt>Satellite source</dt>
+            <dd>Sentinel-2 (10m res), Landsat-8 (30m res)</dd>
+            <dt>Update frequency</dt>
+            <dd>Bi-monthly</dd>
+          </dl>
+          <div class="class-list">
+            <div class="class-row">
+              <span class="swatch swatch--green"></span>
+              <span class="class-label">Healthy</span>
+              <span class="class-val">NDVI ≥ 0.4</span>
+            </div>
+            <div class="class-row">
+              <span class="swatch swatch--amber"></span>
+              <span class="class-label">Stressed</span>
+              <span class="class-val">NDVI 0.2–0.39</span>
+            </div>
+            <div class="class-row">
+              <span class="swatch swatch--red"></span>
+              <span class="class-label">Critical / Replant</span>
+              <span class="class-val">NDVI &lt; 0.2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="layer-card layer-card--b">
+          <div class="layer-card__top">
+            <span class="prog-badge prog-badge--sdamsmp">SDAMSMP</span>
+            <span class="status-pill status-pill--phase">Phase 1 Active</span>
+          </div>
+          <h3 class="layer-card__title">School Infrastructure</h3>
+          <p class="layer-card__desc">Institutional proximity and hardware deployment status for enrolled government primary schools.</p>
+          <dl class="layer-dl">
+            <dt>Coverage</dt>
+            <dd>65,566 schools national target · 951 active (Phase 1)</dd>
+            <dt>Data points</dt>
+            <dd>GPS coordinates, hardware status, last sync, teacher count</dd>
+            <dt>Update frequency</dt>
+            <dd>Real-time (&lt; 4 hours)</dd>
+          </dl>
+          <div class="class-list">
+            <div class="class-row">
+              <span class="swatch swatch--green"></span>
+              <span class="class-label">Installed &amp; Active</span>
+              <span class="class-val"></span>
+            </div>
+            <div class="class-row">
+              <span class="swatch swatch--amber"></span>
+              <span class="class-label">Installation Pending</span>
+              <span class="class-val"></span>
+            </div>
+            <div class="class-row">
+              <span class="swatch swatch--red"></span>
+              <span class="class-label">Offline / Maintenance</span>
+              <span class="class-val"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-params">
+          <p class="overline sidebar-overline">Technical parameters</p>
+          <dl class="params-dl">
+            {techParams.map((p) => (
+              <>
+                <dt>{p.label}</dt>
+                <dd>{p.value}</dd>
+              </>
+            ))}
+          </dl>
+        </div>
+      </aside>
+
+      <div class="map-area">
+        <div class="map-canvas" role="img" aria-label="Schematic map of Bangladesh's eight administrative divisions with GIS telemetry indicators">
+          <div class="map-gridlines"></div>
+
+          <div class="map-controls">
+            <button class="zoom-btn" aria-label="Zoom in">+</button>
+            <button class="zoom-btn" aria-label="Zoom out">−</button>
+            <button class="zoom-btn zoom-btn--fit" aria-label="Fit to bounds">⤢</button>
+          </div>
+
+          <div class="division-grid">
+            {divisions.map((d) => (
+              <div class="division-cell">
+                <span class="division-name">{d.name}</span>
+                <span class="division-districts">{d.districts} districts</span>
+                <div class="division-dots">
+                  {d.nsadmp && <span class="indicator indicator--nsadmp" title="NSADMP active"></span>}
+                  {d.sdamsmp && <span class="indicator indicator--sdamsmp" title="SDAMSMP active"></span>}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="ndvi-strip">
+            <div class="ndvi-strip__bar"></div>
+            <div class="ndvi-strip__labels">
+              <span>0.0</span>
+              <span>0.2</span>
+              <span>0.4</span>
+              <span>0.6</span>
+              <span>0.8+</span>
+            </div>
+          </div>
+
+          <div class="coords-bar">
+            <span class="coord">23.6850°N, 90.3563°E</span>
+            <span class="coords-sep">|</span>
+            <span class="coord">Plot ID: NSADMP-DHK-2026-0847</span>
+            <span class="coords-sep">|</span>
+            <span class="coord">Species: Neem</span>
+            <span class="coords-sep">|</span>
+            <span class="coord">Status: <span class="coord--healthy">Healthy</span></span>
+            <span class="coords-sep">|</span>
+            <span class="coord">NDVI: 0.52</span>
+          </div>
+        </div>
+
+        <div class="map-legend-row">
+          <span class="legend-item">
+            <span class="indicator indicator--nsadmp"></span> NSADMP reforestation plot
+          </span>
+          <span class="legend-item">
+            <span class="indicator indicator--sdamsmp"></span> SDAMSMP school node
+          </span>
+          <span class="legend-item legend-note">Grid lines: administrative division boundaries</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .panel-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 28px;
+    align-items: start;
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sidebar-overline {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .layer-card {
+    background: #fff;
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .layer-card--a {
+    border-color: var(--color-institutional);
+    box-shadow: 0 0 0 3px rgba(0,120,60,0.07);
+  }
+
+  .layer-card__top {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 11px;
+  }
+
+  .prog-badge {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    color: #fff;
+  }
+  .prog-badge--nsadmp { background: var(--color-forest); }
+  .prog-badge--sdamsmp { background: var(--color-gold); }
+
+  .status-pill {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    border: 1px solid;
+  }
+  .status-pill--on {
+    color: var(--color-institutional);
+    border-color: var(--color-institutional);
+    background: rgba(0,120,60,0.07);
+  }
+  .status-pill--phase {
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+    background: rgba(180,140,40,0.07);
+  }
+
+  .layer-card__title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 0 0 8px;
+  }
+
+  .layer-card__desc {
+    font-size: 13px;
+    color: var(--color-slate);
+    line-height: 1.6;
+    margin: 0 0 14px;
+  }
+
+  .layer-dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 12px;
+    font-size: 12px;
+    margin: 0 0 14px;
+  }
+  .layer-dl dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-gold);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .layer-dl dd {
+    color: var(--color-ink);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .class-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+  }
+
+  .class-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .swatch--green { background: #00783C; }
+  .swatch--amber { background: #B48C28; }
+  .swatch--red { background: #c0392b; }
+
+  .class-label {
+    font-size: 12px;
+    color: var(--color-ink);
+    flex: 1;
+  }
+  .class-val {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--color-slate);
+    white-space: nowrap;
+  }
+
+  .tech-params {
+    margin-top: 4px;
+  }
+
+  .params-dl {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 12px;
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 0;
+  }
+  .params-dl dt,
+  .params-dl dd {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--color-border-green);
+    margin: 0;
+  }
+  .params-dl dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-slate);
+    background: var(--color-tint);
+    border-right: 1px solid var(--color-border-green);
+  }
+  .params-dl dd {
+    color: var(--color-ink);
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 12px;
+  }
+
+  .map-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .map-canvas {
+    background: var(--color-ink);
+    border-radius: var(--radius);
+    border: 1.5px solid rgba(197,220,203,0.2);
+    min-height: 520px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .map-gridlines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(197,220,203,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(197,220,203,0.15) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .map-controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 10;
+  }
+
+  .zoom-btn {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(197,220,203,0.3);
+    border-radius: var(--radius-sm);
+    color: rgba(197,220,203,0.9);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: background 0.15s;
+  }
+  .zoom-btn--fit { font-size: 13px; }
+  .zoom-btn:hover { background: rgba(255,255,255,0.2); }
+
+  .division-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3px;
+    padding: 52px 16px 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .division-cell {
+    background: rgba(20,60,20,0.55);
+    border: 1px solid rgba(197,220,203,0.2);
+    border-radius: 6px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 100px;
+    transition: background 0.15s;
+  }
+  .division-cell:hover {
+    background: rgba(0,120,60,0.3);
+  }
+
+  .division-name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(197,220,203,0.95);
+  }
+
+  .division-districts {
+    font-size: 11px;
+    color: rgba(197,220,203,0.5);
+  }
+
+  .division-dots {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .indicator--nsadmp { background: #00783C; box-shadow: 0 0 5px rgba(0,120,60,0.8); }
+  .indicator--sdamsmp { background: #B48C28; box-shadow: 0 0 5px rgba(180,140,40,0.8); }
+
+  .ndvi-strip {
+    position: relative;
+    z-index: 1;
+    padding: 4px 16px 6px;
+  }
+  .ndvi-strip__bar {
+    height: 10px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #c0392b, #B48C28, #00783C);
+    border: 1px solid rgba(197,220,203,0.2);
+  }
+  .ndvi-strip__labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  .ndvi-strip__labels span {
+    font-family: var(--font-display);
+    font-size: 10px;
+    color: rgba(197,220,203,0.55);
+  }
+
+  .coords-bar {
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid rgba(197,220,203,0.12);
+    padding: 8px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .coord {
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(197,220,203,0.7);
+  }
+
+  .coord--healthy {
+    color: #00783C;
+    font-weight: 700;
+  }
+
+  .coords-sep {
+    color: rgba(197,220,203,0.25);
+    font-size: 11px;
+  }
+
+  .map-legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+    padding: 0 4px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--color-slate);
+  }
+  .legend-note {
+    margin-left: auto;
+    font-style: italic;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 1024px) {
+    .panel-layout { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .division-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+    }
+    .coords-bar { display: none; }
+  }
+</style>

@@ -1,0 +1,181 @@
+---
+import Button from './Button.astro';
+
+const slides = [
+  {
+    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=70&auto=format&fit=crop',
+    alt: 'A community health worker walks with families through a riverside village at sunrise.',
+    headline: "There's always a way",
+    sub: 'Scaling human potential through localised resilience and data-driven development.',
+    credit: 'Sarker Protick',
+    cta: { label: 'Explore Our Impact', href: '/impact/' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1600&q=70&auto=format&fit=crop',
+    alt: 'Young women plant tree saplings along an embankment to build climate resilience.',
+    headline: 'Roots that hold the land',
+    sub: 'Community tree planting and climate adaptation across coastal Bangladesh.',
+    credit: 'CHRSD Field Team',
+    cta: { label: 'See Our Work', href: '/our-work/' },
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=1600&q=70&auto=format&fit=crop',
+    alt: 'A teacher leads a bright classroom of children raising their hands to answer.',
+    headline: 'Evidence into action',
+    sub: 'Where real-time data meets human resilience to engineer systemic change.',
+    credit: 'CHRSD Field Team',
+    cta: { label: 'Read the Evidence', href: '/impact/case-studies/' },
+  },
+];
+---
+<section class="hero" aria-roledescription="carousel" aria-label="Featured stories">
+  <div class="overline hero__overline"><span>Let&rsquo;s build resilience</span></div>
+
+  <div class="hero__track" data-track>
+    {slides.map((slide, i) => (
+      <div
+        class="hero__slide"
+        data-slide
+        role="img"
+        aria-label={slide.alt}
+        aria-hidden={i !== 0 ? 'true' : 'false'}
+        style={`background-image: url('${slide.image}')`}
+      >
+        <div class="hero__scrim"></div>
+        <div class="container hero__content">
+          <h1 class="hero__headline">{slide.headline}</h1>
+          <p class="hero__sub">{slide.sub}</p>
+          <div class="hero__cta">
+            <Button href={slide.cta.href} variant="solid" size="lg">{slide.cta.label}</Button>
+          </div>
+          <p class="hero__credit">Photo: {slide.credit}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="hero__controls">
+    <button class="hero__btn" data-prev aria-label="Previous slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="hero__btn" data-toggle aria-label="Pause autoplay" aria-pressed="false">
+      <svg class="ico-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+      <svg class="ico-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <button class="hero__btn" data-next aria-label="Next slide">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="hero__dots" role="tablist" aria-label="Choose slide">
+      {slides.map((_, i) => (
+        <button class="dot" data-dot={i} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-label={`Go to slide ${i + 1}`}></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; height: 85vh; min-height: 560px; max-height: 880px; overflow: hidden; background: var(--color-forest); }
+  .hero__overline { position: absolute; top: 28px; left: 50%; transform: translateX(-50%); z-index: 3; color: #fff; }
+  .hero__overline span { color: #fff; }
+  .hero__overline::before { background: var(--color-gold); }
+
+  .hero__track { height: 100%; position: relative; }
+  .hero__slide {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    display: flex; align-items: center;
+    opacity: 0; visibility: hidden;
+    transition: opacity 700ms var(--ease);
+  }
+  .hero__slide.is-active { opacity: 1; visibility: visible; }
+
+  .hero__scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(13, 31, 13, 0.85) 0%, rgba(13, 31, 13, 0.5) 45%, rgba(13, 31, 13, 0.05) 100%);
+  }
+  .hero__content { position: relative; z-index: 2; color: #fff; max-width: 760px; }
+  .hero__headline { color: #fff; text-transform: none; }
+  .hero__sub { font-size: var(--fs-lead); line-height: var(--lh-lead); color: rgba(255, 255, 255, 0.92); margin-top: 20px; max-width: 52ch; }
+  .hero__cta { margin-top: 32px; }
+  .hero__credit { position: absolute; right: var(--gutter); bottom: -40px; font-size: 12px; color: rgba(255, 255, 255, 0.6); }
+
+  .hero__controls {
+    position: absolute; right: var(--gutter); bottom: 28px; z-index: 3;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero__btn {
+    width: 44px; height: 44px; display: grid; place-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 50%;
+    background: rgba(13, 31, 13, 0.35); color: #fff; cursor: pointer;
+    transition: background var(--dur) var(--ease);
+    backdrop-filter: blur(4px);
+  }
+  .hero__btn:hover { background: var(--color-institutional); border-color: var(--color-institutional); }
+  .hero__dots { display: flex; gap: 8px; margin-left: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.4); cursor: pointer; padding: 0; transition: 0.2s; }
+  .dot[aria-selected='true'] { background: #fff; width: 28px; border-radius: var(--radius-pill); }
+
+  @media (max-width: 768px) {
+    .hero { height: 78vh; min-height: 480px; }
+    .hero__scrim { background: linear-gradient(0deg, rgba(13, 31, 13, 0.9) 0%, rgba(13, 31, 13, 0.45) 60%, rgba(13, 31, 13, 0.2) 100%); }
+    .hero__controls { left: var(--gutter); right: var(--gutter); justify-content: center; }
+  }
+</style>
+
+<script>
+  const root = document.currentScript?.previousElementSibling; // not reliable; query instead
+  const hero = document.querySelector<HTMLElement>('.hero');
+  if (hero) {
+    const slides = Array.from(hero.querySelectorAll<HTMLElement>('[data-slide]'));
+    const dots = Array.from(hero.querySelectorAll<HTMLElement>('[data-dot]'));
+    const toggle = hero.querySelector<HTMLButtonElement>('[data-toggle]');
+    const iconPause = hero.querySelector<HTMLElement>('.ico-pause');
+    const iconPlay = hero.querySelector<HTMLElement>('.ico-play');
+    let index = 0;
+    let timer: number | undefined;
+    const INTERVAL = 6000;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function show(n: number) {
+      index = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === index);
+        s.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+      });
+      dots.forEach((d, i) => d.setAttribute('aria-selected', i === index ? 'true' : 'false'));
+    }
+    function next() { show(index + 1); }
+    function prev() { show(index - 1); }
+
+    function play() {
+      if (reduce) return;
+      stop();
+      timer = window.setInterval(next, INTERVAL);
+      toggle?.setAttribute('aria-pressed', 'false');
+      toggle?.setAttribute('aria-label', 'Pause autoplay');
+      iconPause?.removeAttribute('hidden');
+      iconPlay?.setAttribute('hidden', '');
+    }
+    function stop() {
+      if (timer) clearInterval(timer);
+      timer = undefined;
+    }
+    function pauseManual() {
+      stop();
+      toggle?.setAttribute('aria-pressed', 'true');
+      toggle?.setAttribute('aria-label', 'Play autoplay');
+      iconPause?.setAttribute('hidden', '');
+      iconPlay?.removeAttribute('hidden');
+    }
+
+    hero.querySelector('[data-next]')?.addEventListener('click', () => { next(); play(); });
+    hero.querySelector('[data-prev]')?.addEventListener('click', () => { prev(); play(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { show(i); play(); }));
+    toggle?.addEventListener('click', () => { timer ? pauseManual() : play(); });
+
+    show(0);
+    play();
+    // Pause when tab hidden to save resources
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
+  }
+</script>

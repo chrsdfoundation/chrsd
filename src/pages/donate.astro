@@ -1,0 +1,350 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const bankDetails = [
+  { label: 'Account Name', value: 'Centre for Humanitarian Research and Social Development Foundation', id: 'acc-name', full: true },
+  { label: 'Account Number', value: '01333101317', id: 'acc-num', highlight: true },
+  { label: 'Bank Name', value: 'Standard Bank PLC', id: 'bank-name' },
+  { label: 'Branch', value: 'Foreign Exchange Branch, Dilkusha, Motijheel, Dhaka 1000, Bangladesh', id: 'branch', full: true },
+  { label: 'SWIFT Code', value: 'SDBLBDDH113', id: 'swift', highlight: true },
+  { label: 'Routing Number', value: '210272323', id: 'routing' },
+];
+
+const impacts = [
+  { amount: 'BDT 500', label: 'Plants 5 saplings', icon: '🌱', detail: 'Each sapling is GPS-tagged and digitally tracked through our NSADMP programme.' },
+  { amount: 'BDT 2,000', label: 'Funds legal aid for one person', icon: '⚖️', detail: 'Free legal representation for one victim of trafficking, domestic violence, or arbitrary detention.' },
+  { amount: 'BDT 5,000', label: 'Supports a community workshop', icon: '🎓', detail: 'Covers materials, facilitation, and travel for a human rights literacy session in a rural community.' },
+  { amount: 'BDT 10,000', label: 'Funds a month of field research', icon: '📊', detail: 'Covers field surveys, data collection tools, and analyst time for one month of socio-economic research.' },
+  { amount: 'BDT 25,000', label: 'Equips a field team', icon: '🗺️', detail: 'Provides GPS devices, data management tools, and safety equipment for a three-person field team.' },
+  { amount: 'Any amount', label: 'Makes a difference', icon: '❤️', detail: 'Every contribution — whatever the size — goes directly into our programme funds, unrestricted.' },
+];
+
+const trust = [
+  { title: 'Independently audited', body: 'Our annual accounts are examined by a registered firm of Chartered Accountants and published in full.' },
+  { title: 'No overhead deductions', body: 'Donations go directly into programme funds. We do not deduct overhead or senior salaries from donor contributions.' },
+  { title: 'Published impact data', body: 'We report programme results annually in our public Annual Progress Report — no gated summaries.' },
+  { title: 'Registered non-profit', body: 'CHRSD is registered under the Societies Registration Act, 1860 (Reg. No. S-14480/2026).' },
+];
+---
+<BaseLayout
+  title="Donate"
+  description="Support CHRSD's humanitarian, research, and community development programmes across Bangladesh. Every contribution compounds into measurable change."
+>
+  <PageHero
+    overline="Support our mission"
+    title="Your generosity funds real change"
+    lead="When you donate to CHRSD, your contribution goes directly into humanitarian action, community research, environmental programmes, and legal aid — verified, tracked, and publicly reported."
+  />
+
+  <!-- IMPACT AMOUNTS -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">What your gift does</p>
+        <h2>Every taka makes a difference</h2>
+        <p class="lead lede__sub">
+          Here's what specific contributions enable across our programmes. All figures reflect
+          real programme costs verified in our audited accounts.
+        </p>
+      </div>
+      <div class="impact-grid">
+        {impacts.map((i) => (
+          <article class="impact-card">
+            <span class="impact-icon" aria-hidden="true">{i.icon}</span>
+            <div class="impact-amount">{i.amount}</div>
+            <div class="impact-label">{i.label}</div>
+            <p class="impact-detail">{i.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BANK TRANSFER -->
+  <section class="section" id="bank-transfer">
+    <div class="container">
+      <div class="transfer-wrap">
+
+        <!-- Left: intro -->
+        <div class="transfer-intro">
+          <p class="overline">How to give</p>
+          <h2>Bank transfer</h2>
+          <p style="margin-top:14px;color:var(--color-slate);line-height:1.75">
+            The most direct way to support CHRSD is a bank transfer to our institutional
+            account. Use the credentials below to make a secure direct deposit or
+            electronic fund transfer — locally or internationally.
+          </p>
+          <p style="margin-top:14px;color:var(--color-slate);line-height:1.75">
+            For international transfers, use the SWIFT code. For domestic transfers
+            within Bangladesh, use the routing number.
+          </p>
+          <p style="margin-top:14px;color:var(--color-slate);line-height:1.75">
+            After transferring, please email your transaction reference to
+            <a href={`mailto:${site.email}?subject=Donation%20confirmation`} style="color:var(--color-institutional)">{site.email}</a>
+            so we can acknowledge your gift and send a receipt.
+          </p>
+          <div style="margin-top:28px">
+            <Button href={`mailto:${site.email}?subject=Donation%20enquiry`} variant="solid">Email us about donating</Button>
+          </div>
+        </div>
+
+        <!-- Right: bank details card -->
+        <div class="bank-card" role="region" aria-label="Bank transfer details">
+          <div class="bank-card__header">
+            <span class="bank-card__label">Bank Transfer Details</span>
+            <p class="bank-card__sub">Click any field to copy it to your clipboard</p>
+          </div>
+
+          <div class="bank-fields">
+            {bankDetails.map((f) => (
+              <div class:list={['bank-field', { 'bank-field--full': f.full }]}>
+                <span class="bank-field__label">{f.label}</span>
+                <div class="bank-field__row">
+                  <span
+                    class:list={['bank-field__value', { 'bank-field__value--highlight': f.highlight }]}
+                    id={f.id}
+                  >
+                    {f.value}
+                  </span>
+                  <button
+                    class="copy-btn"
+                    data-target={f.id}
+                    aria-label={`Copy ${f.label}`}
+                    type="button"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="bank-card__footer">
+            <span aria-hidden="true">♥</span> Thank you for standing with us to empower communities.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST & TRANSPARENCY -->
+  <section class="section section--dark">
+    <div class="container">
+      <p class="overline">Why trust CHRSD</p>
+      <h2 style="color:#fff;margin-top:12px">Your donation is protected by accountability</h2>
+      <div class="trust-grid">
+        {trust.map((t) => (
+          <article class="trust-item">
+            <span class="trust-rule" aria-hidden="true"></span>
+            <h3>{t.title}</h3>
+            <p>{t.body}</p>
+          </article>
+        ))}
+      </div>
+      <div style="margin-top:44px;display:flex;flex-wrap:wrap;gap:14px">
+        <Button href="/about-us/governance-and-good-practices/financials-and-external-audit/" variant="solid">View financial audits</Button>
+        <Button href="/impact/annual-reports/" variant="outline">Annual reports</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER WAYS TO HELP -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Other ways to help</p>
+      <h2>Beyond a donation</h2>
+      <div class="other-grid">
+        <a href="/get-involved/volunteer/" class="other-card">
+          <span class="other-icon" aria-hidden="true">🤝</span>
+          <h3>Volunteer</h3>
+          <p>Give your time and skills to our field programmes, research teams, or digital operations.</p>
+          <span class="other-link">Learn about volunteering →</span>
+        </a>
+        <a href="/get-involved/partnership/" class="other-card">
+          <span class="other-icon" aria-hidden="true">🏛️</span>
+          <h3>Partner with us</h3>
+          <p>Organisations can formalise collaboration through an MOU and jointly delivered programmes.</p>
+          <span class="other-link">Explore partnerships →</span>
+        </a>
+        <a href="/get-involved/become-a-member/" class="other-card">
+          <span class="other-icon" aria-hidden="true">📋</span>
+          <h3>Become a member</h3>
+          <p>Join CHRSD as an Associate, Institutional Member, or Patron and participate in our governance.</p>
+          <span class="other-link">View membership tiers →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="section section--dark">
+    <div class="container cta-bottom">
+      <div>
+        <p class="overline">Ready to give?</p>
+        <h2 style="color:#fff;margin-top:10px">Make your transfer today</h2>
+        <p style="color:rgba(255,255,255,0.80);margin-top:12px;max-width:52ch">
+          Use the bank details above to make a direct transfer, then email your
+          transaction reference to us so we can send your acknowledgement and receipt.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;flex-shrink:0">
+        <a href="#bank-transfer" class="btn btn--donate btn--lg">Donate via bank transfer</a>
+        <Button href={`mailto:${site.email}?subject=Donation%20enquiry`} variant="outline" external>Contact us</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const targetId = btn.dataset.target;
+      if (!targetId) return;
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      const text = el.innerText.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        btn.classList.add('copy-btn--success');
+        setTimeout(() => {
+          btn.textContent = orig;
+          btn.classList.remove('copy-btn--success');
+        }, 2000);
+      } catch {
+        /* silent fail — text is visible, user can copy manually */
+      }
+    });
+  });
+</script>
+
+<style>
+  /* Lede */
+  .lede { max-width: 62ch; margin-bottom: 44px; }
+  .lede h2 { margin-top: 12px; }
+  .lede__sub { margin-top: 16px; color: var(--color-slate); }
+
+  /* Impact grid */
+  .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .impact-card {
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius);
+    padding: 28px; transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .impact-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+  .impact-icon { font-size: 26px; display: block; margin-bottom: 14px; }
+  .impact-amount {
+    font-family: var(--font-display); font-weight: 800; font-size: 22px;
+    color: var(--color-donate); line-height: 1; margin-bottom: 6px;
+  }
+  .impact-label { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--color-forest); margin-bottom: 10px; }
+  .impact-detail { font-size: 14px; color: var(--color-slate); line-height: 1.65; }
+
+  /* Bank transfer layout */
+  .transfer-wrap { display: grid; grid-template-columns: 1fr 1.35fr; gap: 64px; align-items: start; }
+  .transfer-intro h2 { margin-top: 12px; }
+
+  /* Bank card */
+  .bank-card {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .bank-card__header {
+    background: var(--color-forest); padding: 22px 28px;
+    border-bottom: 3px solid var(--color-gold);
+  }
+  .bank-card__label {
+    font-family: var(--font-display); font-weight: 700; font-size: 17px; color: #fff; display: block;
+  }
+  .bank-card__sub { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  .bank-fields {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .bank-field {
+    padding: 18px 24px; border-bottom: 1px solid var(--color-border-green);
+    border-right: 1px solid var(--color-border-green);
+  }
+  .bank-field:nth-child(even) { border-right: none; }
+  .bank-field--full { grid-column: span 2; border-right: none; }
+
+  .bank-field__label {
+    display: block; font-family: var(--font-display); font-weight: 700;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--color-slate); margin-bottom: 8px;
+  }
+  .bank-field__row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .bank-field__value {
+    font-size: 15px; font-weight: 600; color: var(--color-ink); line-height: 1.4; word-break: break-all;
+  }
+  .bank-field__value--highlight {
+    font-size: 18px; font-weight: 800; color: var(--color-institutional); letter-spacing: 0.02em;
+  }
+
+  /* Copy button */
+  .copy-btn {
+    flex-shrink: 0; background: #fff; border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius-sm); padding: 5px 12px; font-family: var(--font-display);
+    font-size: 12px; font-weight: 600; color: var(--color-slate); cursor: pointer;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--color-tint); border-color: var(--color-institutional); color: var(--color-institutional); }
+  .copy-btn--success { background: #d1fae5 !important; border-color: #6ee7b7 !important; color: #065f46 !important; }
+
+  .bank-card__footer {
+    padding: 16px 24px; background: var(--color-tint);
+    font-size: 13px; font-weight: 600; color: var(--color-institutional);
+    text-align: center; border-top: 1px solid var(--color-border-green);
+  }
+
+  /* Trust section */
+  .section--dark h2 { color: #fff; }
+  .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 40px; }
+  .trust-item { border-left: 3px solid var(--color-gold); padding-left: 20px; }
+  .trust-rule { display: block; width: 36px; height: 2px; background: var(--color-gold); margin-bottom: 14px; }
+  .trust-item h3 { color: #fff; font-size: 17px; margin-bottom: 10px; }
+  .trust-item p { color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.7; }
+
+  /* Other ways */
+  .other-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+  .other-card {
+    display: block; background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 28px; text-decoration: none;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .other-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+  .other-icon { font-size: 26px; display: block; margin-bottom: 14px; }
+  .other-card h3 { font-size: 18px; color: var(--color-forest); margin-bottom: 10px; }
+  .other-card p { font-size: 14px; color: var(--color-slate); line-height: 1.65; margin-bottom: 16px; }
+  .other-link { font-size: 14px; font-weight: 600; color: var(--color-institutional); }
+
+  /* Bottom CTA */
+  .cta-bottom { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 960px) {
+    .transfer-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .impact-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .bank-fields { grid-template-columns: 1fr; }
+    .bank-field { border-right: none; }
+    .bank-field--full { grid-column: span 1; }
+    .other-grid { grid-template-columns: 1fr; }
+    .cta-bottom { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    .impact-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: 1fr; }
+  }
+</style>

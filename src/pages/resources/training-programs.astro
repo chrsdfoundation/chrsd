@@ -1,0 +1,613 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+---
+<BaseLayout
+  title="Training Programs"
+  description="CHRSD field and institutional training tracks for government school headmasters, NSADMP field foresters, and all staff — delivered in-person and online."
+>
+  <PageHero
+    overline="Resources & Learning"
+    title="Training Programs"
+    lead="Practical, field-tested training designed for the specific contexts in which our programme partners and staff operate — from district-level headmaster orientations to GIS field verification training for foresters."
+  />
+
+  <section class="section section--alt">
+    <div class="container tracks-overview">
+      <div class="track-stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Training tracks</span>
+      </div>
+      <div class="track-stat">
+        <span class="stat-num">21</span>
+        <span class="stat-label">Total training hours</span>
+      </div>
+      <div class="track-stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Delivery languages</span>
+      </div>
+      <div class="track-stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Delivery modes</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="overline">Track 1 — SDAMSMP</p>
+      <div class="track-header">
+        <div>
+          <h2>Headmaster Orientation Programme</h2>
+          <p class="track-subtitle">Government Primary School Headmaster Orientation for the Smart Digital Attendance Management System</p>
+        </div>
+        <div class="track-chips">
+          <span class="chip chip--inperson">In-person</span>
+          <span class="chip chip--duration">1 day · 6 hours</span>
+          <span class="chip chip--lang">Bengali / Bangla</span>
+        </div>
+      </div>
+
+      <div class="track-body">
+        <div class="track-main">
+          <div class="track-info-bar">
+            <div class="info-pair">
+              <span class="info-label">Target participants</span>
+              <span class="info-value">Government primary school headmasters enrolled in SDAMSMP</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Batch size</span>
+              <span class="info-value">30–40 headmasters per district-level session</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Facilitators</span>
+              <span class="info-value">CHRSD Digital Governance Unit + Nevronus Systems technical trainers</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Language</span>
+              <span class="info-value">Bengali (Bangla) with English reference materials</span>
+            </div>
+          </div>
+
+          <h3 class="outcomes-heading">Key learning outcomes</h3>
+          <ol class="outcomes-list">
+            <li>Operate the Nevronus biometric attendance hardware — fingerprint and facial recognition terminals</li>
+            <li>Access and interpret the SDAMSMP online dashboard — daily, weekly, and monthly attendance views</li>
+            <li>Troubleshoot common hardware and connectivity issues</li>
+            <li>Process teacher attendance records for DPE submission via the digital portal</li>
+            <li>Understand data privacy obligations for teacher biometric data</li>
+            <li>Raise support tickets and escalate issues through the helpdesk</li>
+          </ol>
+
+          <details class="materials-block">
+            <summary class="materials-toggle">
+              <span>Training materials provided</span>
+            </summary>
+            <ul class="materials-list">
+              <li>Bangla-language hardware operation manual</li>
+              <li>Quick reference poster (laminated, for display in school office)</li>
+              <li>Nevronus helpdesk contact card</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="track-sidebar">
+          <div class="impact-card">
+            <p class="overline">Expected impact</p>
+            <div class="impact-metric">
+              <span class="impact-num">30%</span>
+              <span class="impact-desc">Reduction in administrative overhead for headmasters</span>
+            </div>
+            <div class="impact-divider"></div>
+            <div class="impact-metric">
+              <span class="impact-num">47 min</span>
+              <span class="impact-desc">Average daily attendance processing time before SDAMSMP</span>
+            </div>
+            <div class="impact-divider"></div>
+            <div class="impact-metric impact-metric--target">
+              <span class="impact-num">&lt; 15 min</span>
+              <span class="impact-desc">Target daily processing time after orientation</span>
+            </div>
+          </div>
+
+          <div class="schedule-card">
+            <p class="overline">Rollout schedule</p>
+            <p class="schedule-text">Rolling district-level orientations throughout Phase 1 (Dhaka District) and Phase 2 (Dhaka Division). National roll-out orientations begin Q3 2027.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Track 2 — NSADMP</p>
+      <div class="track-header">
+        <div>
+          <h2>Field Forester Training Programme</h2>
+          <p class="track-subtitle">Mobile-GIS Geo-tagging and Field Verification Training for NSADMP Field Foresters</p>
+        </div>
+        <div class="track-chips">
+          <span class="chip chip--inperson">In-person field training</span>
+          <span class="chip chip--duration">2 days · 12 hours</span>
+          <span class="chip chip--lang">Bengali / Technical English</span>
+        </div>
+      </div>
+
+      <div class="track-body">
+        <div class="track-main">
+          <div class="track-info-bar">
+            <div class="info-pair">
+              <span class="info-label">Target participants</span>
+              <span class="info-value">Trained foresters and community field officers contracted under NSADMP</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Delivery</span>
+              <span class="info-value">District-level, in-person field training</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Facilitators</span>
+              <span class="info-value">CHRSD Climate Research Unit + Nevronus Systems GIS Division</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Language</span>
+              <span class="info-value">Bengali with technical English terminology</span>
+            </div>
+          </div>
+
+          <div class="day-grid">
+            <details class="day-block" open>
+              <summary class="day-toggle">
+                <span class="day-label">Day 1</span>
+                <span class="day-desc">System orientation and plot tagging workflow</span>
+              </summary>
+              <ol class="day-list">
+                <li>NSADMP programme overview and field officer responsibilities</li>
+                <li>Nevronus mobile application: installation, login, and dashboard navigation</li>
+                <li>GIS Plot ID assignment workflow: scanning, entering species code, recording GPS coordinates</li>
+                <li>Photography standards: angle, resolution, and framing requirements for photographic evidence</li>
+                <li>Practical exercise: Mock planting event with full GIS tagging workflow</li>
+              </ol>
+            </details>
+
+            <details class="day-block" open>
+              <summary class="day-toggle">
+                <span class="day-label">Day 2</span>
+                <span class="day-desc">Field audit, verification, and data submission</span>
+              </summary>
+              <ol class="day-list">
+                <li>NDVI threshold interpretation: what Healthy, Stressed, and Critical means in the field</li>
+                <li>Species identification: priority species for each ecological zone</li>
+                <li>Tree health assessment: height measurement, canopy diameter, pest and disease flags</li>
+                <li>Quarterly field verification audit protocol and documentation standards</li>
+                <li>Data submission and offline-sync procedures for areas with poor connectivity</li>
+                <li>Practical exercise: Field audit of previously planted plot with full verification workflow</li>
+              </ol>
+            </details>
+          </div>
+
+          <details class="materials-block">
+            <summary class="materials-toggle">
+              <span>Training materials provided</span>
+            </summary>
+            <ul class="materials-list">
+              <li>Nevronus mobile application user guide (Bangla edition)</li>
+              <li>Species identification pocket guide</li>
+              <li>Field audit checklist (waterproof print)</li>
+            </ul>
+          </details>
+        </div>
+
+        <div class="track-sidebar">
+          <div class="impact-card">
+            <p class="overline">Expected output per forester</p>
+            <div class="impact-metric">
+              <span class="impact-num">80–120</span>
+              <span class="impact-desc">Trees tagged, verified, and documented per day upon completion</span>
+            </div>
+          </div>
+
+          <div class="schedule-card">
+            <p class="overline">Delivery areas</p>
+            <p class="schedule-text">Training is delivered at district level aligned with NSADMP planting zones. Coverage expands as each phase of the programme rolls out.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="overline">Track 3 — All staff</p>
+      <div class="track-header">
+        <div>
+          <h2>Data Privacy & Safeguarding Induction</h2>
+          <p class="track-subtitle">Mandatory induction for all CHRSD staff, consultants, field officers, and volunteers</p>
+        </div>
+        <div class="track-chips">
+          <span class="chip chip--online">Online</span>
+          <span class="chip chip--duration">3 hours</span>
+          <span class="chip chip--mandatory">Mandatory</span>
+        </div>
+      </div>
+
+      <div class="safeguarding-body">
+        <div class="safeguarding-main">
+          <div class="track-info-bar safeguarding-info">
+            <div class="info-pair">
+              <span class="info-label">Target audience</span>
+              <span class="info-value">All CHRSD staff, consultants, field officers, and volunteers</span>
+            </div>
+            <div class="info-pair">
+              <span class="info-label">Completion requirement</span>
+              <span class="info-value">At onboarding, then annual refresh</span>
+            </div>
+          </div>
+
+          <h3 class="outcomes-heading">Content covered</h3>
+          <ul class="outcomes-list outcomes-list--bullets">
+            <li>CHRSD Data Privacy Policy overview</li>
+            <li>Handling of biometric, health, and beneficiary data</li>
+            <li>Child safeguarding principles</li>
+            <li>Mandatory reporting obligations</li>
+            <li>Whistleblower protection rights</li>
+          </ul>
+
+          <div class="safeguarding-note">
+            <p>Completion of this induction is a condition of engagement for all CHRSD staff and associates. Annual refresh completions are tracked by the CHRSD HR and Compliance team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container enrol-section">
+      <div>
+        <p class="overline">Participation and access</p>
+        <h2>Enrolment and scheduling</h2>
+        <p class="enrol-lead">Training enrolment for SDAMSMP and NSADMP field programmes is coordinated through CHRSD programme management and district-level implementing partners. The Data Privacy and Safeguarding Induction is administered centrally through the CHRSD HR and Compliance team.</p>
+        <div class="enrol-actions">
+          <a href="/get-involved/contact-us/" class="btn btn--solid btn--md">Contact CHRSD to enquire</a>
+          <a href="/resources/online-courses/" class="btn btn--outline btn--md">View online courses</a>
+        </div>
+      </div>
+      <div class="enrol-sidebar">
+        <p class="overline">Also available</p>
+        <a href="/resources/library/" class="related-link">
+          <span class="related-link__title">Resource Library</span>
+          <span class="related-link__desc">Training materials, manuals, and reference guides available for download</span>
+          <span class="related-link__arrow">Access the library</span>
+        </a>
+        <a href="/resources/online-courses/" class="related-link">
+          <span class="related-link__title">Online Courses</span>
+          <span class="related-link__desc">Self-paced professional development in GIS, AI healthcare, and data management</span>
+          <span class="related-link__arrow">View courses</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tracks-overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .track-stat {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--color-forest);
+    line-height: 1;
+  }
+  .stat-label {
+    display: block;
+    font-size: 13px;
+    color: var(--color-slate);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .track-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 8px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .track-header h2 { margin-top: 8px; }
+  .track-subtitle {
+    font-size: 15px;
+    color: var(--color-slate);
+    font-style: italic;
+    margin-top: 8px;
+    max-width: 60ch;
+  }
+  .track-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding-top: 12px;
+  }
+  .chip {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .chip--inperson { background: var(--color-forest); color: #fff; font-family: var(--font-display); font-weight: 600; }
+  .chip--online { background: var(--color-institutional); color: #fff; font-family: var(--font-display); font-weight: 600; }
+  .chip--duration { background: transparent; border-color: var(--color-border-green); color: var(--color-slate); }
+  .chip--lang { background: rgba(180,140,40,0.1); color: var(--color-gold); border-color: rgba(180,140,40,0.2); font-weight: 600; }
+  .chip--mandatory { background: rgba(212, 118, 42, 0.1); color: var(--color-donate); border-color: rgba(212,118,42,0.2); font-weight: 600; }
+
+  .track-body {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .track-info-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+    padding: 20px 24px;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    margin-bottom: 28px;
+  }
+  .info-pair { display: flex; flex-direction: column; gap: 4px; }
+  .info-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+  }
+  .info-value { font-size: 14px; color: var(--color-ink); line-height: 1.5; }
+
+  .outcomes-heading {
+    font-size: 16px;
+    color: var(--color-forest);
+    margin-bottom: 14px;
+    font-family: var(--font-display);
+  }
+  .outcomes-list {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .outcomes-list li {
+    font-size: 14px;
+    color: var(--color-ink);
+    line-height: 1.6;
+  }
+  .outcomes-list--bullets { list-style: disc; }
+
+  .day-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .day-block {
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .day-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 14px 18px;
+    cursor: pointer;
+    background: var(--color-tint);
+    list-style: none;
+    user-select: none;
+    transition: background var(--dur) var(--ease);
+  }
+  .day-toggle::-webkit-details-marker { display: none; }
+  .day-toggle:hover { background: #eaf4ee; }
+  .day-label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-institutional);
+  }
+  .day-desc {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-forest);
+  }
+  .day-list {
+    list-style: decimal;
+    padding: 14px 18px 14px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    border-top: 1px solid var(--color-border-green);
+  }
+  .day-list li { font-size: 13px; color: var(--color-ink); line-height: 1.6; }
+
+  .materials-block {
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .materials-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    cursor: pointer;
+    background: var(--color-tint);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--color-forest);
+    list-style: none;
+    user-select: none;
+    transition: background var(--dur) var(--ease);
+  }
+  .materials-toggle::-webkit-details-marker { display: none; }
+  .materials-toggle::after {
+    content: '+';
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-institutional);
+    transition: transform var(--dur) var(--ease);
+  }
+  details[open] .materials-toggle::after { transform: rotate(45deg); }
+  .materials-toggle:hover { background: #eaf4ee; }
+  .materials-list {
+    list-style: disc;
+    padding: 14px 18px 14px 32px;
+    background: #fff;
+    border-top: 1px solid var(--color-border-green);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .materials-list li { font-size: 14px; color: var(--color-ink); line-height: 1.5; }
+
+  .track-sidebar { display: flex; flex-direction: column; gap: 16px; }
+  .impact-card {
+    background: var(--color-forest);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .impact-card .overline { color: rgba(255,255,255,0.65); margin-bottom: 16px; }
+  .impact-metric { margin-bottom: 12px; }
+  .impact-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 32px;
+    color: #fff;
+    line-height: 1.1;
+  }
+  .impact-desc {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    margin-top: 4px;
+  }
+  .impact-metric--target .impact-num { color: #7fddaa; }
+  .impact-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 14px 0;
+  }
+
+  .schedule-card {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+  }
+  .schedule-card .overline { margin-bottom: 10px; }
+  .schedule-text { font-size: 14px; color: var(--color-slate); line-height: 1.7; }
+
+  .safeguarding-body { display: grid; grid-template-columns: 1fr; }
+  .safeguarding-info { grid-template-columns: 1fr 1fr; }
+  .safeguarding-note {
+    margin-top: 20px;
+    padding: 16px 20px;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--color-slate);
+    line-height: 1.65;
+  }
+
+  .enrol-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .enrol-lead {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.7;
+    max-width: 58ch;
+  }
+  .enrol-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .enrol-sidebar { display: flex; flex-direction: column; gap: 16px; }
+  .related-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    text-decoration: none;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .related-link:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
+  .related-link__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--color-forest);
+  }
+  .related-link__desc {
+    font-size: 13px;
+    color: var(--color-slate);
+    line-height: 1.55;
+  }
+  .related-link__arrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-institutional);
+    margin-top: 6px;
+  }
+
+  @media (max-width: 1024px) {
+    .tracks-overview { grid-template-columns: repeat(2, 1fr); }
+    .track-body { grid-template-columns: 1fr; }
+    .track-sidebar { flex-direction: row; flex-wrap: wrap; }
+    .impact-card, .schedule-card { flex: 1; min-width: 240px; }
+    .enrol-section { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .track-info-bar { grid-template-columns: 1fr; }
+    .day-grid { grid-template-columns: 1fr; }
+    .safeguarding-info { grid-template-columns: 1fr; }
+    .track-header { flex-direction: column; }
+    .tracks-overview { grid-template-columns: 1fr 1fr; }
+  }
+</style>

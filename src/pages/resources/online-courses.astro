@@ -1,0 +1,482 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+
+const courses = [
+  {
+    code: 'CHRSD-GIS-101',
+    title: 'GIS Mapping for Strategic Environmental Frameworks',
+    level: 'Intermediate',
+    duration: '24 hours',
+    durationDetail: 'Self-paced · 8 modules',
+    format: 'Online (asynchronous) + 2 live Q&A sessions',
+    certification: 'CHRSD Certificate of Completion (digital, verifiable)',
+    description: 'Equips development professionals with practical GIS skills for environmental programme design and monitoring. Covers QGIS, coordinate systems, vegetation index (NDVI) interpretation, and field data integration with mobile applications. Aligned with the NSADMP technical methodology.',
+    audience: 'Environmental programme officers, M&E staff, field foresters',
+    prerequisites: 'Basic computer literacy; familiarity with Excel or similar',
+    modules: [
+      { title: 'Introduction to Geospatial Data for NGOs', hours: 3 },
+      { title: 'Coordinate Systems and Projection Standards', hours: 2 },
+      { title: 'QGIS: Data Import, Layers, and Symbology', hours: 4 },
+      { title: 'Remote Sensing Fundamentals: Landsat & Sentinel-2', hours: 3 },
+      { title: 'NDVI Analysis and Vegetation Health Classification', hours: 3 },
+      { title: 'Mobile GIS: Field Data Collection Workflows', hours: 3 },
+      { title: 'GIS in Programme Monitoring & Evaluation', hours: 3 },
+      { title: 'Capstone: Designing a Reforestation Monitoring Dashboard', hours: 3 },
+    ],
+    levelClass: 'level--intermediate',
+    area: 'Environmental',
+  },
+  {
+    code: 'CHRSD-AIH-201',
+    title: 'Implementing AI Automation in Modern Healthcare Models',
+    level: 'Advanced',
+    duration: '18 hours',
+    durationDetail: 'Self-paced · 6 modules',
+    format: 'Online (asynchronous) + peer-reviewed case analysis',
+    certification: 'CHRSD Professional Certificate (digital + printed on request)',
+    description: 'A clinical-operational course examining AI deployment in community health screening contexts. Draws directly from the CHRSD AI Vision Care Initiative methodology: computer vision diagnostic pipelines, accuracy validation, clinical safety thresholds, and workflow integration in low-resource settings.',
+    audience: 'NGO health programme managers, digital health officers, clinicians',
+    prerequisites: 'Understanding of public health concepts; CHRSD-GIS-101 or equivalent recommended',
+    modules: [
+      { title: 'AI Diagnostic Systems: Foundations and Clinical Safety', hours: 3 },
+      { title: 'Computer Vision in Refractive Error Screening', hours: 3 },
+      { title: 'Data Pipelines: From Sensor to Clinical Decision Support', hours: 3 },
+      { title: 'Validation Methodologies: Sensitivity, Specificity, AUC', hours: 3 },
+      { title: 'Workflow Integration in Factory/Community Settings', hours: 3 },
+      { title: 'Ethics, Consent, and Data Protection in AI Health Programmes', hours: 3 },
+    ],
+    levelClass: 'level--advanced',
+    area: 'Health',
+  },
+  {
+    code: 'CHRSD-DM-301',
+    title: 'Ethical Data Management Strategies within Public Sector Implementations',
+    level: 'Foundational–Intermediate',
+    duration: '12 hours',
+    durationDetail: 'Self-paced · 4 modules',
+    format: 'Online (asynchronous)',
+    certification: 'CHRSD Certificate of Completion',
+    description: "Covers data governance, privacy law compliance, and ethical data handling for NGOs and government partners managing sensitive datasets — including biometric teacher data, beneficiary health records, and community survey data. References GDPR principles, Bangladesh Data Protection Act, and CHRSD's internal data privacy policy.",
+    audience: 'Data officers, IT managers, programme coordinators handling personal data',
+    prerequisites: 'None',
+    modules: [
+      { title: 'Data Governance Frameworks for Development Organisations', hours: 3 },
+      { title: 'Legal Compliance: GDPR, Bangladesh DPA, and ICT Act 2006', hours: 3 },
+      { title: 'Biometric Data: Special Considerations and Safeguards', hours: 3 },
+      { title: 'Incident Response and Breach Notification Protocols', hours: 3 },
+    ],
+    levelClass: 'level--foundational',
+    area: 'Governance',
+  },
+];
+---
+<BaseLayout
+  title="Online Courses"
+  description="CHRSD professional development courses for NGO staff, development professionals, and public sector officers — covering GIS mapping, AI healthcare, and ethical data management."
+>
+  <PageHero
+    overline="Resources & Learning"
+    title="Online Courses"
+    lead="Structured professional development for NGO staff, development professionals, and public sector officers. All courses are grounded in CHRSD programme methodologies and deliver transferable, field-tested skills."
+  />
+
+  <section class="section section--alt">
+    <div class="container intro-grid">
+      <div class="intro-stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Courses available</span>
+      </div>
+      <div class="intro-stat">
+        <span class="stat-num">54</span>
+        <span class="stat-label">Total learning hours</span>
+      </div>
+      <div class="intro-stat">
+        <span class="stat-num">18</span>
+        <span class="stat-label">Modules across all courses</span>
+      </div>
+      <div class="intro-copy">
+        <p>All courses are delivered online and designed for working professionals. Certifications are issued digitally and can be verified by employers and institutional partners. Enrolment is open to individuals and cohorts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="overline">Course catalogue</p>
+      <h2>Professional development programmes</h2>
+      <div class="courses">
+        {courses.map((c) => (
+          <article class="course-card">
+            <div class="course-card__header">
+              <div class="course-card__meta-top">
+                <span class={`level-badge ${c.levelClass}`}>{c.level}</span>
+                <span class="course-code">{c.code}</span>
+              </div>
+              <h3 class="course-card__title">{c.title}</h3>
+              <div class="course-card__chips">
+                <span class="chip chip--duration">{c.duration}</span>
+                <span class="chip chip--detail">{c.durationDetail}</span>
+                <span class="chip chip--area">{c.area}</span>
+              </div>
+            </div>
+
+            <div class="course-card__body">
+              <p class="course-card__description">{c.description}</p>
+
+              <div class="course-card__info-grid">
+                <div class="info-item">
+                  <span class="info-label">Format</span>
+                  <span class="info-value">{c.format}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Certification</span>
+                  <span class="info-value">{c.certification}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Target audience</span>
+                  <span class="info-value">{c.audience}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Prerequisites</span>
+                  <span class="info-value">{c.prerequisites}</span>
+                </div>
+              </div>
+
+              <details class="syllabus">
+                <summary class="syllabus__toggle">
+                  <span>View syllabus</span>
+                  <span class="syllabus__count">{c.modules.length} modules</span>
+                </summary>
+                <ol class="syllabus__list">
+                  {c.modules.map((m, idx) => (
+                    <li class="syllabus__item">
+                      <span class="syllabus__num">{String(idx + 1).padStart(2, '0')}</span>
+                      <span class="syllabus__name">{m.title}</span>
+                      <span class="syllabus__hours">{m.hours} hrs</span>
+                    </li>
+                  ))}
+                </ol>
+              </details>
+
+              <div class="course-card__footer">
+                <a href="/get-involved/contact-us/" class="btn btn--solid btn--md">Enquire to enrol</a>
+                <span class="course-card__cert-note">{c.certification}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container cohort-section">
+      <div>
+        <p class="overline">Group enrolment</p>
+        <h2>Cohort and institutional bookings</h2>
+        <p class="cohort-lead">
+          Organisations may enrol staff cohorts of five or more participants at a time. CHRSD can customise delivery schedules and supplementary materials for institutional clients including government agencies, INGO offices, and private sector partners.
+        </p>
+        <div class="cohort-actions">
+          <a href="/get-involved/contact-us/" class="btn btn--solid btn--md">Contact us about cohort enrolment</a>
+          <a href="/get-involved/partnership/" class="btn btn--outline btn--md">Partnership enquiries</a>
+        </div>
+      </div>
+      <div class="cohort-note">
+        <p class="overline">Accreditation note</p>
+        <p>CHRSD certificates are issued under the authority of the Centre for Humanitarian Research and Social Development Foundation (Reg. No. S-14480/2026). Digital certificates include a unique verification code that can be validated by employers and institutional partners.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 2fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .intro-stat {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--color-forest);
+    line-height: 1;
+  }
+  .stat-label {
+    display: block;
+    font-size: 13px;
+    color: var(--color-slate);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .intro-copy {
+    padding-left: 16px;
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.7;
+    border-left: 3px solid var(--color-border-green);
+  }
+
+  .courses {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .course-card {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .course-card:hover { box-shadow: var(--shadow-card-hover); }
+
+  .course-card__header {
+    background: var(--color-tint);
+    border-bottom: 1px solid var(--color-border-green);
+    padding: 28px 32px 24px;
+  }
+  .course-card__meta-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .level-badge {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: var(--radius-pill);
+  }
+  .level--foundational { background: #e8f5ec; color: #2a7a4e; }
+  .level--intermediate { background: #deeef5; color: #1a5e78; }
+  .level--advanced { background: #f5ede0; color: #7a4a1a; }
+
+  .course-code {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    background: rgba(180, 140, 40, 0.1);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+  }
+
+  .course-card__title {
+    font-size: 22px;
+    color: var(--color-forest);
+    line-height: 1.3;
+    margin-bottom: 16px;
+    max-width: 66ch;
+  }
+
+  .course-card__chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+  }
+  .chip--duration {
+    background: var(--color-forest);
+    color: #fff;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .chip--detail {
+    background: transparent;
+    border-color: var(--color-border-green);
+    color: var(--color-slate);
+  }
+  .chip--area {
+    background: rgba(0, 120, 60, 0.08);
+    color: var(--color-institutional);
+    border-color: rgba(0, 120, 60, 0.2);
+    font-weight: 600;
+  }
+
+  .course-card__body { padding: 28px 32px; }
+
+  .course-card__description {
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    max-width: 80ch;
+  }
+
+  .course-card__info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+    margin-bottom: 28px;
+    padding: 20px 24px;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+  }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-slate);
+  }
+  .info-value { font-size: 14px; color: var(--color-ink); line-height: 1.5; }
+
+  .syllabus {
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .syllabus__toggle {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 14px 20px;
+    cursor: pointer;
+    background: var(--color-tint);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-forest);
+    list-style: none;
+    user-select: none;
+    transition: background var(--dur) var(--ease);
+  }
+  .syllabus__toggle::-webkit-details-marker { display: none; }
+  .syllabus__toggle::after {
+    content: '+';
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-institutional);
+    margin-left: auto;
+    transition: transform var(--dur) var(--ease);
+  }
+  details[open] .syllabus__toggle::after { transform: rotate(45deg); }
+  .syllabus__toggle:hover { background: #eaf4ee; }
+  .syllabus__count {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-slate);
+    margin-left: 12px;
+  }
+  .syllabus__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .syllabus__item {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 20px;
+    border-top: 1px solid var(--color-border-green);
+    font-size: 14px;
+  }
+  .syllabus__item:nth-child(even) { background: rgba(245, 249, 246, 0.6); }
+  .syllabus__num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--color-light-green);
+  }
+  .syllabus__name { color: var(--color-ink); line-height: 1.45; }
+  .syllabus__hours {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-slate);
+    white-space: nowrap;
+  }
+
+  .course-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .course-card__cert-note {
+    font-size: 13px;
+    color: var(--color-slate);
+    font-style: italic;
+  }
+
+  .cohort-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .cohort-lead {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.7;
+    max-width: 56ch;
+  }
+  .cohort-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cohort-note {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .cohort-note .overline { margin-bottom: 12px; }
+  .cohort-note p { font-size: 14px; color: var(--color-slate); line-height: 1.7; }
+
+  @media (max-width: 1024px) {
+    .intro-grid { grid-template-columns: repeat(3, 1fr); }
+    .intro-copy {
+      grid-column: 1 / -1;
+      border-left: none;
+      border-top: 3px solid var(--color-border-green);
+      padding-left: 0;
+      padding-top: 16px;
+    }
+    .cohort-section { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .intro-grid { grid-template-columns: 1fr 1fr; }
+    .course-card__header { padding: 20px; }
+    .course-card__body { padding: 20px; }
+    .course-card__info-grid { grid-template-columns: 1fr; }
+    .course-card__title { font-size: 19px; }
+    .syllabus__item { grid-template-columns: 28px 1fr auto; gap: 8px; padding: 12px 16px; }
+  }
+  @media (max-width: 480px) {
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+</style>

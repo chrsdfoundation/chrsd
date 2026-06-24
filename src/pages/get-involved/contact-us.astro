@@ -1,0 +1,188 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '';
+---
+<BaseLayout
+  title="Contact Us"
+  description="Get in touch with CHRSD — partnerships, media, programmes, and general enquiries."
+>
+  <PageHero
+    overline="Get involved"
+    title="Get in touch"
+    lead="Whether you're a partner, journalist, or someone who wants to help — we'd like to hear from you."
+  />
+
+  <section class="section">
+    <div class="container contact">
+      <div class="contact__info">
+        <h2>Reach us directly</h2>
+        <dl class="contact__list">
+          <div>
+            <dt>Office</dt>
+            <dd>{site.address}</dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd><a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}>{site.phone}</a></dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>Sunday&ndash;Thursday, 9:00&ndash;17:00 (GMT+6)</dd>
+          </div>
+        </dl>
+        <p class="contact__note">
+          For procurement and tenders, please visit the
+          <a href={site.tenderUrl} target="_blank" rel="noopener noreferrer">E-Tender portal</a>.
+        </p>
+      </div>
+
+      <form class="contact__form" id="contact-form" action={endpoint} method="POST" novalidate>
+        <div class="field">
+          <label for="name">Full name <span aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" required autocomplete="name" aria-required="true" />
+          <p class="error" data-error-for="name"></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" required autocomplete="email" aria-required="true" />
+            <p class="error" data-error-for="email"></p>
+          </div>
+          <div class="field">
+            <label for="org">Organisation</label>
+            <input id="org" name="organisation" type="text" autocomplete="organization" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="topic">What is this about?</label>
+          <select id="topic" name="topic">
+            <option value="General enquiry">General enquiry</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Media & press">Media &amp; press</option>
+            <option value="Volunteering">Volunteering</option>
+            <option value="Programmes">Programmes</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+          <p class="error" data-error-for="message"></p>
+        </div>
+
+        <!-- Honeypot for spam bots -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="visually-hidden" aria-hidden="true" />
+
+        <button type="submit" class="submit">Send message</button>
+        <p class="form-status" role="status" aria-live="polite" data-status></p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; }
+  .contact__info h2 { font-size: 28px; }
+  .contact__list { margin-top: 24px; display: grid; gap: 20px; }
+  .contact__list dt { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-gold); }
+  .contact__list dd { margin: 4px 0 0; color: var(--text-body); line-height: 1.5; }
+  .contact__note { margin-top: 28px; padding: 16px 18px; background: var(--color-tint); border-left: 3px solid var(--color-institutional); border-radius: var(--radius-sm); font-size: 15px; color: var(--text-muted); }
+
+  .contact__form {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 36px;
+  }
+  .field { margin-bottom: 20px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  label { display: block; font-family: var(--font-display); font-weight: 600; font-size: 14px; margin-bottom: 7px; }
+  label span { color: var(--color-donate); }
+  input, select, textarea {
+    width: 100%; padding: 13px 15px;
+    border: 1px solid var(--color-border-green); border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 16px; color: var(--color-ink); background: #fff;
+    transition: border-color var(--dur) var(--ease);
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--color-institutional); }
+  textarea { resize: vertical; }
+  .error { color: #B3261E; font-size: 13px; margin-top: 6px; min-height: 1em; }
+  input[aria-invalid='true'], textarea[aria-invalid='true'] { border-color: #B3261E; }
+
+  .submit {
+    background: var(--color-institutional); color: #fff; border: 0;
+    padding: 15px 32px; border-radius: var(--radius-pill);
+    font-family: var(--font-display); font-weight: 600; font-size: 16px; cursor: pointer;
+    transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .submit:hover { background: var(--color-light-green); transform: translateY(-1px); }
+  .submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-status { margin-top: 14px; font-size: 15px; min-height: 1em; }
+  .form-status.is-ok { color: var(--color-institutional); }
+  .form-status.is-err { color: #B3261E; }
+
+  @media (max-width: 900px) { .contact { grid-template-columns: 1fr; gap: 36px; } }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } .contact__form { padding: 24px; } }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = form?.querySelector<HTMLElement>('[data-status]');
+
+  function setError(name: string, msg: string) {
+    const field = form?.querySelector<HTMLElement>(`[data-error-for="${name}"]`);
+    const input = form?.querySelector<HTMLInputElement>(`[name="${name}"]`);
+    if (field) field.textContent = msg;
+    input?.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+
+  function validate(): boolean {
+    let ok = true;
+    const name = form?.querySelector<HTMLInputElement>('[name="name"]');
+    const email = form?.querySelector<HTMLInputElement>('[name="email"]');
+    const message = form?.querySelector<HTMLTextAreaElement>('[name="message"]');
+
+    if (!name?.value.trim()) { setError('name', 'Please enter your name.'); ok = false; } else setError('name', '');
+    if (!email?.value.trim()) { setError('email', 'Please enter your email.'); ok = false; }
+    else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) { setError('email', 'Please enter a valid email.'); ok = false; }
+    else setError('email', '');
+    if (!message?.value.trim()) { setError('message', 'Please write a message.'); ok = false; } else setError('message', '');
+    return ok;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (status) { status.textContent = ''; status.className = 'form-status'; }
+    if (!validate()) {
+      form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+      return;
+    }
+    if (!form.action) {
+      if (status) { status.textContent = 'Demo mode: set PUBLIC_CONTACT_ENDPOINT in .env to enable sending.'; status.classList.add('is-ok'); }
+      form.reset();
+      return;
+    }
+    const submitBtn = form.querySelector<HTMLButtonElement>('.submit');
+    submitBtn?.setAttribute('disabled', '');
+    if (status) status.textContent = 'Sending\u2026';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (res.ok) {
+        if (status) { status.textContent = 'Thank you \u2014 your message has been sent. We\u2019ll be in touch.'; status.classList.add('is-ok'); }
+        form.reset();
+      } else {
+        if (status) { status.textContent = 'Something went wrong. Please email us directly.'; status.classList.add('is-err'); }
+      }
+    } catch {
+      if (status) { status.textContent = 'Network error. Please try again or email us directly.'; status.classList.add('is-err'); }
+    } finally {
+      submitBtn?.removeAttribute('disabled');
+    }
+  });
+</script>

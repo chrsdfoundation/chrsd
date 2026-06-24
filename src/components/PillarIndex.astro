@@ -1,0 +1,46 @@
+---
+import { navigation } from '@data/navigation';
+
+interface Props {
+  pillarLabel: string;
+}
+const { pillarLabel } = Astro.props;
+const pillar = navigation.find((p) => p.label === pillarLabel);
+---
+{pillar && (
+  <section class="section">
+    <div class="container pillar">
+      {pillar.groups.map((group) => (
+        <div class="pillar__group">
+          <h2 class="pillar__heading">{group.group}</h2>
+          <ul class="pillar__links">
+            {group.items.map((item) => (
+              <li>
+                <a href={item.url}>
+                  <span class="pillar__label">{item.label}</span>
+                  <span class="pillar__arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .pillar { display: grid; gap: 48px; }
+  .pillar__heading { font-size: 24px; padding-bottom: 14px; border-bottom: 2px solid var(--color-border-green); }
+  .pillar__links { list-style: none; padding: 0; margin-top: 8px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 32px; }
+  .pillar__links a {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 4px; border-bottom: 1px solid var(--color-tint);
+    color: var(--color-ink); font-family: var(--font-display); font-weight: 600;
+  }
+  .pillar__links a:hover { color: var(--color-institutional); }
+  .pillar__arrow { color: var(--color-institutional); transition: transform var(--dur) var(--ease); }
+  .pillar__links a:hover .pillar__arrow { transform: translateX(4px); }
+
+  @media (max-width: 768px) { .pillar__links { grid-template-columns: 1fr; } }
+</style>

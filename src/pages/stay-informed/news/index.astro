@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Card from '@components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('news', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<BaseLayout
+  title="News & Press"
+  description="Announcements, press releases, and the latest updates from the CHRSD Foundation."
+>
+  <PageHero
+    overline="Newsroom"
+    title="News & Press"
+    lead="Announcements, press releases, and updates from across our programmes and partnerships."
+  />
+
+  <section class="section">
+    <div class="container">
+      {items.length > 0 ? (
+        <div class="news-grid">
+          {items.map((item) => (
+            <Card
+              href={item.data.externalUrl ?? `/stay-informed/news/${item.slug}/`}
+              image={item.data.coverImage}
+              alt={item.data.coverAlt}
+              tag={item.data.type}
+              title={item.data.title}
+              excerpt={item.data.excerpt}
+              meta={fmt(item.data.pubDate)}
+              cta={item.data.externalUrl ? 'Read release' : 'Read more'}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="empty">No news published yet. Check back soon.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .empty { text-align: center; color: var(--text-muted); padding: 40px 0; }
+
+  @media (max-width: 1024px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .news-grid { grid-template-columns: 1fr; } }
+</style>

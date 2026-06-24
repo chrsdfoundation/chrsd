@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import PillarIndex from '@components/PillarIndex.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+---
+<BaseLayout title="Get Involved" description="Volunteer, partner, give, or join CHRSD's mission.">
+  <PageHero
+    overline="Get involved"
+    title="There's a place for you in this work"
+    lead="Give, volunteer, partner, or join us — every contribution compounds into measurable change."
+  />
+  <section class="section" style="padding-bottom:0">
+    <div class="container" style="display:flex;gap:14px;flex-wrap:wrap">
+      <Button href={site.donateUrl} variant="donate" size="lg" external>Donate now</Button>
+      <Button href="/get-involved/volunteer/" variant="outline" size="lg">Become a volunteer</Button>
+    </div>
+  </section>
+  <PillarIndex pillarLabel="Get Involved" />
+</BaseLayout>

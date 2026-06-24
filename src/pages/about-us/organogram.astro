@@ -1,0 +1,483 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+---
+<BaseLayout
+  title="Institutional Organogram"
+  description="CHRSD's organisational structure — governance, leadership, and operational divisions."
+>
+  <PageHero
+    overline="About us · Governance"
+    title="Institutional Organogram"
+    lead="Explore CHRSD's governance framework and operational structure. Switch between views, drag to pan, and scroll to zoom."
+  />
+
+  <section class="section">
+    <div class="container">
+
+      <!-- View tabs -->
+      <div class="tabs" role="tablist" aria-label="Organogram views">
+        <button class="tab tab--active" role="tab" data-view="governance" aria-selected="true">Governance</button>
+        <button class="tab" role="tab" data-view="operations" aria-selected="false">Operations</button>
+        <button class="tab" role="tab" data-view="combined" aria-selected="false">Combined</button>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="zoom-controls">
+          <button class="zoom-btn" id="btn-zoom-in" aria-label="Zoom in">+</button>
+          <span class="zoom-label" id="zoom-label">100%</span>
+          <button class="zoom-btn" id="btn-zoom-out" aria-label="Zoom out">−</button>
+        </div>
+        <button class="fit-btn" id="btn-fit">Fit to screen</button>
+        <span class="hint">Drag to pan · Scroll to zoom</span>
+      </div>
+
+      <!-- Canvas wrapper -->
+      <div class="canvas-wrap" id="canvas-wrap" tabindex="0" aria-label="Interactive organisational chart">
+        <svg class="canvas-svg" id="canvas-svg" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--color-border-green)" />
+            </marker>
+            <marker id="arrow-gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--color-gold)" />
+            </marker>
+          </defs>
+          <g id="canvas-g"></g>
+        </svg>
+      </div>
+
+      <!-- Tooltip -->
+      <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+      <!-- Legend -->
+      <div class="legend">
+        <span class="leg-item"><span class="leg-dot leg-dot--board"></span>Board / Governance</span>
+        <span class="leg-item"><span class="leg-dot leg-dot--exec"></span>Executive Office</span>
+        <span class="leg-item"><span class="leg-dot leg-dot--ops"></span>Operational Division</span>
+        <span class="leg-item"><span class="leg-dot leg-dot--support"></span>Support Staff</span>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+// ── Data ─────────────────────────────────────────────────────────────────────
+
+const VIEWS = {
+  governance: {
+    nodes: [
+      { id: 'bod',    label: 'Board of Directors',    sub: '9 Members',                         type: 'board', w: 220, h: 72 },
+      { id: 'boff',   label: 'Board Officers',        sub: 'Chair · Vice-chair · Treasurer',    type: 'board', w: 220, h: 60 },
+      { id: 'gbm',    label: 'General Board Members', sub: '6 Members',                         type: 'board', w: 220, h: 60 },
+      { id: 'ec',     label: 'Executive Committee',   sub: '5 Members',                         type: 'board', w: 220, h: 60 },
+      { id: 'sg',     label: 'Secretary-General',     sub: '',                                  type: 'exec',  w: 220, h: 60 },
+      { id: 'adv',    label: 'Advisory Committee',    sub: '12 Members',                        type: 'board', w: 220, h: 60 },
+      { id: 'ed',     label: 'Executive Director',    sub: 'M. A. Ramim',                       type: 'exec',  w: 220, h: 72 },
+      { id: 'eo',     label: 'Executive Office',      sub: 'Programme · Finance · HR · M&E',   type: 'exec',  w: 220, h: 72 },
+    ],
+    edges: [
+      { from: 'bod',  to: 'boff',  style: 'solid'  },
+      { from: 'bod',  to: 'gbm',   style: 'solid'  },
+      { from: 'bod',  to: 'ec',    style: 'solid'  },
+      { from: 'ec',   to: 'sg',    style: 'solid'  },
+      { from: 'ec',   to: 'adv',   style: 'dashed' },
+      { from: 'sg',   to: 'ed',    style: 'solid'  },
+      { from: 'ed',   to: 'eo',    style: 'solid'  },
+    ],
+    layout: {
+      bod:  { x: 340, y:  40 },
+      boff: { x:  80, y: 160 },
+      gbm:  { x: 340, y: 160 },
+      ec:   { x: 600, y: 160 },
+      sg:   { x: 600, y: 280 },
+      adv:  { x: 860, y: 280 },
+      ed:   { x: 600, y: 400 },
+      eo:   { x: 600, y: 530 },
+    },
+  },
+
+  operations: {
+    nodes: [
+      { id: 'ed',  label: 'Executive Director', sub: 'M. A. Ramim',          type: 'exec', w: 220, h: 72 },
+      // Directors
+      { id: 'd1',  label: 'Director',           sub: 'Programmes',            type: 'ops',  w: 190, h: 60 },
+      { id: 'd2',  label: 'Director',           sub: 'Fundraising & Dev',     type: 'ops',  w: 190, h: 60 },
+      { id: 'd3',  label: 'Director',           sub: 'Communications & Advocacy', type: 'ops', w: 190, h: 60 },
+      { id: 'd4',  label: 'Director',           sub: 'Finance & Admin',       type: 'ops',  w: 190, h: 60 },
+      { id: 'd5',  label: 'Director',           sub: 'Human Resources',       type: 'ops',  w: 190, h: 60 },
+      { id: 'd6',  label: 'Director',           sub: 'M&E',                   type: 'ops',  w: 190, h: 60 },
+      // Managers / Staff
+      { id: 'm1a', label: 'Programme Manager',  sub: 'Environment',           type: 'support', w: 170, h: 56 },
+      { id: 'm1b', label: 'Programme Manager',  sub: 'Social Dev',            type: 'support', w: 170, h: 56 },
+      { id: 'm2a', label: 'Grants Manager',     sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm3a', label: 'Media Officer',      sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm3b', label: 'Digital Officer',    sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm4a', label: 'Finance Manager',    sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm4b', label: 'Admin Officer',      sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm5a', label: 'HR Officer',         sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm6a', label: 'M&E Officer',        sub: '',                      type: 'support', w: 170, h: 52 },
+      { id: 'm6b', label: 'Data Analyst',       sub: '',                      type: 'support', w: 170, h: 52 },
+    ],
+    edges: [
+      { from: 'ed', to: 'd1', style: 'solid' },
+      { from: 'ed', to: 'd2', style: 'solid' },
+      { from: 'ed', to: 'd3', style: 'solid' },
+      { from: 'ed', to: 'd4', style: 'solid' },
+      { from: 'ed', to: 'd5', style: 'solid' },
+      { from: 'ed', to: 'd6', style: 'solid' },
+      { from: 'd1', to: 'm1a', style: 'solid' },
+      { from: 'd1', to: 'm1b', style: 'solid' },
+      { from: 'd2', to: 'm2a', style: 'solid' },
+      { from: 'd3', to: 'm3a', style: 'solid' },
+      { from: 'd3', to: 'm3b', style: 'solid' },
+      { from: 'd4', to: 'm4a', style: 'solid' },
+      { from: 'd4', to: 'm4b', style: 'solid' },
+      { from: 'd5', to: 'm5a', style: 'solid' },
+      { from: 'd6', to: 'm6a', style: 'solid' },
+      { from: 'd6', to: 'm6b', style: 'solid' },
+    ],
+    layout: {
+      ed:  { x: 450, y:  40 },
+      d1:  { x:  40, y: 180 },
+      d2:  { x: 240, y: 180 },
+      d3:  { x: 440, y: 180 },
+      d4:  { x: 640, y: 180 },
+      d5:  { x: 740+100, y: 180 },
+      d6:  { x: 940+100, y: 180 },
+      m1a: { x:  10, y: 320 },
+      m1b: { x: 195, y: 320 },
+      m2a: { x: 248, y: 320 },
+      m3a: { x: 390, y: 320 },
+      m3b: { x: 575, y: 320 },
+      m4a: { x: 610, y: 320 },
+      m4b: { x: 795, y: 320 },
+      m5a: { x: 870, y: 320 },
+      m6a: { x: 960, y: 320 },
+      m6b: { x:1145, y: 320 },
+    },
+  },
+};
+
+// Build combined view by merging both
+const COMBINED_NODES = [
+  ...VIEWS.governance.nodes,
+  ...VIEWS.operations.nodes.filter(n => n.id !== 'ed'),
+];
+const COMBINED_EDGES = [
+  ...VIEWS.governance.edges,
+  ...VIEWS.operations.edges,
+];
+// Offset operations nodes downward in combined view
+const GOV_H = 680;
+const COMBINED_LAYOUT: Record<string, {x:number,y:number}> = {
+  ...VIEWS.governance.layout,
+};
+for (const [id, pos] of Object.entries(VIEWS.operations.layout)) {
+  if (id === 'ed') continue;
+  COMBINED_LAYOUT[id] = { x: pos.x, y: pos.y + GOV_H };
+}
+
+// ── Colours ──────────────────────────────────────────────────────────────────
+const TYPE_STYLES: Record<string, { fill: string; stroke: string; text: string; sub: string }> = {
+  board:   { fill: '#EAF2EC', stroke: '#143C14', text: '#143C14', sub: '#4A6B52' },
+  exec:    { fill: '#143C14', stroke: '#143C14', text: '#FFFFFF', sub: '#C5DCCB' },
+  ops:     { fill: '#00783C', stroke: '#00783C', text: '#FFFFFF', sub: '#A8D4BC' },
+  support: { fill: '#F5F9F6', stroke: '#C5DCCB', text: '#0D1F0D', sub: '#4A6B52' },
+};
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let currentView = 'governance';
+let scale = 1;
+let panX = 0, panY = 0;
+let dragging = false;
+let lastX = 0, lastY = 0;
+
+const g       = document.getElementById('canvas-g')!;
+const svg     = document.getElementById('canvas-svg') as unknown as SVGSVGElement;
+const wrap    = document.getElementById('canvas-wrap')!;
+const tooltip = document.getElementById('tooltip')!;
+const zoomLbl = document.getElementById('zoom-label')!;
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function getViewData(view: string) {
+  if (view === 'combined') return { nodes: COMBINED_NODES, edges: COMBINED_EDGES, layout: COMBINED_LAYOUT };
+  return { ...VIEWS[view as keyof typeof VIEWS], layout: VIEWS[view as keyof typeof VIEWS].layout };
+}
+
+function render(view: string) {
+  const { nodes, edges, layout } = getViewData(view);
+  g.innerHTML = '';
+
+  // Draw edges first (behind nodes)
+  for (const edge of edges) {
+    const from = layout[edge.from];
+    const to   = layout[edge.to];
+    if (!from || !to) continue;
+
+    const fn = nodes.find(n => n.id === edge.from)!;
+    const tn = nodes.find(n => n.id === edge.to)!;
+    const x1 = from.x + (fn?.w ?? 200) / 2;
+    const y1 = from.y + (fn?.h ?? 60);
+    const x2 = to.x   + (tn?.w ?? 200) / 2;
+    const y2 = to.y;
+
+    const cx1 = x1, cy1 = (y1 + y2) / 2;
+    const cx2 = x2, cy2 = (y1 + y2) / 2;
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', `M${x1},${y1} C${cx1},${cy1} ${cx2},${cy2} ${x2},${y2}`);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', edge.style === 'dashed' ? '#B48C28' : '#C5DCCB');
+    path.setAttribute('stroke-width', '1.5');
+    path.setAttribute('stroke-dasharray', edge.style === 'dashed' ? '6,4' : 'none');
+    path.setAttribute('marker-end', edge.style === 'dashed' ? 'url(#arrow-gold)' : 'url(#arrow)');
+    g.appendChild(path);
+  }
+
+  // Draw nodes
+  for (const node of nodes) {
+    const pos = layout[node.id];
+    if (!pos) continue;
+    const s = TYPE_STYLES[node.type] ?? TYPE_STYLES.support;
+
+    const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    group.setAttribute('class', 'org-node');
+    group.setAttribute('tabindex', '0');
+    group.setAttribute('aria-label', node.sub ? `${node.label}: ${node.sub}` : node.label);
+    group.setAttribute('data-label', node.label);
+    group.setAttribute('data-sub', node.sub);
+
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('x', String(pos.x));
+    rect.setAttribute('y', String(pos.y));
+    rect.setAttribute('width', String(node.w));
+    rect.setAttribute('height', String(node.h));
+    rect.setAttribute('rx', '8');
+    rect.setAttribute('fill', s.fill);
+    rect.setAttribute('stroke', s.stroke);
+    rect.setAttribute('stroke-width', '1.5');
+
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('x', String(pos.x + node.w / 2));
+    label.setAttribute('y', String(pos.y + (node.sub ? node.h / 2 - 8 : node.h / 2 + 5)));
+    label.setAttribute('text-anchor', 'middle');
+    label.setAttribute('fill', s.text);
+    label.setAttribute('font-family', "'Plus Jakarta Sans', sans-serif");
+    label.setAttribute('font-weight', '700');
+    label.setAttribute('font-size', '13');
+    label.textContent = node.label;
+
+    group.appendChild(rect);
+    group.appendChild(label);
+
+    if (node.sub) {
+      const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      sub.setAttribute('x', String(pos.x + node.w / 2));
+      sub.setAttribute('y', String(pos.y + node.h / 2 + 12));
+      sub.setAttribute('text-anchor', 'middle');
+      sub.setAttribute('fill', s.sub);
+      sub.setAttribute('font-family', "'Inter', sans-serif");
+      sub.setAttribute('font-size', '11');
+      sub.textContent = node.sub;
+      group.appendChild(sub);
+    }
+
+    // Tooltip events
+    group.addEventListener('mouseenter', (e) => showTooltip(e as MouseEvent, node.label, node.sub));
+    group.addEventListener('mouseleave', hideTooltip);
+    group.addEventListener('focus', (e) => {
+      const rect = (e.target as Element).getBoundingClientRect();
+      showTooltipAt(rect.left + rect.width / 2, rect.top - 8, node.label, node.sub);
+    });
+    group.addEventListener('blur', hideTooltip);
+
+    g.appendChild(group);
+  }
+
+  fitToScreen(nodes, layout, false);
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+function showTooltip(e: MouseEvent, label: string, sub: string) {
+  showTooltipAt(e.clientX, e.clientY, label, sub);
+}
+function showTooltipAt(cx: number, cy: number, label: string, sub: string) {
+  tooltip.innerHTML = `<strong>${label}</strong>${sub ? `<br><span>${sub}</span>` : ''}`;
+  tooltip.setAttribute('aria-hidden', 'false');
+  tooltip.style.opacity = '1';
+  tooltip.style.left = cx + 'px';
+  tooltip.style.top  = (cy - 12) + 'px';
+}
+function hideTooltip() {
+  tooltip.style.opacity = '0';
+  tooltip.setAttribute('aria-hidden', 'true');
+}
+
+// ── Pan & Zoom ────────────────────────────────────────────────────────────────
+function applyTransform() {
+  g.setAttribute('transform', `translate(${panX},${panY}) scale(${scale})`);
+  zoomLbl.textContent = Math.round(scale * 100) + '%';
+}
+
+function fitToScreen(nodes: typeof VIEWS.governance.nodes, layout: Record<string, {x:number,y:number}>, animate = true) {
+  const wW = wrap.clientWidth;
+  const wH = wrap.clientHeight;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  for (const n of nodes) {
+    const p = layout[n.id];
+    if (!p) continue;
+    minX = Math.min(minX, p.x);
+    minY = Math.min(minY, p.y);
+    maxX = Math.max(maxX, p.x + n.w);
+    maxY = Math.max(maxY, p.y + n.h);
+  }
+  const cW = maxX - minX + 80;
+  const cH = maxY - minY + 80;
+  scale = Math.min(wW / cW, wH / cH, 1.2);
+  panX  = (wW - cW * scale) / 2 - minX * scale + 40 * scale;
+  panY  = (wH - cH * scale) / 2 - minY * scale + 40 * scale;
+  applyTransform();
+}
+
+wrap.addEventListener('mousedown', (e) => {
+  dragging = true;
+  lastX = e.clientX; lastY = e.clientY;
+  wrap.style.cursor = 'grabbing';
+});
+window.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+  panX += e.clientX - lastX;
+  panY += e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  applyTransform();
+});
+window.addEventListener('mouseup', () => { dragging = false; wrap.style.cursor = 'grab'; });
+
+wrap.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const rect = wrap.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  panX = mx - (mx - panX) * delta;
+  panY = my - (my - panY) * delta;
+  scale = Math.min(Math.max(scale * delta, 0.2), 3);
+  applyTransform();
+}, { passive: false });
+
+document.getElementById('btn-zoom-in')!.addEventListener('click', () => {
+  scale = Math.min(scale * 1.2, 3);
+  applyTransform();
+});
+document.getElementById('btn-zoom-out')!.addEventListener('click', () => {
+  scale = Math.max(scale * 0.8, 0.2);
+  applyTransform();
+});
+document.getElementById('btn-fit')!.addEventListener('click', () => {
+  const { nodes, layout } = getViewData(currentView);
+  fitToScreen(nodes, layout, true);
+});
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => {
+      b.classList.remove('tab--active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('tab--active');
+    btn.setAttribute('aria-selected', 'true');
+    currentView = (btn as HTMLElement).dataset.view!;
+    render(currentView);
+  });
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+render(currentView);
+</script>
+
+<style>
+  .tabs {
+    display: flex; gap: 6px; margin-bottom: 16px;
+  }
+  .tab {
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    padding: 8px 20px; border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-border-green);
+    background: #fff; color: var(--color-forest);
+    cursor: pointer; transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .tab--active, .tab:hover {
+    background: var(--color-institutional); color: #fff; border-color: var(--color-institutional);
+  }
+
+  .toolbar {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+  }
+  .zoom-controls {
+    display: flex; align-items: center; gap: 4px;
+    border: 1.5px solid var(--color-border-green); border-radius: var(--radius-pill);
+    padding: 2px 6px; background: #fff;
+  }
+  .zoom-btn {
+    font-size: 18px; font-weight: 700; width: 28px; height: 28px; border: none;
+    background: transparent; cursor: pointer; color: var(--color-forest); line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .zoom-label { font-family: var(--font-display); font-size: 13px; font-weight: 600; min-width: 42px; text-align: center; color: var(--color-slate); }
+  .fit-btn {
+    font-family: var(--font-display); font-size: 13px; font-weight: 600;
+    padding: 6px 16px; border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-border-green); background: #fff;
+    color: var(--color-forest); cursor: pointer;
+    transition: background var(--dur) var(--ease);
+  }
+  .fit-btn:hover { background: var(--color-tint); }
+  .hint { font-size: 13px; color: var(--color-slate); margin-left: auto; }
+
+  .canvas-wrap {
+    width: 100%; height: 560px;
+    border: 1.5px solid var(--color-border-green); border-radius: var(--radius);
+    background: var(--color-tint); overflow: hidden; cursor: grab;
+    position: relative; user-select: none;
+  }
+  .canvas-svg { width: 100%; height: 100%; display: block; }
+
+  /* SVG node hover */
+  :global(.org-node rect) { transition: filter 0.18s; }
+  :global(.org-node:hover rect), :global(.org-node:focus rect) {
+    filter: brightness(0.93) drop-shadow(0 4px 12px rgba(0,0,0,0.12));
+    outline: none;
+  }
+  :global(.org-node:focus) { outline: none; }
+
+  .tooltip {
+    position: fixed; pointer-events: none;
+    background: var(--color-forest); color: #fff;
+    font-family: var(--font-body); font-size: 13px; line-height: 1.5;
+    padding: 8px 14px; border-radius: var(--radius-sm);
+    transform: translate(-50%, -100%);
+    opacity: 0; transition: opacity 0.15s;
+    z-index: 100; max-width: 240px; text-align: center;
+  }
+  .tooltip span { opacity: 0.75; font-size: 12px; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 20px; margin-top: 16px;
+    font-family: var(--font-display); font-size: 13px; color: var(--color-slate);
+  }
+  .leg-item { display: flex; align-items: center; gap: 8px; }
+  .leg-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .leg-dot--board   { background: #EAF2EC; border: 1.5px solid #143C14; }
+  .leg-dot--exec    { background: #143C14; }
+  .leg-dot--ops     { background: #00783C; }
+  .leg-dot--support { background: #F5F9F6; border: 1.5px solid #C5DCCB; }
+
+  @media (max-width: 600px) {
+    .canvas-wrap { height: 420px; }
+    .hint { display: none; }
+  }
+</style>

@@ -1,0 +1,459 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+
+const briefings = [
+  {
+    ref: 'PB-2026-04',
+    date: 'April 2026',
+    programme: 'Primary Education',
+    title: 'Biometric Attendance Optimisation Frameworks for National Educational Networks: Evidence from the SDAMSMP Pilot, Bangladesh',
+    audience: 'MoPME officials, education development partners, multilateral agency programme officers',
+    summary: 'The Smart Digital Attendance Management System & Monitoring Programme (SDAMSMP) pilot in Dhaka District demonstrated a 76.6% reduction in daily administrative time for headmasters (47 min to 11 min). The system enrolled 7,740 teachers across 951 schools, transmitted attendance data in under 4 hours (vs. 3–5 days paper baseline), and identified a 2.3% attendance anomaly rate requiring HR review. National scale-up to 379,624 teachers across 65,566 schools has an estimated budget of BDT 41.98 Crore.',
+    recommendations: [
+      'Mandate biometric attendance integration into MoPME\'s Digital Primary Education Strategy 2026–2031.',
+      'Allocate dedicated IT maintenance budget per upazila.',
+      'Establish a National Attendance Data Repository linked to Teacher Service Commission records.',
+      'Commission independent 12-month impact evaluation.',
+    ],
+    downloads: [
+      { label: 'Download PDF', href: '/publications/PB-2026-04.pdf' },
+      { label: 'Executive Summary (1-pager)', href: '/publications/PB-2026-04-summary.pdf' },
+    ],
+  },
+  {
+    ref: 'PB-2026-05',
+    date: 'May 2026',
+    programme: 'Worker Health & ESG',
+    title: 'AI-Assisted Vision Screening as a Scalable ESG Intervention in the Global Ready-Made Garment (RMG) Value Chain',
+    audience: 'BGMEA leadership, international buyer CSR teams, ILO/IFC social compliance officers',
+    summary: 'Uncorrected refractive errors affect an estimated 61.3% of screened sewing operators in Bangladesh\'s RMG sector (CHRSD pilot, n=847). Corrected workers in the 8-week follow-up cohort demonstrated an 8.2% increase in units-per-hour and a 14.6% reduction in QC-line error rejection rates. At a cost of approximately $10–12 per worker including screening and eyewear, the employer payback period is under 5 months. Scaling to 1.2 million workers represents a transformative ESG investment with measurable productivity returns exceeding 3× ROI, consistent with PROSPER II, VisionSpring, and THRIVE evidence base.',
+    recommendations: [
+      'Include vision screening in mandatory annual factory health checks under BGMEA compliance framework.',
+      'Enable international buyers to count corrective eyewear provision as qualifying ESG expenditure.',
+      'Integrate AI vision diagnostics into ILO Better Work programme factory assessments.',
+      'Establish a national refractive error registry for the RMG workforce.',
+    ],
+    downloads: [
+      { label: 'Download PDF', href: '/publications/PB-2026-05.pdf' },
+      { label: 'Executive Summary (1-pager)', href: '/publications/PB-2026-05-summary.pdf' },
+    ],
+  },
+  {
+    ref: 'PB-2026-03',
+    date: 'March 2026',
+    programme: 'Climate & Afforestation',
+    title: 'Technology-Verified Afforestation as a Nationally Determined Contribution Implementation Mechanism: The NSADMP Model from Bangladesh',
+    audience: 'MoEFCC officials, UNFCCC national focal points, climate finance programme officers',
+    summary: 'Bangladesh\'s NDC commits to nature-based solutions as a core climate strategy. The NSADMP operationalises this commitment through GIS-tagged planting, NDVI satellite monitoring, and mobile field verification — achieving a 94.2% 30-day survival rate in the Sonaimuri pilot (vs. 40–55% national unverified baseline). The programme\'s data architecture creates the first nationally verifiable, tree-level plantation registry in Bangladesh, enabling MRV (Measurement, Reporting, Verification) compliance for carbon credit eligibility.',
+    recommendations: [
+      'Adopt NSADMP as the standard MRV framework for NDC afforestation targets under MoEFCC.',
+      'Allocate climate finance budget for GIS-verified plantation programmes in Coastal Belt and Hill Tracts zones.',
+      'Link NSADMP tree-level registry to UNFCCC national communications and biennial transparency reports.',
+      'Commission third-party verification of NDVI survival data for carbon credit market certification.',
+    ],
+    downloads: [
+      { label: 'Download PDF', href: '/publications/PB-2026-03.pdf' },
+      { label: 'Technical Annexe', href: '/publications/PB-2026-03-annexe.pdf' },
+    ],
+  },
+];
+
+const programmes = ['All', 'Primary Education', 'Worker Health & ESG', 'Climate & Afforestation'];
+---
+<BaseLayout
+  title="Policy Briefings"
+  description="Executive analytical briefs from CHRSD for international development agencies, civil servants, and ministerial staff."
+>
+  <PageHero
+    overline="Impact & evidence · Publications"
+    title="Policy Briefings"
+    lead="Two-page executive analytical briefs translating CHRSD field evidence into actionable policy for government ministries, development agencies, and international programme officers."
+  />
+
+  <section class="section section--alt">
+    <div class="container about-briefs">
+      <div>
+        <p class="overline">About this series</p>
+        <h2>Evidence for decision-makers</h2>
+        <p class="lead" style="margin-top:14px">
+          Each CHRSD Policy Brief is a structured two-page document presenting pilot findings, statistical evidence, and concrete recommendations for senior decision-makers. Briefs are issued following programme milestones and are available in full without gated access.
+        </p>
+      </div>
+      <div class="brief-meta-grid">
+        {[
+          { label: 'Format', value: '2-page executive brief' },
+          { label: 'Audience', value: 'Ministries, multilateral agencies, civil servants' },
+          { label: 'Access', value: 'Open access · no registration required' },
+          { label: 'Language', value: 'English · Bangla on request' },
+        ].map((m) => (
+          <div class="brief-meta-item">
+            <span class="brief-meta-item__label">{m.label}</span>
+            <span class="brief-meta-item__value">{m.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="archive-header">
+        <div>
+          <p class="overline">Archive</p>
+          <h2>Published briefings</h2>
+        </div>
+        <div class="filter-bar" role="group" aria-label="Filter by programme area">
+          {programmes.map((p, i) => (
+            <button class:list={['filter-btn', { 'filter-btn--active': i === 0 }]} data-programme={p}>
+              {p}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="briefings-list">
+        {briefings.map((b) => (
+          <article class="brief-card" data-programme={b.programme}>
+            <div class="brief-card__header">
+              <div class="brief-card__badges">
+                <span class="ref-badge">{b.ref}</span>
+                <span class="programme-tag">{b.programme}</span>
+              </div>
+              <time class="brief-card__date">{b.date}</time>
+            </div>
+
+            <h3 class="brief-card__title">{b.title}</h3>
+
+            <dl class="brief-card__meta">
+              <div class="brief-card__meta-row">
+                <dt>Target audience</dt>
+                <dd>{b.audience}</dd>
+              </div>
+            </dl>
+
+            <div class="brief-card__summary">
+              <p class="overline" style="margin-bottom:8px">Executive summary</p>
+              <p>{b.summary}</p>
+            </div>
+
+            <div class="brief-card__recommendations">
+              <p class="overline" style="margin-bottom:10px">Policy recommendations</p>
+              <ol class="rec-list">
+                {b.recommendations.map((r) => (
+                  <li>{r}</li>
+                ))}
+              </ol>
+            </div>
+
+            <div class="brief-card__downloads">
+              {b.downloads.map((d, i) => (
+                <a
+                  href={d.href}
+                  class:list={['dl-btn', { 'dl-btn--primary': i === 0, 'dl-btn--secondary': i > 0 }]}
+                  aria-label={`${d.label} for ${b.ref}`}
+                >
+                  {d.label}
+                </a>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-briefs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-briefs h2 { margin-top: 12px; }
+
+  .brief-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .brief-meta-item {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .brief-meta-item__label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .brief-meta-item__value {
+    font-size: 14px;
+    color: var(--color-forest);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .archive-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .archive-header h2 { margin-top: 12px; }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border-green);
+    background: #fff;
+    color: var(--color-slate);
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+
+  .filter-btn:hover {
+    background: var(--color-tint);
+    border-color: var(--color-institutional);
+    color: var(--color-institutional);
+  }
+
+  .filter-btn--active {
+    background: var(--color-institutional);
+    color: #fff;
+    border-color: var(--color-institutional);
+  }
+
+  .briefings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .brief-card {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+
+  .brief-card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .brief-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .brief-card__badges {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .ref-badge {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--color-forest);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .programme-tag {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-institutional);
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .brief-card__date {
+    font-size: 13px;
+    color: var(--color-slate);
+    font-weight: 500;
+  }
+
+  .brief-card__title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-forest);
+    line-height: 1.35;
+    margin-bottom: 18px;
+  }
+
+  .brief-card__meta {
+    margin: 0 0 20px;
+    padding: 14px 18px;
+    background: var(--color-tint);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--color-gold);
+  }
+
+  .brief-card__meta-row {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
+  .brief-card__meta dt {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    flex-shrink: 0;
+  }
+
+  .brief-card__meta dd {
+    font-size: 14px;
+    color: var(--color-slate);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .brief-card__summary {
+    margin-bottom: 24px;
+  }
+
+  .brief-card__summary p:last-child {
+    font-size: 15px;
+    color: var(--color-ink);
+    line-height: 1.75;
+  }
+
+  .brief-card__recommendations {
+    margin-bottom: 26px;
+    padding: 20px 22px;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+  }
+
+  .rec-list {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .rec-list li {
+    font-size: 14px;
+    color: var(--color-ink);
+    line-height: 1.65;
+  }
+
+  .brief-card__downloads {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 6px;
+    border-top: 1px solid var(--color-border-green);
+  }
+
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+
+  .dl-btn--primary {
+    background: var(--color-institutional);
+    color: #fff;
+  }
+
+  .dl-btn--primary:hover {
+    background: var(--color-forest);
+    box-shadow: 0 4px 16px rgba(0,120,60,0.25);
+  }
+
+  .dl-btn--secondary {
+    background: transparent;
+    color: var(--color-institutional);
+    border: 1.5px solid var(--color-institutional);
+  }
+
+  .dl-btn--secondary:hover {
+    background: var(--color-tint);
+  }
+
+  @media (max-width: 1024px) {
+    .about-briefs { grid-template-columns: 1fr; gap: 40px; }
+    .brief-meta-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .brief-card { padding: 22px 20px; }
+    .brief-card__title { font-size: 17px; }
+    .archive-header { flex-direction: column; align-items: flex-start; }
+    .brief-meta-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.brief-card');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.remove('filter-btn--active'));
+      btn.classList.add('filter-btn--active');
+
+      const selected = btn.dataset.programme;
+      cards.forEach((card) => {
+        if (selected === 'All' || card.dataset.programme === selected) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,69 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/Hero.astro';
+import AboutSection from '@components/AboutSection.astro';
+import StatsBlock from '@components/StatsBlock.astro';
+import ImpactSummary from '@components/ImpactSummary.astro';
+import NewsCards from '@components/NewsCards.astro';
+import Card from '@components/Card.astro';
+import Button from '@components/Button.astro';
+import { getCollection } from 'astro:content';
+
+// Featured programmes for a homepage "Our Work" teaser row
+const featured = (await getCollection('projects', ({ data }) => data.featured))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 3);
+const projects = featured.length
+  ? featured
+  : (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order).slice(0, 3);
+---
+<BaseLayout title="Home">
+  <!-- Block 2: Hero carousel -->
+  <Hero />
+
+  <!-- Block 3: About CHRSD -->
+  <AboutSection />
+
+  <!-- Block 4: Unlocking Potential stats -->
+  <StatsBlock />
+
+  <!-- Our Work teaser (programmes collection) -->
+  <section class="section work-teaser">
+    <div class="container">
+      <div class="work-teaser__head">
+        <div>
+          <p class="overline">Our work</p>
+          <h2>Programmes engineered with communities</h2>
+        </div>
+        <Button href="/our-work/" variant="ghost">View all programmes &rarr;</Button>
+      </div>
+      <div class="work-teaser__grid">
+        {projects.map((p) => (
+          <Card
+            href={`/our-work/${p.slug}/`}
+            image={p.data.coverImage}
+            alt={p.data.coverAlt}
+            tag={p.data.focusArea}
+            title={p.data.title}
+            excerpt={p.data.summary}
+            meta={`${p.data.country}${p.data.startYear ? ` · since ${p.data.startYear}` : ''}`}
+            cta="Explore programme"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Block 6: Impact summary banner -->
+  <ImpactSummary />
+
+  <!-- Block 7: Latest Updates (news) -->
+  <NewsCards />
+</BaseLayout>
+
+<style>
+  .work-teaser__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
+  .work-teaser__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 1024px) { .work-teaser__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .work-teaser__grid { grid-template-columns: 1fr; } .work-teaser__head { flex-direction: column; align-items: flex-start; } }
+</style>

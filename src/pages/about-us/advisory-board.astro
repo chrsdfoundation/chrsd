@@ -1,0 +1,177 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+
+const members = [
+  {
+    name: 'Professor Dr. Abdul Karim Chowdhury',
+    role: 'Chair, Advisory Board',
+    affiliation: 'Emeritus Professor of Environmental Science, University of Dhaka',
+    expertise: ['Climate Policy', 'Environmental Governance', 'South Asian Development'],
+    bio: 'A leading voice in climate adaptation policy with over 35 years of academic and advisory experience. Former adviser to the Ministry of Environment, Forest & Climate Change.',
+  },
+  {
+    name: 'Begum Taslima Rahman',
+    role: 'Board Member',
+    affiliation: 'Former Secretary, Ministry of Women and Children Affairs',
+    expertise: ['Gender & Development', 'Social Protection', 'Public Administration'],
+    bio: 'Distinguished career in Bangladesh civil service spanning 30 years, with specialisations in women\'s empowerment, child protection, and social safety net design.',
+  },
+  {
+    name: 'Dr. Syed Mahmudur Rahman',
+    role: 'Board Member',
+    affiliation: 'Director, Centre for Development Research, Bangladesh (CDRB)',
+    expertise: ['Socio-Economic Research', 'Labour Markets', 'Poverty Analytics'],
+    bio: 'A respected development economist whose research on labour market informality and extreme poverty has influenced national policy frameworks in Bangladesh and South Asia.',
+  },
+  {
+    name: 'Advocate Farhana Sultana',
+    role: 'Board Member',
+    affiliation: 'Senior Advocate, Supreme Court of Bangladesh',
+    expertise: ['Human Rights Law', 'Anti-Trafficking', 'Constitutional Law'],
+    bio: 'A pioneering human rights lawyer with over 25 years of experience in constitutional litigation, anti-trafficking advocacy, and access to justice initiatives for marginalised communities.',
+  },
+  {
+    name: 'Mr. Khondker Moinul Ahsan',
+    role: 'Board Member',
+    affiliation: 'Managing Director, Nevronus Systems Ltd.',
+    expertise: ['GIS Technology', 'Digital Governance', 'Remote Sensing'],
+    bio: 'Technology strategist and digital transformation leader whose firm is CHRSD\'s strategic consortium partner for the NSADMP and SDAMSMP digital programmes.',
+  },
+  {
+    name: 'Dr. Yasmin Hossain',
+    role: 'Board Member',
+    affiliation: 'Country Representative (ret.), UNDP Bangladesh',
+    expertise: ['International Development', 'SDG Frameworks', 'Institutional Capacity Building'],
+    bio: 'Brings 28 years of multilateral development experience, having led UNDP\'s Bangladesh country programme during the critical 2015–2030 SDG transition period.',
+  },
+];
+---
+<BaseLayout
+  title="Advisory Board"
+  description="Meet CHRSD's Advisory Board — distinguished leaders in environmental science, law, development research, and public administration."
+>
+  <PageHero
+    overline="About · Governance"
+    title="Advisory Board"
+    lead="CHRSD's Advisory Board comprises senior practitioners from law, public administration, environmental science, and international development. They provide independent strategic guidance and governance oversight."
+  />
+
+  <!-- ROLE OF THE BOARD -->
+  <section class="section section--alt">
+    <div class="container board-role">
+      <div>
+        <p class="overline">Board mandate</p>
+        <h2>What the Advisory Board does</h2>
+        <p class="lead" style="margin-top:14px">
+          The Advisory Board meets quarterly and provides independent oversight of
+          CHRSD's strategic direction, programme quality, and financial integrity.
+        </p>
+      </div>
+      <div class="responsibilities">
+        {[
+          { title: 'Strategic oversight', body: 'Review and endorse CHRSD\'s multi-year strategic plan and annual programme portfolio.' },
+          { title: 'Financial governance', body: 'Review audited financial statements, approve budget frameworks, and ensure funds are used as intended.' },
+          { title: 'Quality assurance', body: 'Assess programme evaluation findings and advise on methodology, evidence standards, and impact measurement.' },
+          { title: 'Independence safeguard', body: 'Ensure CHRSD\'s research and advocacy remain free from undue influence by donors, government, or other external actors.' },
+        ].map((r) => (
+          <article class="resp">
+            <span class="resp__rule" aria-hidden="true"></span>
+            <h3>{r.title}</h3>
+            <p>{r.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBERS -->
+  <section class="section">
+    <div class="container">
+      <p class="overline">Board members</p>
+      <h2>Current membership</h2>
+      <div class="members">
+        {members.map((m) => (
+          <article class="member">
+            <div class="member__header">
+              <div class="member__avatar" aria-hidden="true">
+                <span>{m.name.split(' ').filter((w: string) => /^[A-Z]/.test(w)).slice(-2).map((w: string) => w[0]).join('')}</span>
+              </div>
+              <div>
+                <h3 class="member__name">{m.name}</h3>
+                <p class="member__role">{m.role}</p>
+                <p class="member__affiliation">{m.affiliation}</p>
+              </div>
+            </div>
+            <p class="member__bio">{m.bio}</p>
+            <ul class="member__tags">
+              {m.expertise.map((e: string) => <li>{e}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GOVERNANCE DOCS -->
+  <section class="section section--dark">
+    <div class="container gov-cta">
+      <div>
+        <p class="overline">Full governance picture</p>
+        <h2 style="color:#fff;margin-top:10px">Accountability & Transparency</h2>
+        <p style="color:rgba(255,255,255,0.82);margin-top:12px;max-width:52ch">
+          The Advisory Board's work is one part of CHRSD's broader accountability
+          architecture — which also includes annual independent audits, published
+          programme evaluations, and open data practices.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;flex-shrink:0">
+        <Button href="/about-us/governance-and-good-practices/financials-and-external-audit/" variant="solid">Financial audits</Button>
+        <Button href="/about-us/organogram/" variant="outline">View organogram</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Board role */
+  .board-role { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+  .board-role h2 { margin-top: 12px; }
+  .responsibilities { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .resp { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 22px 24px; }
+  .resp__rule { display: block; width: 36px; height: 3px; background: var(--color-gold); border-radius: 2px; margin-bottom: 14px; }
+  .resp h3 { font-size: 16px; color: var(--color-forest); margin-bottom: 8px; }
+  .resp p { font-size: 14px; color: var(--color-slate); line-height: 1.65; }
+
+  /* Members */
+  .members { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px; }
+  .member { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 28px; transition: box-shadow var(--dur) var(--ease); }
+  .member:hover { box-shadow: var(--shadow-card-hover); }
+  .member__header { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 16px; }
+  .member__avatar {
+    width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+    background: var(--color-forest); display: flex; align-items: center; justify-content: center;
+  }
+  .member__avatar span { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: #fff; }
+  .member__name { font-size: 18px; color: var(--color-forest); margin-bottom: 3px; }
+  .member__role { font-size: 13px; color: var(--color-institutional); font-family: var(--font-display); font-weight: 600; }
+  .member__affiliation { font-size: 13px; color: var(--color-slate); margin-top: 3px; }
+  .member__bio { font-size: 14px; color: var(--color-slate); line-height: 1.7; }
+  .member__tags { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .member__tags li { font-size: 12px; font-weight: 600; color: var(--color-institutional); background: var(--color-tint); border: 1px solid var(--color-border-green); padding: 4px 10px; border-radius: var(--radius-pill); }
+
+  /* CTA */
+  .gov-cta { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  @media (max-width: 1024px) {
+    .board-role { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .members { grid-template-columns: 1fr; }
+    .gov-cta { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .responsibilities { grid-template-columns: 1fr; }
+  }
+</style>

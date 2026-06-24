@@ -1,0 +1,516 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+
+const galleryItems = [
+  {
+    category: 'Field Afforestation',
+    caption: 'Sapling Distribution, Sonaimuri',
+    coords: '23.1902°N, 91.0996°E',
+    date: '05 June 2026',
+    token: 'NSADMP-SON-2026-001',
+    tileHue: 'tile--forest',
+  },
+  {
+    category: 'Field Afforestation',
+    caption: 'GIS Tagging Field Exercise, Noakhali',
+    coords: '22.8696°N, 91.0988°E',
+    date: '05 June 2026',
+    token: 'NSADMP-SON-2026-002',
+    tileHue: 'tile--forest',
+  },
+  {
+    category: 'Field Afforestation',
+    caption: 'Community Custodian Briefing',
+    coords: '23.1870°N, 91.1010°E',
+    date: '05 June 2026',
+    token: 'NSADMP-SON-2026-003',
+    tileHue: 'tile--forest',
+  },
+  {
+    category: 'Field Afforestation',
+    caption: 'Species: Koroch Sapling Verification',
+    coords: '23.1899°N, 91.0994°E',
+    date: '06 June 2026',
+    token: 'NSADMP-SON-2026-004',
+    tileHue: 'tile--forest',
+  },
+  {
+    category: 'Field Afforestation',
+    caption: 'Nursery Batch Preparation, Feni',
+    coords: '22.9228°N, 91.3836°E',
+    date: '28 May 2026',
+    token: 'NSADMP-FEN-2026-001',
+    tileHue: 'tile--forest',
+  },
+  {
+    category: 'Field Afforestation',
+    caption: 'NDVI Ground-Truth Plot Audit',
+    coords: '23.1905°N, 91.0998°E',
+    date: '06 July 2026',
+    token: 'NSADMP-SON-2026-011',
+    tileHue: 'tile--forest',
+  },
+  {
+    category: 'Primary School Enrolment',
+    caption: 'Biometric Hardware Installation, Dhaka',
+    coords: '23.7104°N, 90.4074°E',
+    date: '12 Jan 2026',
+    token: 'SDAMSMP-DHK-2026-001',
+    tileHue: 'tile--institutional',
+  },
+  {
+    category: 'Primary School Enrolment',
+    caption: 'Headmaster Orientation Session, Savar',
+    coords: '23.8503°N, 90.2660°E',
+    date: '15 Jan 2026',
+    token: 'SDAMSMP-DHK-2026-005',
+    tileHue: 'tile--institutional',
+  },
+  {
+    category: 'Primary School Enrolment',
+    caption: 'Teacher Fingerprint Enrolment',
+    coords: '23.7104°N, 90.4074°E',
+    date: '18 Jan 2026',
+    token: 'SDAMSMP-DHK-2026-009',
+    tileHue: 'tile--institutional',
+  },
+  {
+    category: 'Primary School Enrolment',
+    caption: 'System Dashboard Demo, DPE Office',
+    coords: '23.7337°N, 90.3987°E',
+    date: '22 Feb 2026',
+    token: 'SDAMSMP-DPE-2026-001',
+    tileHue: 'tile--institutional',
+  },
+  {
+    category: 'Primary School Enrolment',
+    caption: 'School Network Cabling, Gazipur',
+    coords: '23.9999°N, 90.4203°E',
+    date: '03 Mar 2026',
+    token: 'SDAMSMP-GAZ-2026-002',
+    tileHue: 'tile--institutional',
+  },
+  {
+    category: 'Primary School Enrolment',
+    caption: 'Live Attendance Dashboard Display',
+    coords: '23.7104°N, 90.4074°E',
+    date: '10 Mar 2026',
+    token: 'SDAMSMP-DHK-2026-031',
+    tileHue: 'tile--institutional',
+  },
+  {
+    category: 'Clinical Eye Screenings',
+    caption: 'AI Vision Diagnostic Station Setup',
+    coords: '23.7250°N, 90.4200°E',
+    date: '10 Mar 2026',
+    token: 'VISION-EPZ-2026-001',
+    tileHue: 'tile--gold',
+  },
+  {
+    category: 'Clinical Eye Screenings',
+    caption: 'Sewing Operator Screening Queue',
+    coords: '23.7251°N, 90.4201°E',
+    date: '10 Mar 2026',
+    token: 'VISION-EPZ-2026-002',
+    tileHue: 'tile--gold',
+  },
+  {
+    category: 'Clinical Eye Screenings',
+    caption: 'Prescription Eyewear Distribution',
+    coords: '23.7248°N, 90.4199°E',
+    date: '15 Apr 2026',
+    token: 'VISION-EPZ-2026-018',
+    tileHue: 'tile--gold',
+  },
+  {
+    category: 'Clinical Eye Screenings',
+    caption: 'Post-Correction Follow-up Assessment',
+    coords: '23.7250°N, 90.4200°E',
+    date: '20 May 2026',
+    token: 'VISION-EPZ-2026-047',
+    tileHue: 'tile--gold',
+  },
+];
+
+const tabs = ['All', 'Field Afforestation', 'Primary School Enrolment', 'Clinical Eye Screenings'];
+---
+<BaseLayout
+  title="Field Gallery"
+  description="An editorial, metadata-rich photo archive of CHRSD field operations — afforestation, primary school digitisation, and clinical eye screenings."
+>
+  <PageHero
+    overline="Stay informed · Gallery"
+    title="Field gallery"
+    lead="A geotagged visual archive of CHRSD field operations across the NSADMP, SDAMSMP, and AI Vision Care Initiative programmes."
+  />
+
+  <section class="section section--alt tabs-section">
+    <div class="container">
+      <div class="gallery-header">
+        <div>
+          <p class="overline">Archive</p>
+          <h2>Programme photography</h2>
+        </div>
+        <div class="tab-bar" role="tablist" aria-label="Filter by programme category">
+          {tabs.map((tab, i) => (
+            <button
+              role="tab"
+              aria-selected={i === 0}
+              class:list={['tab-btn', { 'tab-btn--active': i === 0 }]}
+              data-category={tab}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="gallery-meta-bar">
+        <span class="gallery-count" id="gallery-count">{galleryItems.length} photographs</span>
+        <span class="gallery-note">All images are geotagged with field coordinates and programme reference codes.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="gallery-grid" id="gallery-grid">
+        {galleryItems.map((item) => (
+          <figure class="gallery-item" data-category={item.category}>
+            <div class:list={['gallery-tile', item.tileHue]} aria-label={`Field photograph: ${item.caption}`} role="img">
+              <span class="gallery-tile__label">{item.category}</span>
+            </div>
+            <figcaption class="gallery-caption">
+              <span class="gallery-caption__title">{item.caption}</span>
+              <dl class="gallery-caption__meta">
+                <div class="meta-row">
+                  <dt>Coords</dt>
+                  <dd>{item.coords}</dd>
+                </div>
+                <div class="meta-row">
+                  <dt>Date</dt>
+                  <dd>{item.date}</dd>
+                </div>
+                <div class="meta-row">
+                  <dt>Ref</dt>
+                  <dd>{item.token}</dd>
+                </div>
+              </dl>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container archive-note">
+      <div class="archive-note__content">
+        <p class="overline">Archive access</p>
+        <h3>High-resolution image requests</h3>
+        <p>
+          High-resolution versions of all field photographs are available for press, research, and programme partner use. Contact our communications office with the photograph reference code.
+        </p>
+        <a href="/get-involved/contact-us/" class="archive-link">Request images</a>
+      </div>
+      <div class="archive-note__stats">
+        <div class="archive-stat">
+          <span class="archive-stat__number">16</span>
+          <span class="archive-stat__label">Photographs archived</span>
+        </div>
+        <div class="archive-stat">
+          <span class="archive-stat__number">3</span>
+          <span class="archive-stat__label">Programme categories</span>
+        </div>
+        <div class="archive-stat">
+          <span class="archive-stat__number">4</span>
+          <span class="archive-stat__label">Field districts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tabs-section { padding-bottom: 0; }
+
+  .gallery-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .gallery-header h2 { margin-top: 12px; }
+
+  .tab-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border-green);
+    background: #fff;
+    color: var(--color-slate);
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+
+  .tab-btn:hover {
+    background: var(--color-tint);
+    border-color: var(--color-institutional);
+    color: var(--color-institutional);
+  }
+
+  .tab-btn--active {
+    background: var(--color-institutional);
+    color: #fff;
+    border-color: var(--color-institutional);
+  }
+
+  .gallery-meta-bar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--color-border-green);
+    font-size: 13px;
+    color: var(--color-slate);
+  }
+
+  .gallery-count {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-forest);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .gallery-item {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: #fff;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+
+  .gallery-item:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-3px);
+  }
+
+  .gallery-tile {
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tile--forest {
+    background: linear-gradient(135deg, #143C14 0%, #28A064 60%, #1a5a2a 100%);
+  }
+
+  .tile--institutional {
+    background: linear-gradient(135deg, #00783C 0%, #0d4a2a 50%, #28A064 100%);
+  }
+
+  .tile--gold {
+    background: linear-gradient(135deg, #7a5a10 0%, #B48C28 55%, #d4a830 100%);
+  }
+
+  .gallery-tile__label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    background: rgba(0,0,0,0.25);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .gallery-caption {
+    padding: 14px 16px 16px;
+    border-top: 1px solid var(--color-border-green);
+  }
+
+  .gallery-caption__title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-forest);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .gallery-caption__meta {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .meta-row dt {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    flex-shrink: 0;
+    width: 36px;
+  }
+
+  .meta-row dd {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    color: var(--color-slate);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .archive-note {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .archive-note__content h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-forest);
+    margin: 10px 0 12px;
+  }
+
+  .archive-note__content p {
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.7;
+    max-width: 52ch;
+    margin-bottom: 18px;
+  }
+
+  .archive-link {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--color-institutional);
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+
+  .archive-link:hover {
+    background: var(--color-forest);
+    box-shadow: 0 4px 14px rgba(0,120,60,0.25);
+  }
+
+  .archive-note__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .archive-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+  }
+
+  .archive-stat__number {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--color-forest);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .archive-stat__label {
+    font-size: 12px;
+    color: var(--color-slate);
+    font-weight: 500;
+  }
+
+  @media (max-width: 1024px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .archive-note { grid-template-columns: 1fr; gap: 32px; }
+    .archive-note__stats { flex-direction: row; gap: 28px; }
+    .archive-stat { text-align: left; }
+  }
+
+  @media (max-width: 700px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-header { flex-direction: column; align-items: flex-start; }
+    .archive-note__stats { flex-wrap: wrap; }
+  }
+</style>
+
+<script>
+  const tabBtns = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
+  const items = document.querySelectorAll<HTMLElement>('.gallery-item');
+  const countEl = document.getElementById('gallery-count');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach((b) => {
+        b.classList.remove('tab-btn--active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('tab-btn--active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const selected = btn.dataset.category;
+      let visible = 0;
+
+      items.forEach((item) => {
+        if (selected === 'All' || item.dataset.category === selected) {
+          item.style.display = '';
+          visible++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      if (countEl) {
+        countEl.textContent = `${visible} photograph${visible !== 1 ? 's' : ''}`;
+      }
+    });
+  });
+</script>

@@ -1,0 +1,47 @@
+---
+import Button from './Button.astro';
+---
+<section class="section impact-summary" style="--bg-dark: var(--color-institutional)">
+  <div class="container grid-12 is__grid">
+    <div class="is__text">
+      <p class="overline">Our relentless mission</p>
+      <h2>145 Million+ People.<br />One Relentless Mission.</h2>
+      <p class="lead">
+        Real-time data meets human resilience. Discover how we engineer systemic
+        change &mdash; from a single household to fifteen countries.
+      </p>
+      <div class="is__cta">
+        <Button href="/our-work/" variant="solid" size="lg">Our Work</Button>
+        <Button href="/impact/" variant="outline" size="lg">Our Impact</Button>
+      </div>
+    </div>
+    <div class="is__media">
+      <img
+        src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=900&q=70&auto=format&fit=crop"
+        alt="A field officer and community member review programme data together on a tablet."
+        width="900" height="600" loading="lazy"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact-summary { background: var(--color-institutional); color: #fff; }
+  .impact-summary h2 { color: #fff; margin-top: 16px; }
+  .impact-summary .lead { color: rgba(255, 255, 255, 0.9); margin-top: 18px; max-width: 46ch; }
+  .is__grid { align-items: center; }
+  .is__text { grid-column: span 8; }
+  .is__media { grid-column: span 4; }
+  .is__cta { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+  .is__media img { border-radius: var(--radius); aspect-ratio: 3 / 2; object-fit: cover; box-shadow: var(--shadow-card-hover); }
+  /* outline button on this green bg should read white */
+  .impact-summary :global(.btn--outline) { color: #fff; border-color: rgba(255, 255, 255, 0.6); }
+  .impact-summary :global(.btn--outline:hover) { background: #fff; color: var(--color-institutional); border-color: #fff; }
+  .impact-summary :global(.btn--solid) { background: var(--color-forest); }
+  .impact-summary :global(.btn--solid:hover) { background: var(--color-ink); }
+
+  @media (max-width: 1024px) {
+    .is__text, .is__media { grid-column: 1 / -1; }
+    .is__media { order: -1; }
+  }
+</style>

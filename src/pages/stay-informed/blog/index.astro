@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Card from '@components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const [featured, ...rest] = posts;
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<BaseLayout
+  title="Blog"
+  description="Field notes, research reflections, and stories from the CHRSD team and the communities we work with."
+>
+  <PageHero
+    overline="Stay informed"
+    title="The CHRSD Blog"
+    lead="Field notes, research reflections, and first-hand stories from our programmes."
+  />
+
+  <section class="section">
+    <div class="container">
+      {featured && (
+        <a class="feature" href={`/stay-informed/blog/${featured.slug}/`}>
+          <div class="feature__media">
+            <img src={featured.data.coverImage} alt={featured.data.coverAlt} width="800" height="500" loading="eager" />
+          </div>
+          <div class="feature__body">
+            <p class="meta"><span class="feature__tag">{featured.data.category}</span> · {fmt(featured.data.pubDate)}</p>
+            <h2 class="feature__title">{featured.data.title}</h2>
+            <p class="feature__desc">{featured.data.description}</p>
+            <span class="feature__cta">Read the story &rarr;</span>
+          </div>
+        </a>
+      )}
+
+      {rest.length > 0 && (
+        <div class="blog-grid">
+          {rest.map((post) => (
+            <Card
+              href={`/stay-informed/blog/${post.slug}/`}
+              image={post.data.coverImage}
+              alt={post.data.coverAlt}
+              tag={post.data.category}
+              title={post.data.title}
+              excerpt={post.data.description}
+              meta={`${fmt(post.data.pubDate)} · ${post.data.author}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {posts.length === 0 && <p class="empty">No posts published yet. Check back soon.</p>}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .feature {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; align-items: stretch;
+    border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden;
+    margin-bottom: 48px; background: #fff;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .feature:hover { box-shadow: var(--shadow-card-hover); }
+  .feature__media { aspect-ratio: 16 / 10; overflow: hidden; }
+  .feature__media img { width: 100%; height: 100%; object-fit: cover; }
+  .feature__body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+  .feature__tag { color: var(--color-institutional); font-weight: 700; }
+  .feature__title { color: var(--color-ink); margin: 12px 0 14px; font-size: 32px; }
+  .feature:hover .feature__title { color: var(--color-institutional); }
+  .feature__desc { color: var(--text-muted); }
+  .feature__cta { margin-top: 20px; font-family: var(--font-display); font-weight: 600; color: var(--color-institutional); }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .empty { text-align: center; color: var(--text-muted); padding: 40px 0; }
+
+  @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 768px) { .feature { grid-template-columns: 1fr; } .feature__title { font-size: 26px; } }
+  @media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
+</style>

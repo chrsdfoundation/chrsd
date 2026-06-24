@@ -1,0 +1,89 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Card from '@components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title)
+);
+const focusAreas = [...new Set(projects.map((p) => p.data.focusArea))];
+---
+<BaseLayout
+  title="Our Work"
+  description="CHRSD programmes across environmental sustainability, social development, climate resilience, human rights, and research."
+>
+  <PageHero
+    overline="Our work"
+    title="Programmes built with communities, measured with evidence"
+    lead="Every programme follows the same discipline: name the challenge, design the approach alongside the people it serves, and prove the result with data."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="filters" role="group" aria-label="Filter programmes by focus area">
+        <button class="filter is-active" data-filter="all">All</button>
+        {focusAreas.map((area) => (
+          <button class="filter" data-filter={area}>{area}</button>
+        ))}
+      </div>
+
+      <div class="work-grid" data-grid>
+        {projects.map((p) => (
+          <div class="work-cell" data-area={p.data.focusArea}>
+            <Card
+              href={`/our-work/${p.slug}/`}
+              image={p.data.coverImage}
+              alt={p.data.coverAlt}
+              tag={p.data.focusArea}
+              title={p.data.title}
+              excerpt={p.data.summary}
+              meta={`${p.data.country}${p.data.startYear ? ` · since ${p.data.startYear}` : ''}`}
+              cta="Explore programme"
+            />
+          </div>
+        ))}
+      </div>
+      <p class="empty" data-empty hidden>No programmes in this focus area yet.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .filter {
+    font-family: var(--font-display); font-weight: 600; font-size: 14px;
+    padding: 9px 18px; border-radius: var(--radius-pill);
+    border: 1px solid var(--color-border-green); background: #fff; color: var(--color-slate);
+    cursor: pointer; transition: 0.2s;
+  }
+  .filter:hover { border-color: var(--color-institutional); color: var(--color-institutional); }
+  .filter.is-active { background: var(--color-institutional); border-color: var(--color-institutional); color: #fff; }
+
+  .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .work-cell.is-hidden { display: none; }
+  .empty { text-align: center; color: var(--text-muted); padding: 40px 0; }
+
+  @media (max-width: 1024px) { .work-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .work-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const cells = document.querySelectorAll<HTMLElement>('.work-cell');
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      buttons.forEach((b) => b.classList.toggle('is-active', b === btn));
+      const filter = btn.dataset.filter;
+      let visible = 0;
+      cells.forEach((cell) => {
+        const show = filter === 'all' || cell.dataset.area === filter;
+        cell.classList.toggle('is-hidden', !show);
+        if (show) visible++;
+      });
+      empty?.toggleAttribute('hidden', visible !== 0);
+    });
+  });
+</script>

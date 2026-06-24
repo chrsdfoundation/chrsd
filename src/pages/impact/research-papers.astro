@@ -1,0 +1,364 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+
+const papers = [
+  {
+    area: 'Climate & Reforestation',
+    date: 'May 2026',
+    title: 'Verified Survival Rate Optimisation in Tropical Reforestation through GIS Tagging and NDVI Remote Sensing: Evidence from Bangladesh',
+    doi: '10.48550/chrsd.2026.0051',
+    authors: 'CHRSD Climate Research Unit; Nevronus Systems GIS Division',
+    methodology: 'Quasi-experimental; satellite imagery analysis; field audit cross-validation',
+    abstract: 'This paper evaluates the impact of GIS-tagged planting combined with bi-monthly NDVI satellite monitoring on reforestation survival rates in Bangladesh\'s delta region. The Sonaimuri pilot achieved a 94.2% 30-day survival rate against a national unverified baseline of 40–55%. The study validates NDVI thresholds as a scalable early-warning mechanism for community reforestation programmes.',
+  },
+  {
+    area: 'Vision Care & AI Diagnostics',
+    date: 'April 2026',
+    title: 'Uncorrected Refractive Error Prevalence among Sewing Operators in Bangladesh\'s Ready-Made Garment Sector: A Baseline Cross-Sectional Study',
+    doi: '10.48550/chrsd.2026.0047',
+    authors: 'CHRSD Clinical Research Team; Lunera Optical Research; Nevronus Systems',
+    methodology: 'Cross-sectional; stratified random sample (n=847); AI-assisted diagnostic pipeline',
+    abstract: 'A cross-sectional baseline study of 847 sewing operators in a Dhaka EPZ garment factory found 61.3% with clinically significant uncorrected refractive errors. AI-assisted computer vision diagnostics achieved diagnostic concordance of 94.7% against optometrist reference standard. This paper establishes the first factory-level baseline for refractive error burden in Bangladesh\'s RMG sector.',
+  },
+  {
+    area: 'Digital Governance',
+    date: 'March 2026',
+    title: 'Administrative Efficiency Gains from Biometric Attendance Systems in Government Primary Schools: A Pilot Study from Dhaka District',
+    doi: '10.48550/chrsd.2026.0039',
+    authors: 'CHRSD Digital Governance Unit; MoPME Research Cell',
+    methodology: 'Pre-post comparative design; matched control (n=951 schools); headmaster survey',
+    abstract: 'This pilot study documents a 76.6% reduction in headmaster attendance administration time following deployment of the Nevronus biometric attendance system across 951 Dhaka District schools. Attendance data transmission lag fell from 3–5 days to under 4 hours. A 2.3% anomaly-flagging rate for attendance patterns provides a basis for estimating ghost-teacher incidence.',
+  },
+  {
+    area: 'Climate & Reforestation',
+    date: 'February 2026',
+    title: 'Carbon Sequestration Modelling for Native Species Plantations in Bangladesh\'s Coastal Delta Zone',
+    doi: '10.48550/chrsd.2026.0031',
+    authors: 'CHRSD Climate Research Unit; Bangladesh Forest Research Institute',
+    methodology: 'Allometric biomass equations; species-specific carbon stock tables; remote sensing validation',
+    abstract: 'Using species-specific allometric equations calibrated to coastal delta conditions, this paper models the 20-year carbon sequestration potential of the five priority species planted under NSADMP. Koroch and Hijal demonstrate the highest coastal delta carbon density at 4.8 and 4.2 tC/ha respectively at maturity. Findings support NSADMP\'s eligibility for Verified Carbon Standard (VCS) registration.',
+  },
+  {
+    area: 'Vision Care & AI Diagnostics',
+    date: 'January 2026',
+    title: 'Socio-Economic Impact of Corrective Eyewear on Garment Worker Productivity: Systematic Review and Meta-Analysis',
+    doi: '10.48550/chrsd.2026.0022',
+    authors: 'CHRSD Social Research Unit',
+    methodology: 'Systematic review (PRISMA protocol); meta-analysis of 12 studies including PROSPER II, VisionSpring, and THRIVE',
+    abstract: 'This systematic review and meta-analysis of 12 studies finds consistent evidence of 6–33% productivity gains following corrective eyewear provision to manufacturing workers in low- and middle-income countries. THRIVE study data from Bangladesh (33.4% income gain) provides the strongest local evidence. Pooled ROI estimate across studies: 3.1× at 6 months.',
+  },
+];
+
+const forthcoming = [
+  {
+    title: 'Longitudinal NDVI Analysis of NSADMP Cohort: 6-Month Follow-Up',
+    expected: 'Expected Q3 2026',
+  },
+  {
+    title: 'Headmaster Survey: SDAMSMP User Satisfaction and System Usability at 6 Months',
+    expected: 'Expected Q3 2026',
+  },
+  {
+    title: 'Phase 2 Refractive Error Screening: Expanded RMG Factory Cohort, n=3,200',
+    expected: 'Expected Q4 2026',
+  },
+];
+
+const areaColor: Record<string, string> = {
+  'Climate & Reforestation': '#143C14',
+  'Digital Governance': '#00783C',
+  'Vision Care & AI Diagnostics': '#B48C28',
+  'Social Development': '#4A6B52',
+};
+
+const filterAreas = ['All', 'Climate & Reforestation', 'Digital Governance', 'Vision Care & AI Diagnostics', 'Social Development'];
+---
+<BaseLayout
+  title="Research Papers"
+  description="CHRSD Foundation peer-reviewed research outputs — climate science, AI diagnostics, digital governance, and social development."
+>
+  <PageHero
+    overline="Impact & Evidence · Publications"
+    title="Research Papers"
+    lead="CHRSD's internal research units publish peer-reviewed findings across climate science, AI-assisted diagnostics, digital governance, and socio-economic development. All papers are open access where rights permit."
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Filter by research area</p>
+      <div class="filter-bar" role="group" aria-label="Filter papers by research area">
+        {filterAreas.map((a) => (
+          <button class={`filter-btn${a === 'All' ? ' filter-btn--active' : ''}`} data-filter={a}>
+            {a}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="overline">Published papers</p>
+      <div class="papers-list" id="papers-list">
+        {papers.map((p) => (
+          <article class="paper-card" data-area={p.area}>
+            <header class="paper-card__header">
+              <span
+                class="area-badge"
+                style={`background:${areaColor[p.area] || '#143C14'}18;color:${areaColor[p.area] || '#143C14'};border-color:${areaColor[p.area] || '#143C14'}38`}
+              >
+                {p.area}
+              </span>
+              <span class="date-chip">{p.date}</span>
+            </header>
+            <h3 class="paper-card__title">{p.title}</h3>
+            <code class="paper-card__doi">{p.doi}</code>
+            <p class="paper-card__authors">{p.authors}</p>
+            <span class="methodology-tag">{p.methodology}</span>
+            <p class="paper-card__abstract">{p.abstract}</p>
+            <div class="paper-card__actions">
+              <a href="#" class="dl-btn" aria-label={`Download PDF for ${p.title}`}>PDF</a>
+              <a href="#" class="dl-btn" aria-label={`Download BibTeX for ${p.title}`}>BibTeX</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">In preparation</p>
+      <div class="forthcoming-list">
+        {forthcoming.map((f) => (
+          <div class="forthcoming-item">
+            <span class="forthcoming-badge">In peer review</span>
+            <p class="forthcoming-title">{f.title}</p>
+            <span class="forthcoming-expected">{f.expected}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .filter-btn {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-border-green);
+    background: #fff;
+    color: var(--color-slate);
+    cursor: pointer;
+    transition: all var(--dur) var(--ease);
+  }
+  .filter-btn:hover {
+    border-color: var(--color-institutional);
+    color: var(--color-institutional);
+  }
+  .filter-btn--active {
+    background: var(--color-institutional);
+    border-color: var(--color-institutional);
+    color: #fff;
+  }
+
+  .papers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 32px;
+  }
+
+  .paper-card {
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  .paper-card:hover { box-shadow: var(--shadow-card-hover); }
+  .paper-card[data-hidden] { display: none; }
+
+  .paper-card__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+
+  .area-badge {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    border: 1px solid;
+  }
+
+  .date-chip {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-slate);
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-pill);
+    padding: 4px 11px;
+  }
+
+  .paper-card__title {
+    font-family: var(--font-display);
+    font-size: clamp(15px, 1.8vw, 18px);
+    font-weight: 700;
+    color: var(--color-forest);
+    line-height: 1.4;
+    margin: 0 0 10px;
+  }
+
+  .paper-card__doi {
+    display: inline-block;
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--color-slate);
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    padding: 3px 8px;
+    margin-bottom: 10px;
+  }
+
+  .paper-card__authors {
+    font-size: 13px;
+    color: var(--color-slate);
+    margin: 0 0 10px;
+    line-height: 1.5;
+  }
+
+  .methodology-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--color-slate);
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius-sm);
+    padding: 3px 10px;
+    margin-bottom: 14px;
+  }
+
+  .paper-card__abstract {
+    font-size: 14px;
+    color: var(--color-ink);
+    line-height: 1.7;
+    margin: 0 0 20px;
+    max-width: 860px;
+  }
+
+  .paper-card__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dl-btn {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-border-green);
+    color: var(--color-institutional);
+    background: #fff;
+    text-decoration: none;
+    transition: all var(--dur) var(--ease);
+  }
+  .dl-btn:hover {
+    background: var(--color-institutional);
+    border-color: var(--color-institutional);
+    color: #fff;
+  }
+
+  .forthcoming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .forthcoming-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--color-border-green);
+    border-left: 3px solid var(--color-gold);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+  }
+
+  .forthcoming-badge {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-gold);
+    white-space: nowrap;
+  }
+
+  .forthcoming-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-forest);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .forthcoming-expected {
+    font-size: 12px;
+    color: var(--color-slate);
+    white-space: nowrap;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .paper-card { padding: 20px; }
+    .forthcoming-item { grid-template-columns: 1fr; gap: 8px; }
+  }
+  @media (max-width: 480px) {
+    .filter-btn { font-size: 12px; padding: 7px 13px; }
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const paperCards = document.querySelectorAll<HTMLElement>('.paper-card');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach((b) => b.classList.remove('filter-btn--active'));
+      btn.classList.add('filter-btn--active');
+      const filter = btn.dataset.filter;
+      paperCards.forEach((card) => {
+        if (filter === 'All' || card.dataset.area === filter) {
+          card.removeAttribute('data-hidden');
+        } else {
+          card.setAttribute('data-hidden', '');
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,188 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+
+const milestones = [
+  {
+    year: '1972',
+    era: 'Foundation',
+    title: 'Established in post-liberation Dhaka',
+    body: 'CHRSD is founded by a group of researchers and civil society leaders in the months following Bangladesh\'s independence. The organisation\'s founding mandate: produce evidence that marginalised communities can use to advocate for their own rights.'
+  },
+  {
+    year: '1980',
+    era: 'Expansion',
+    title: 'First field offices outside Dhaka',
+    body: 'Permanent field offices open in Rajshahi and Chittagong, enabling direct community engagement beyond the capital. Programme focus expands to include legal aid for landless farmers.'
+  },
+  {
+    year: '1991',
+    era: 'Resilience',
+    title: 'Cyclone response and climate work begins',
+    body: 'Following the catastrophic 1991 cyclone, CHRSD establishes its environmental resilience programme — the precursor to today\'s climate adaptation work. The organisation coordinates relief and long-term reconstruction across coastal communities.'
+  },
+  {
+    year: '1998',
+    era: 'Research',
+    title: 'Socio-economic research division founded',
+    body: 'A dedicated research division is established, formalising CHRSD\'s role as a producer of peer-reviewed evidence on poverty, labour markets, and environmental change in Bangladesh.'
+  },
+  {
+    year: '2005',
+    era: 'Rights',
+    title: 'Human rights programme launched',
+    body: 'CHRSD launches a formal human rights monitoring and legal aid programme, including free legal representation for victims of trafficking, domestic violence, and arbitrary detention.'
+  },
+  {
+    year: '2010',
+    era: 'Digital',
+    title: 'First GIS-enabled field monitoring',
+    body: 'CHRSD becomes one of the first Bangladeshi NGOs to use GPS and GIS technology for field programme monitoring — initially deployed to track tree-planting survival rates in northern Bangladesh.'
+  },
+  {
+    year: '2018',
+    era: 'Scale',
+    title: 'NSADMP programme awarded',
+    body: 'The National Smart Afforestation & Digital Monitoring Programme is formally launched, positioning CHRSD to plant and digitally track 25 crore trees across Bangladesh using satellite remote sensing.'
+  },
+  {
+    year: '2021',
+    era: 'Governance',
+    title: 'SDAMSMP pilot begins',
+    body: 'The Smart Digital Attendance Management System pilot launches in 500 government primary schools, applying biometric verification to address proxy attendance. The pilot shows a 34% improvement in teacher attendance rates.'
+  },
+  {
+    year: '2024',
+    era: 'Milestone',
+    title: '8 crore trees planted and tracked',
+    body: 'NSADMP reaches its first major milestone: 8 crore saplings planted across 14 districts with a verified 71% survival rate — exceeding national benchmarks. SDAMSMP scales to 12,000 schools.'
+  },
+  {
+    year: '2026',
+    era: 'Future',
+    title: 'NSADMP Phase II and coastal expansion',
+    body: 'CHRSD launches Phase II of NSADMP targeting coastal Bangladesh, where climate stress is most acute. Simultaneously, the legal aid programme expands to three new districts and a multi-year evaluation of SDAMSMP begins.'
+  },
+];
+---
+<BaseLayout
+  title="Our History & Milestones"
+  description="Five decades of community-centred development — CHRSD's history from 1972 to the present."
+>
+  <PageHero
+    overline="About · Our identity"
+    title="Our history & milestones"
+    lead="From a small Dhaka research collective in 1972 to a multi-programme foundation operating across fourteen districts — this is the story of how CHRSD grew into the work."
+  />
+
+  <!-- FOUNDING SECTION -->
+  <section class="section">
+    <div class="container founding">
+      <div class="founding__text">
+        <p class="overline">The beginning</p>
+        <h2>Founded in the year of independence</h2>
+        <p class="lead" style="margin-top:14px">
+          CHRSD was established in 1972 — the same year Bangladesh came into being as an
+          independent nation. That context was not incidental. The founders believed that
+          a newly sovereign state needed independent, evidence-based institutions capable
+          of holding power accountable and amplifying the voices of the most vulnerable.
+        </p>
+        <p style="margin-top:16px;color:var(--color-slate)">
+          That conviction has not changed in 54 years. What has changed is scale, technology,
+          and the sophistication of our methods. The question — <em>what does it take for
+          marginalised people to shape their own futures?</em> — remains exactly the same.
+        </p>
+      </div>
+      <div class="founding__stat">
+        <span class="founding__year">1972</span>
+        <span class="founding__label">Year founded</span>
+        <span class="founding__sub">54 years of community-centred development</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Key milestones</p>
+      <h2>A history in ten chapters</h2>
+      <div class="timeline" role="list">
+        {milestones.map((m, i) => (
+          <article class="milestone" role="listitem">
+            <div class="milestone__year-col" aria-hidden="true">
+              <span class="milestone__year">{m.year}</span>
+              <span class="milestone__line"></span>
+            </div>
+            <div class="milestone__content">
+              <span class="milestone__era">{m.era}</span>
+              <h3 class="milestone__title">{m.title}</h3>
+              <p class="milestone__body">{m.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--dark">
+    <div class="container cta__inner">
+      <div>
+        <p class="overline">Where we are headed</p>
+        <h2 style="color:#fff;margin-top:10px">The next chapter</h2>
+        <p style="color:rgba(255,255,255,0.82);margin-top:12px;max-width:52ch">
+          Read our Executive Director's annual message for a detailed account of this
+          year's progress and CHRSD's priorities for the years ahead.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;flex-shrink:0">
+        <Button href="/about-us/executive-directors-message/" variant="solid">Director's message</Button>
+        <Button href="/impact/annual-reports/" variant="outline">Annual reports</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Founding */
+  .founding { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: center; }
+  .founding__text h2 { margin-top: 12px; }
+  .founding__stat {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--color-forest); flex-shrink: 0;
+  }
+  .founding__year { font-family: var(--font-display); font-weight: 800; font-size: 52px; color: #fff; line-height: 1; }
+  .founding__label { font-family: var(--font-display); font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); margin-top: 4px; }
+  .founding__sub { font-size: 11px; color: rgba(255,255,255,0.55); max-width: 120px; text-align: center; margin-top: 6px; line-height: 1.4; }
+
+  /* Timeline */
+  .timeline { display: grid; gap: 0; margin-top: 44px; }
+  .milestone { display: grid; grid-template-columns: 100px 1fr; gap: 32px; padding-bottom: 40px; }
+  .milestone:last-child .milestone__line { display: none; }
+
+  .milestone__year-col { display: flex; flex-direction: column; align-items: center; padding-top: 6px; }
+  .milestone__year { font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--color-institutional); flex-shrink: 0; }
+  .milestone__line { flex: 1; width: 2px; background: var(--color-border-green); margin-top: 10px; min-height: 40px; }
+
+  .milestone__content { background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 24px 28px; }
+  .milestone__era { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-gold); }
+  .milestone__title { font-size: 19px; color: var(--color-forest); margin: 8px 0 10px; }
+  .milestone__body { font-size: 15px; color: var(--color-slate); line-height: 1.7; }
+
+  /* CTA */
+  .cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  @media (max-width: 860px) {
+    .founding { grid-template-columns: 1fr; }
+    .founding__stat { margin: 0 auto; }
+    .milestone { grid-template-columns: 70px 1fr; gap: 20px; }
+    .cta__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 500px) {
+    .milestone { grid-template-columns: 1fr; }
+    .milestone__year-col { flex-direction: row; align-items: center; gap: 12px; }
+    .milestone__line { display: none; }
+  }
+</style>

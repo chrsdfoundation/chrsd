@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Button from '@components/Button.astro';
+---
+<BaseLayout title="Page not found" noindex>
+  <section class="section" style="text-align:center;padding-block:120px">
+    <div class="container">
+      <p class="overline" style="justify-content:center">Error 404</p>
+      <h1 style="margin-top:16px">We can't find that page</h1>
+      <p class="lead" style="margin:16px auto 32px;max-width:48ch">
+        The page may have moved or no longer exists. Let's get you back on track.
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <Button href="/" variant="solid">Back to home</Button>
+        <Button href="/our-work/" variant="outline">Browse our work</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

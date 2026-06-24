@@ -1,0 +1,211 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+---
+<BaseLayout
+  title="Executive Director's Message"
+  description="A message from CHRSD's Executive Director on the Foundation's mission, progress, and direction."
+>
+  <PageHero
+    overline="About · Our identity"
+    title="Executive Director's Message"
+    lead="An annual reflection on where we stand, what we have learned, and where we are going."
+  />
+
+  <section class="section">
+    <div class="container letter-wrap">
+
+      <!-- SIDEBAR: Director card -->
+      <aside class="director-card">
+        <div class="director-avatar" aria-hidden="true">
+          <span>MA</span>
+        </div>
+        <div class="director-info">
+          <strong class="director-name">Mohammed Azizul Haque</strong>
+          <span class="director-title">Executive Director</span>
+          <span class="director-org">CHRSD Foundation</span>
+        </div>
+        <div class="director-links">
+          <Button href="/about-us/team/" variant="outline">Meet the team</Button>
+          <Button href="/get-involved/contact-us/" variant="ghost">Write to us</Button>
+        </div>
+      </aside>
+
+      <!-- LETTER -->
+      <article class="letter prose">
+        <p class="letter__date">June 2026</p>
+        <p class="letter__salutation">Dear friends and partners,</p>
+
+        <p>
+          Fifty-four years ago, a small group of researchers and community organisers in
+          Dhaka asked a simple question: <em>what would it take for the most marginalised
+          people in Bangladesh to shape the policies that governed their own lives?</em>
+          The Centre for Humanitarian Research and Social Development was founded on that
+          question. It remains the animating force behind everything we do today.
+        </p>
+
+        <p>
+          The world has changed dramatically since 1972. Bangladesh has made
+          extraordinary strides — in poverty reduction, in women's empowerment, in
+          climate adaptation, and in the digital transformation of public services.
+          But the distance between policy intent and lived community experience remains
+          as wide as ever in too many places. Filling that gap — with evidence, with
+          advocacy, and with direct action — is still CHRSD's mandate.
+        </p>
+
+        <h3>A year of measurable progress</h3>
+
+        <p>
+          This year has been one of our most consequential. The National Smart
+          Afforestation & Digital Monitoring Programme reached its first major milestone:
+          over 8 crore saplings planted and digitally tracked across fourteen districts,
+          with a verified survival rate of 71% — well above the national average. For
+          each of those trees, there is a community member who planted it, a field
+          technician who recorded its GPS coordinates, and a satellite image confirming
+          it is still standing.
+        </p>
+
+        <p>
+          The Smart Digital Attendance Management System is now operational in over
+          12,000 government primary schools. Teacher accountability is improving,
+          and — more importantly — children are learning in classrooms that are reliably
+          staffed. The data tells a clear story; the families we have spoken to in the
+          field tell an even clearer one.
+        </p>
+
+        <p>
+          Our human rights team has provided free legal assistance to 340 individuals
+          this year — people who could not otherwise have accessed a lawyer. Our
+          socio-economic research division published three peer-reviewed studies on
+          labour market informality and its relationship to extreme weather events.
+          These are not numbers on a dashboard. They are people, households, and
+          communities.
+        </p>
+
+        <h3>What we are learning</h3>
+
+        <p>
+          Scale without depth is a trap. We have been deliberate this year about
+          asking not just <em>how many</em> but <em>how sustainably</em>. Are the trees
+          we plant surviving because communities feel ownership over them — or because
+          we are monitoring them? Are the schools we support improving because teachers
+          are accountable to data — or because they feel respected and resourced?
+          These are uncomfortable questions. We are building evaluation frameworks that
+          force us to answer them honestly.
+        </p>
+
+        <p>
+          We are also learning about the limits of technology. GIS and satellite
+          monitoring are powerful tools — but they work only when layered onto deep
+          community relationships. Data collected without trust is data collected badly.
+          CHRSD's comparative advantage has always been that combination: rigorous
+          methodology with genuine community embeddedness. We will not sacrifice the
+          second for the first.
+        </p>
+
+        <h3>The road ahead</h3>
+
+        <p>
+          In the coming year we will launch Phase II of NSADMP, targeting an additional
+          10 crore trees in coastal Bangladesh — a region facing acute climate stress.
+          We will expand our legal aid programme into three new districts. And we will
+          begin a multi-year evaluation of SDAMSMP to determine whether attendance
+          improvements are translating into learning outcomes.
+        </p>
+
+        <p>
+          None of this is possible without you — our volunteers, donors, partners, and
+          the communities who open their doors to our field teams. Thank you for your
+          trust. We do not take it lightly. We publish our audited accounts, our
+          evaluation reports, and our programme data precisely because accountability
+          to you is not a compliance exercise — it is the foundation of everything we do.
+        </p>
+
+        <p>
+          There is always a way. We keep finding it, together.
+        </p>
+
+        <div class="letter__sign">
+          <div class="signature" aria-hidden="true">Mohammed Azizul Haque</div>
+          <div class="signature-block">
+            <strong>Mohammed Azizul Haque</strong>
+            <span>Executive Director, CHRSD Foundation</span>
+            <span>Dhaka, June 2026</span>
+          </div>
+        </div>
+
+        <div class="letter__footer">
+          <Button href="/impact/annual-reports/" variant="solid">Read the Annual Report</Button>
+          <Button href="/about-us/team/" variant="outline">Meet the full team</Button>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .letter-wrap {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* Director card */
+  .director-card {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--color-tint);
+    border: 1px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    gap: 20px;
+  }
+  .director-avatar {
+    width: 88px; height: 88px; border-radius: 50%;
+    background: var(--color-forest); display: flex; align-items: center; justify-content: center;
+  }
+  .director-avatar span { font-family: var(--font-display); font-weight: 800; font-size: 30px; color: #fff; }
+  .director-info { display: flex; flex-direction: column; gap: 4px; }
+  .director-name { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--color-forest); }
+  .director-title { font-size: 14px; color: var(--color-institutional); font-weight: 600; }
+  .director-org { font-size: 13px; color: var(--color-slate); }
+  .director-links { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+  .director-links .btn { width: 100%; justify-content: center; }
+
+  /* Letter / prose */
+  .letter { max-width: 70ch; }
+  .letter__date { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--color-slate); letter-spacing: 0.04em; margin-bottom: 8px; }
+  .letter__salutation { font-size: 20px; font-family: var(--font-display); font-weight: 600; color: var(--color-forest); margin-bottom: 28px; }
+  .prose p { color: var(--color-slate); line-height: 1.8; margin-bottom: 18px; }
+  .prose em { font-style: italic; color: var(--color-ink); }
+  .prose h3 { font-size: 20px; color: var(--color-forest); margin: 36px 0 16px; padding-left: 16px; border-left: 3px solid var(--color-gold); }
+
+  /* Signature */
+  .letter__sign { display: flex; align-items: flex-end; gap: 24px; margin: 40px 0 36px; padding-top: 24px; border-top: 1px solid var(--color-border-green); }
+  .signature {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 28px; color: var(--color-forest); font-style: italic;
+    white-space: nowrap; line-height: 1.2;
+  }
+  .signature-block { display: flex; flex-direction: column; gap: 3px; }
+  .signature-block strong { font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--color-forest); }
+  .signature-block span { font-size: 14px; color: var(--color-slate); }
+
+  .letter__footer { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 860px) {
+    .letter-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .director-card { position: static; flex-direction: row; flex-wrap: wrap; text-align: left; }
+    .director-links { flex-direction: row; }
+    .director-links .btn { width: auto; }
+  }
+  @media (max-width: 520px) {
+    .letter__sign { flex-direction: column; align-items: flex-start; }
+  }
+</style>

@@ -1,0 +1,536 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import { site } from '@data/navigation';
+
+const policies = [
+  {
+    id: 'whistleblower',
+    title: 'Whistleblower Protection Policy',
+    summary: 'Encourage reporting of misconduct through protected, confidential channels — with a written guarantee against retaliation.',
+    sections: [
+      {
+        heading: 'Purpose',
+        body: 'This policy exists to ensure that all persons associated with CHRSD — whether staff, consultants, volunteers, board members, or partner organisation representatives — can report known or suspected misconduct, fraud, corruption, or governance failures without fear of adverse consequence. CHRSD is committed to creating an environment where raising concerns is treated as an act of institutional loyalty, not disloyalty.',
+      },
+      {
+        heading: 'Scope',
+        body: 'This policy applies to all CHRSD staff (permanent and contractual), consultants and service providers, volunteers, members of the Advisory Board and governing committees, and personnel employed by partner organisations who are engaged in CHRSD-funded or CHRSD-implemented programmes.',
+      },
+      {
+        heading: 'Reporting channels',
+        items: [
+          'Email: ethics@chrsd.org (monitored exclusively by the Ethics Committee)',
+          'Anonymous hotline: Available to all staff and associates — details distributed internally',
+          'Written submission: Sealed letter addressed directly to the Board Chair, marked "Strictly Confidential"',
+          'Direct disclosure: To any member of the Ethics Committee or, where the concern involves committee members, directly to the Board Chair',
+        ],
+      },
+      {
+        heading: 'Protections guaranteed',
+        body: 'No person who makes a report in good faith under this policy shall face dismissal, demotion, salary reduction, adverse performance assessment, workplace harassment, exclusion from opportunity, or any other form of victimisation. These protections apply regardless of whether the reported concern is subsequently substantiated, provided the report was made honestly and without malicious intent.',
+      },
+      {
+        heading: 'Investigation process',
+        body: 'All reports received through any designated channel are reviewed by an independent Ethics Committee within 14 working days of receipt. The committee operates independently from line management. Investigators are required to maintain confidentiality, protect the identity of the reporter to the fullest extent possible, and document all steps taken.',
+      },
+      {
+        heading: 'Non-retaliation guarantee',
+        body: 'On conclusion of the preliminary review, the Ethics Committee will provide written confirmation to the reporter (where identity is known) that no retaliatory action has been or will be taken as a result of their disclosure. This written confirmation is a formal institutional commitment.',
+      },
+    ],
+  },
+  {
+    id: 'anti-corruption',
+    title: 'Anti-Corruption & Anti-Bribery Policy',
+    summary: 'Zero tolerance for bribery, facilitation payments, kickbacks, and fraud — applicable across all institutional relationships.',
+    sections: [
+      {
+        heading: 'Zero-tolerance position',
+        body: 'CHRSD maintains an absolute zero-tolerance position on bribery, corruption, and fraud in all its forms. This includes: direct bribery (offering, giving, receiving, or soliciting anything of value to influence action), facilitation payments (unofficial payments to expedite routine functions), kickbacks (return of funds as reward for awarding contracts or grants), conflict of interest not properly declared and managed, and any form of financial fraud or misappropriation of institutional assets.',
+      },
+      {
+        heading: 'Scope of application',
+        body: 'This policy applies to all CHRSD operations, without exception, including: government liaison and ministry-level engagement, procurement and vendor contracting, donor engagement and grant management, sub-granting to partner organisations, and all external representation of CHRSD. Third-party agents, consultants, and partner organisations are required to confirm adherence to equivalent standards as a condition of engagement.',
+      },
+      {
+        heading: 'Gift and hospitality policy',
+        body: 'No staff member, consultant, volunteer, or board member shall accept any gift, hospitality, or benefit with a value exceeding BDT 500 equivalent from any external party with whom CHRSD has or may have a business or programme relationship. All gifts received, regardless of value, must be declared to the relevant line manager and logged in the institutional Gift Register. Gifts above the threshold must be returned, donated to an institutional purpose, or declined at the point of offer.',
+      },
+      {
+        heading: 'Training requirements',
+        body: 'Completion of CHRSD\'s Anti-Corruption and Anti-Bribery training module is mandatory for all staff on joining the organisation and annually thereafter. Participation is recorded and non-completion constitutes a disciplinary matter. Programme-specific training is additionally required for all staff with procurement, financial management, or government-liaison responsibilities.',
+      },
+      {
+        heading: 'Enforcement',
+        body: 'Any confirmed breach of this policy will result in immediate suspension of the individual pending a formal investigation. Substantiated findings of corruption, bribery, or fraud will result in termination of employment or contractual relationship, referral to law enforcement authorities where appropriate, notification to relevant donors or government bodies where required, and recovery of funds or assets where possible.',
+      },
+    ],
+  },
+  {
+    id: 'data-privacy',
+    title: 'Data Privacy & Security Policy',
+    summary: 'Rigorous data governance for sensitive datasets including teacher biometrics, student records, and beneficiary personal data.',
+    sections: [
+      {
+        heading: 'Legal framework',
+        body: 'CHRSD\'s data processing activities are governed by: the principles of the EU General Data Protection Regulation (GDPR) as an international standard of best practice; the Bangladesh Data Protection Act (draft framework); the Information and Communication Technology (ICT) Act, 2006, Bangladesh; and applicable ministry-level data governance circulars issued by MoPME and MoEFCC. Where domestic law and GDPR principles differ, CHRSD applies the higher standard of protection.',
+      },
+      {
+        heading: 'Datasets covered by this policy',
+        items: [
+          'Teacher biometric data: Fingerprint and facial recognition data collected under the Smart Digital Attendance Management System and Monitoring Programme (SDAMSMP)',
+          'Student attendance records: Digital attendance data linked to individual learners across enrolled primary schools',
+          'RMG worker beneficiary data: Personal health and vision assessment data collected under the AI Vision Care Initiative in BGMEA-affiliated factories',
+          'Agricultural beneficiary data: Personal and livelihood data collected from smallholder farmers in CHRSD field programmes',
+          'NSADMP custodian data: Identity and location data associated with registered tree custodians under the National Smart Afforestation Programme',
+        ],
+      },
+      {
+        heading: 'Data minimisation',
+        body: 'CHRSD collects only the personal data that is strictly necessary for the stated, lawful purpose of the programme for which it is collected. Purpose limitation is enforced: data collected for teacher attendance monitoring shall not be used for any other purpose without the explicit, written consent of the data subject and the approval of the relevant ministry.',
+      },
+      {
+        heading: 'Retention periods',
+        items: [
+          'Teacher biometric data (fingerprint/facial): Retained for 3 years post-programme conclusion; then securely deleted',
+          'Beneficiary personal data (RMG workers, farmers, programme recipients): Retained for 5 years post-programme conclusion',
+          'Student attendance records: Retained for the period required by DPE/MoPME directive; default 5 years',
+          'Financial records linked to personal data: Retained for 7 years in accordance with Bangladesh tax and audit requirements',
+        ],
+      },
+      {
+        heading: 'Access control',
+        body: 'Access to personal data is restricted on a strict need-to-know, role-based basis. Nevronus Systems operates as a data processor for all technology-mediated data under a formal Data Processing Agreement (DPA) which specifies permitted processing activities, security obligations, breach notification duties, and sub-processor restrictions. No data is transferred to any third party outside the terms of the applicable DPA or without explicit data-subject consent.',
+      },
+      {
+        heading: 'Breach notification protocol',
+        items: [
+          'Affected data subjects notified within 72 hours of breach detection, where contact information is available',
+          'Relevant ministry or government authority notified within 5 working days',
+          'CHRSD Board notified immediately on identification of any breach involving biometric or sensitive personal data',
+          'Full incident report documenting cause, scope, and remediation measures completed within 30 days',
+        ],
+      },
+      {
+        heading: 'Data subject rights',
+        body: 'All individuals whose personal data CHRSD holds retain the right to: access a copy of their personal data; request correction of inaccurate or incomplete data; request deletion of data where the processing purpose has lapsed and no legal retention requirement applies; object to processing where it is not required for the performance of a programme or legal obligation. Requests are responded to within 30 calendar days.',
+      },
+    ],
+  },
+  {
+    id: 'safeguarding',
+    title: 'Child & Vulnerable Adult Safeguarding Policy',
+    summary: 'Absolute commitment to the safety of every child and vulnerable adult who comes into contact with CHRSD programmes, field sites, or events.',
+    sections: [
+      {
+        heading: 'Commitment',
+        body: 'CHRSD is unconditionally committed to the safety and wellbeing of all children and vulnerable adults who come into contact with our programmes, field sites, training venues, and events. This commitment is non-negotiable and superior to all other operational considerations. The welfare of children and vulnerable adults is the first concern of every CHRSD staff member, volunteer, and associate.',
+      },
+      {
+        heading: 'Scope',
+        body: 'This policy applies to all CHRSD activities across all locations — including but not limited to: government primary school deployments under SDAMSMP, community field sites under NSADMP, training venues, public events, media engagements, and digital platforms. It applies to all permanent staff, temporary and contractual staff, consultants, volunteers, board members, and visitors to CHRSD sites and programmes.',
+      },
+      {
+        heading: 'Prohibited conduct',
+        body: 'The following conduct is strictly prohibited under all circumstances, and any breach will result in immediate removal from the programme and referral to law enforcement authorities:',
+        items: [
+          'Physical abuse, corporal punishment, or any form of physical coercion',
+          'Emotional or psychological abuse, including humiliation, threats, or intimidation',
+          'Sexual abuse, exploitation, or harassment in any form',
+          'Grooming behaviours or inappropriate personal communications',
+          'Photographing or filming children or vulnerable adults without explicit written consent from a parent or guardian',
+          'Sharing images of children or vulnerable adults on personal or institutional social media without consent',
+          'Accepting personal gifts from children, families, or caregivers in return for programme access or favours',
+          'Any commercial exploitation of children or vulnerable adults',
+        ],
+      },
+      {
+        heading: 'Safer recruitment',
+        body: 'All staff, volunteers, and consultants who will have direct contact with children or vulnerable adults undergo: criminal background checks prior to engagement; professional reference verification with specific safeguarding questions; review of any known safeguarding concerns through appropriate professional channels; and are required to sign CHRSD\'s Safeguarding Declaration as a condition of engagement. No individual with a substantiated safeguarding concern on record shall be permitted to hold a position involving contact with children or vulnerable adults.',
+      },
+      {
+        heading: 'Reporting and escalation',
+        body: 'CHRSD designates a trained Designated Safeguarding Lead (DSL) who is the first point of contact for all safeguarding concerns. Any concern — however minor — must be reported to the DSL immediately. The DSL activates the escalation protocol within 24 hours of receiving any concern, which may include notifying local child protection authorities, law enforcement, or relevant government ministries. All reports are documented. A concern need not be proven to be reported — a reasonable suspicion is sufficient.',
+      },
+      {
+        heading: 'PSEA — Protection from Sexual Exploitation and Abuse',
+        body: 'CHRSD fully aligns with the UN Inter-Agency Standing Committee (IASC) standards on Protection from Sexual Exploitation and Abuse (PSEA). All CHRSD staff and associates are trained on PSEA principles. CHRSD maintains a PSEA focal point and participates in relevant inter-agency coordination mechanisms. Allegations of SEA are treated as the most serious category of safeguarding concern and are escalated immediately to the Board.',
+      },
+      {
+        heading: 'Policy review',
+        body: 'This policy is reviewed annually by the CHRSD Advisory Board, or immediately following any safeguarding incident, change in relevant law or regulation, or update to international standards. The most current version of this policy is published on the CHRSD website and is available in hard copy on request.',
+      },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Policy Repository"
+  description="CHRSD's core institutional policies — whistleblower protection, anti-corruption, data privacy, and child safeguarding — published in full for accountability and transparency."
+>
+  <PageHero
+    overline="Governance & Good Practices · Policies"
+    title="Policy Repository"
+    lead="CHRSD's core governance policies, published in full. These policies govern how we protect people who report misconduct, how we prevent corruption, how we safeguard sensitive data, and how we protect children and vulnerable adults in our programmes."
+  />
+
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Governance framework</p>
+      <h2>Our policy commitments</h2>
+      <p class="section-intro">
+        The four policies below represent CHRSD's core institutional commitments to ethical governance.
+        Each is reviewed at least annually by the Advisory Board and is fully enforceable across all
+        staff, consultants, volunteers, and partner organisations engaged in CHRSD programmes.
+      </p>
+      <div class="policy-index">
+        {policies.map((p, i) => (
+          <a href={`#${p.id}`} class="policy-index-item">
+            <span class="policy-index-item__num">{String(i + 1).padStart(2, '0')}</span>
+            <span class="policy-index-item__title">{p.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="policies-list">
+        {policies.map((policy, i) => (
+          <article class="policy-accordion" id={policy.id}>
+            <div class="policy-accordion__meta">
+              <span class="policy-num">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            <div class="policy-accordion__body">
+              <div class="policy-header">
+                <h2 class="policy-title">{policy.title}</h2>
+                <p class="policy-summary">{policy.summary}</p>
+              </div>
+              <div class="policy-sections">
+                {policy.sections.map((sec) => (
+                  <details class="policy-detail">
+                    <summary class="policy-detail__summary">
+                      <span class="policy-detail__heading">{sec.heading}</span>
+                      <span class="policy-detail__icon" aria-hidden="true"></span>
+                    </summary>
+                    <div class="policy-detail__content">
+                      {sec.body && <p>{sec.body}</p>}
+                      {sec.items && (
+                        <ul class="policy-list">
+                          {sec.items.map((item) => (
+                            <li>{item}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="footer-note">
+        <div class="footer-note__text">
+          <p class="overline">Questions about our policies</p>
+          <h2>Contact our governance team</h2>
+          <p>
+            For questions about any policy, requests for certified copies, or to report a concern
+            under any of the mechanisms described above, contact CHRSD directly. Safeguarding
+            concerns may also be submitted confidentially via the Designated Safeguarding Lead.
+          </p>
+          <p>
+            All policies are available in hard copy from the CHRSD administration office in
+            Dhaka, Bangladesh.
+          </p>
+        </div>
+        <div class="footer-note__links">
+          <a href={`mailto:${site.email}?subject=Policy%20Query`} class="footer-link-card">
+            <span class="footer-link-card__label">General policy queries</span>
+            <span class="footer-link-card__value">{site.email}</span>
+          </a>
+          <a href="mailto:ethics@chrsd.org" class="footer-link-card">
+            <span class="footer-link-card__label">Ethics & whistleblower channel</span>
+            <span class="footer-link-card__value">ethics@chrsd.org</span>
+          </a>
+          <a href="/about-us/governance-and-good-practices/financials-and-external-audit/" class="footer-link-card footer-link-card--internal">
+            <span class="footer-link-card__label">Related</span>
+            <span class="footer-link-card__value">Financials & External Audit</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-intro {
+    color: var(--color-slate);
+    max-width: 65ch;
+    line-height: 1.75;
+    margin-top: 16px;
+    margin-bottom: 36px;
+  }
+
+  .policy-index {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .policy-index-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    text-decoration: none;
+    color: var(--color-forest);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .policy-index-item:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+    border-color: var(--color-institutional);
+  }
+  .policy-index-item__num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-institutional);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+  .policy-index-item__title { line-height: 1.35; }
+
+  .policies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .policy-accordion {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 40px;
+    padding: 52px 0;
+    border-bottom: 1px solid var(--color-border-green);
+  }
+  .policy-accordion:last-child { border-bottom: none; }
+
+  .policy-accordion__meta {
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .policy-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--color-border-green);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .policy-header { margin-bottom: 28px; }
+  .policy-title {
+    font-size: 26px;
+    color: var(--color-forest);
+    margin: 0 0 10px;
+    line-height: 1.2;
+  }
+  .policy-summary {
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.7;
+    margin: 0;
+    max-width: 70ch;
+  }
+
+  .policy-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1.5px solid var(--color-border-green);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .policy-detail {
+    border-bottom: 1px solid var(--color-border-green);
+  }
+  .policy-detail:last-child { border-bottom: none; }
+
+  .policy-detail__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+    cursor: pointer;
+    list-style: none;
+    background: #fff;
+    transition: background var(--dur) var(--ease);
+  }
+  .policy-detail__summary::-webkit-details-marker { display: none; }
+  .policy-detail__summary::marker { display: none; }
+  .policy-detail__summary:hover { background: var(--color-tint); }
+
+  .policy-detail[open] > .policy-detail__summary {
+    background: var(--color-tint);
+    border-bottom: 1px solid var(--color-border-green);
+  }
+
+  .policy-detail__heading {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--color-forest);
+  }
+
+  .policy-detail__icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-border-green);
+    flex-shrink: 0;
+    position: relative;
+    transition: background var(--dur) var(--ease);
+  }
+  .policy-detail__icon::before,
+  .policy-detail__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 1.5px;
+    background: var(--color-forest);
+    transform: translate(-50%, -50%);
+    transition: transform var(--dur) var(--ease);
+  }
+  .policy-detail__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .policy-detail[open] .policy-detail__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .policy-detail[open] .policy-detail__icon {
+    background: var(--color-institutional);
+  }
+  .policy-detail[open] .policy-detail__icon::before,
+  .policy-detail[open] .policy-detail__icon::after {
+    background: #fff;
+  }
+
+  .policy-detail__content {
+    padding: 20px 24px 24px;
+    background: #fff;
+  }
+  .policy-detail__content p {
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.8;
+    margin: 0 0 12px;
+  }
+  .policy-detail__content p:last-child { margin-bottom: 0; }
+
+  .policy-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .policy-list li {
+    font-size: 15px;
+    color: var(--color-slate);
+    line-height: 1.7;
+    padding-left: 22px;
+    position: relative;
+  }
+  .policy-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-institutional);
+  }
+
+  .footer-note {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 64px;
+    align-items: start;
+  }
+  .footer-note__text h2 { margin: 12px 0 20px; }
+  .footer-note__text p { color: var(--color-slate); line-height: 1.8; margin-bottom: 16px; }
+
+  .footer-note__links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-link-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: var(--color-forest);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    text-decoration: none;
+    transition: opacity var(--dur) var(--ease);
+  }
+  .footer-link-card:hover { opacity: 0.88; }
+  .footer-link-card--internal {
+    background: #fff;
+    border: 1.5px solid var(--color-border-green);
+  }
+  .footer-link-card__label {
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: rgba(255,255,255,0.65);
+  }
+  .footer-link-card--internal .footer-link-card__label { color: var(--color-slate); }
+  .footer-link-card__value {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+  }
+  .footer-link-card--internal .footer-link-card__value { color: var(--color-forest); }
+
+  @media (max-width: 1024px) {
+    .footer-note { grid-template-columns: 1fr; gap: 40px; }
+    .footer-note__links { flex-direction: row; flex-wrap: wrap; }
+    .footer-link-card { flex: 1 1 240px; }
+  }
+  @media (max-width: 768px) {
+    .policy-index { grid-template-columns: 1fr; }
+    .policy-accordion { grid-template-columns: 1fr; gap: 0; }
+    .policy-accordion__meta { flex-direction: row; align-items: center; margin-bottom: 16px; }
+    .policy-num { font-size: 28px; }
+  }
+  @media (max-width: 500px) {
+    .footer-link-card { flex: 1 1 100%; }
+  }
+</style>

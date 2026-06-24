@@ -1,0 +1,294 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const areas = [
+  {
+    icon: '🌱',
+    title: 'Environmental Action',
+    body: 'Join tree-planting drives, sapling distribution, and nursery management across Bangladesh. No prior experience required — just enthusiasm.',
+    commitment: '1–2 days/month',
+  },
+  {
+    icon: '📊',
+    title: 'Research & Data',
+    body: 'Support field surveys, data entry, GIS mapping, and the analysis of socio-economic and environmental datasets.',
+    commitment: 'Flexible, project-based',
+  },
+  {
+    icon: '⚖️',
+    title: 'Legal Aid & Advocacy',
+    body: 'Assist our human rights team with community outreach, legal document preparation, and awareness campaigns.',
+    commitment: '4–8 hrs/week',
+  },
+  {
+    icon: '📢',
+    title: 'Communications',
+    body: "Contribute writing, photography, translation, social media, or design skills to amplify our programmes' stories.",
+    commitment: 'Flexible, remote possible',
+  },
+  {
+    icon: '🎓',
+    title: 'Education & Training',
+    body: 'Facilitate workshops, anti-trafficking awareness sessions, and digital literacy programmes in communities we serve.',
+    commitment: '2–4 days/quarter',
+  },
+  {
+    icon: '💻',
+    title: 'Technology & Digital',
+    body: 'Support our digital governance programmes with software testing, data management, or technical training for field staff.',
+    commitment: 'Flexible, remote possible',
+  },
+];
+
+const steps = [
+  { no: '01', title: 'Submit an expression of interest', body: 'Fill in the form below with your details, skills, and preferred area.' },
+  { no: '02', title: 'Initial conversation', body: 'A member of our team will contact you within five working days to discuss opportunities.' },
+  { no: '03', title: 'Orientation', body: 'Attend a short online or in-person orientation covering our values, safeguarding policies, and programme context.' },
+  { no: '04', title: 'Start volunteering', body: 'Get matched with a programme and begin making a measurable difference.' },
+];
+---
+<BaseLayout
+  title="Become a Volunteer"
+  description="Join CHRSD's volunteer network — from environmental action and legal aid to research and digital programmes."
+>
+  <PageHero
+    overline="Get involved · Volunteer"
+    title="Give your time, grow our impact"
+    lead="CHRSD volunteers are an integral part of our field operations, research teams, and community programmes. There's a role for every skill set."
+  />
+
+  <!-- IMPACT BANNER -->
+  <section class="section section--alt">
+    <div class="container stats">
+      <div class="stat">
+        <span class="stat__n">500+</span>
+        <span class="stat__l">Active volunteers</span>
+      </div>
+      <div class="stat">
+        <span class="stat__n">14</span>
+        <span class="stat__l">Districts served</span>
+      </div>
+      <div class="stat">
+        <span class="stat__n">6</span>
+        <span class="stat__l">Volunteer tracks</span>
+      </div>
+      <div class="stat">
+        <span class="stat__n">50+</span>
+        <span class="stat__l">Years of community roots</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS -->
+  <section class="section">
+    <div class="container">
+      <div class="lede">
+        <p class="overline">Where you can help</p>
+        <h2>Volunteer tracks</h2>
+        <p class="lead lede__sub">
+          Our programmes span environmental sustainability, social justice, and digital
+          governance. Choose the area that best matches your skills and availability.
+        </p>
+      </div>
+      <div class="areas">
+        {areas.map((a) => (
+          <article class="area">
+            <span class="area__icon" aria-hidden="true">{a.icon}</span>
+            <h3 class="area__title">{a.title}</h3>
+            <p class="area__body">{a.body}</p>
+            <p class="area__commitment">
+              <span class="commit__label">Commitment</span>
+              {a.commitment}
+            </p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">The process</p>
+      <h2>How to get started</h2>
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step">
+            <span class="step__no" aria-hidden="true">{s.no}</span>
+            <div>
+              <h3 class="step__title">{s.title}</h3>
+              <p class="step__body">{s.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPRESSION OF INTEREST FORM -->
+  <section class="section" id="apply">
+    <div class="container">
+      <div class="form-wrap">
+        <div class="form-intro">
+          <p class="overline">Express your interest</p>
+          <h2>Apply to volunteer</h2>
+          <p class="lead" style="margin-top:14px">
+            Tell us a little about yourself and we will be in touch within five working
+            days. All applications are reviewed by our volunteer coordination team.
+          </p>
+          <p style="margin-top:16px;color:var(--color-slate)">
+            You can also reach us directly at
+            <a href={`mailto:${site.email}`} style="color:var(--color-institutional)">{site.email}</a>
+            with the subject line "Volunteer enquiry".
+          </p>
+        </div>
+
+        <form
+          class="form"
+          action={import.meta.env.PUBLIC_CONTACT_ENDPOINT}
+          method="POST"
+          id="volunteer-form"
+          novalidate
+        >
+          <input type="hidden" name="_subject" value="Volunteer Application" />
+          <div class="form__row">
+            <div class="field">
+              <label for="v-name">Full name <span aria-hidden="true">*</span></label>
+              <input type="text" id="v-name" name="name" required autocomplete="name" placeholder="Your full name" />
+            </div>
+            <div class="field">
+              <label for="v-email">Email address <span aria-hidden="true">*</span></label>
+              <input type="email" id="v-email" name="email" required autocomplete="email" placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="field">
+              <label for="v-phone">Phone number</label>
+              <input type="tel" id="v-phone" name="phone" autocomplete="tel" placeholder="+880 …" />
+            </div>
+            <div class="field">
+              <label for="v-area">Preferred volunteer track <span aria-hidden="true">*</span></label>
+              <select id="v-area" name="area" required>
+                <option value="" disabled selected>Select a track</option>
+                {areas.map((a) => <option value={a.title}>{a.title}</option>)}
+                <option value="Open to any">Open to any track</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="v-message">Tell us about your background and motivation <span aria-hidden="true">*</span></label>
+            <textarea id="v-message" name="message" rows="5" required placeholder="Brief background, relevant skills, and why you want to volunteer with CHRSD…"></textarea>
+          </div>
+          <div class="form__footer">
+            <button type="submit" class="btn btn--solid btn--lg">Submit application</button>
+            <p id="volunteer-status" class="form__status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('volunteer-form') as HTMLFormElement | null;
+  const status = document.getElementById('volunteer-status');
+  if (form && status) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      status.textContent = '';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          status.textContent = 'Thank you! We\'ll be in touch within five working days.';
+          status.style.color = 'var(--color-institutional)';
+          form.reset();
+        } else {
+          throw new Error();
+        }
+      } catch {
+        status.textContent = 'Something went wrong. Please email us directly.';
+        status.style.color = '#c0392b';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submit application';
+      }
+    });
+  }
+</script>
+
+<style>
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden; }
+  .stat { padding: 36px 28px; text-align: center; border-right: 1px solid var(--color-border-green); background: #fff; }
+  .stat:last-child { border-right: none; }
+  .stat__n { display: block; font-family: var(--font-display); font-weight: 800; font-size: 44px; color: var(--color-institutional); line-height: 1; }
+  .stat__l { display: block; font-size: 14px; color: var(--color-slate); margin-top: 8px; }
+
+  /* Lede */
+  .lede { max-width: 60ch; margin-bottom: 44px; }
+  .lede h2 { margin-top: 12px; }
+  .lede__sub { margin-top: 16px; color: var(--color-slate); }
+
+  /* Areas */
+  .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .area {
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius);
+    padding: 28px; transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .area:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-3px); }
+  .area__icon { font-size: 28px; display: block; }
+  .area__title { color: var(--color-forest); font-size: 19px; margin: 14px 0 10px; }
+  .area__body { color: var(--color-slate); font-size: 15px; line-height: 1.65; }
+  .area__commitment { margin-top: 18px; font-size: 13px; color: var(--color-slate); }
+  .commit__label { display: block; font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 3px; }
+
+  /* Steps */
+  .steps { display: grid; gap: 16px; margin-top: 36px; }
+  .step { display: flex; gap: 28px; align-items: flex-start; background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius); padding: 28px 32px; }
+  .step__no { font-family: var(--font-display); font-weight: 800; font-size: 36px; color: var(--color-border-green); line-height: 1; flex-shrink: 0; width: 56px; }
+  .step__title { color: var(--color-forest); font-size: 19px; margin-bottom: 8px; }
+  .step__body { color: var(--color-slate); font-size: 15px; }
+
+  /* Form */
+  .form-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+  .form-intro h2 { margin-top: 12px; }
+  .form { display: flex; flex-direction: column; gap: 20px; }
+  .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  label { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--color-forest); }
+  label span { color: var(--color-donate); }
+  input, select, textarea {
+    border: 1.5px solid var(--color-border-green); border-radius: var(--radius-sm);
+    padding: 11px 14px; font-family: var(--font-body); font-size: 16px; color: var(--color-ink);
+    background: #fff; transition: border-color var(--dur) var(--ease);
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--color-institutional); box-shadow: 0 0 0 3px rgba(0,120,60,0.12); }
+  textarea { resize: vertical; }
+  .form__footer { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .form__status { font-size: 15px; }
+
+  @media (max-width: 1024px) {
+    .areas { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-top: 1px solid var(--color-border-green); }
+    .form-wrap { grid-template-columns: 1fr; gap: 36px; }
+    .form__row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .areas { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

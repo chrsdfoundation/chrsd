@@ -1,0 +1,244 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import PageHero from '@components/PageHero.astro';
+import Button from '@components/Button.astro';
+import { site } from '@data/navigation';
+
+const tiers = [
+  {
+    name: 'Associate Member',
+    fee: 'BDT 1,200 / year',
+    tagline: 'For individuals who believe in the mission',
+    benefits: [
+      'Annual membership certificate',
+      'CHRSD Annual Report (digital)',
+      'Quarterly newsletter',
+      'Priority access to CHRSD public events',
+      'Listing in the Annual Report (optional)',
+    ],
+    cta: 'Become an Associate Member',
+    highlight: false,
+  },
+  {
+    name: 'Institutional Member',
+    fee: 'BDT 12,000 / year',
+    tagline: 'For organisations aligned with our mandate',
+    benefits: [
+      'All Associate Member benefits',
+      'Two named contacts on membership',
+      'Invitation to Annual General Meeting with voting rights',
+      'Organisational listing on CHRSD website',
+      'Early access to research publications',
+      'Annual impact briefing from the Executive Director',
+    ],
+    cta: 'Become an Institutional Member',
+    highlight: true,
+  },
+  {
+    name: 'Patron',
+    fee: 'BDT 60,000 / year',
+    tagline: 'For champions of long-term systemic change',
+    benefits: [
+      'All Institutional Member benefits',
+      'Named acknowledgement in Annual Report',
+      'Annual private briefing with senior leadership',
+      'Invitation to programme site visits',
+      'Access to unpublished research datasets (where permissible)',
+      'Customised impact report linked to patron funding',
+    ],
+    cta: 'Become a Patron',
+    highlight: false,
+  },
+];
+
+const faqs = [
+  { q: 'How are membership fees used?', a: 'All membership income goes directly into CHRSD\'s programme funds, unrestricted. We do not use membership fees to cover senior salaries or overhead.' },
+  { q: 'Is membership open to non-Bangladeshi individuals and organisations?', a: 'Yes. International members are welcome at all tiers. Fees can be paid in BDT or USD equivalent. Contact us for international payment arrangements.' },
+  { q: 'What is the difference between a member and a donor?', a: 'Membership is a formal affiliation with CHRSD and includes governance participation rights (for Institutional Members and above). Donating is a financial contribution without formal membership status. You can do both.' },
+  { q: 'Can my membership be tax-deductible?', a: 'CHRSD is registered as a non-profit organisation under the Societies Registration Act, 1860. Whether your membership fee is tax-deductible depends on your jurisdiction. Please consult your tax adviser.' },
+];
+---
+<BaseLayout
+  title="Become a Member"
+  description="Join CHRSD as a member — support evidence-based, community-centred development and participate in the governance of a 54-year-old institution."
+>
+  <PageHero
+    overline="Get involved · Membership"
+    title="Become a member"
+    lead="Membership is more than financial support — it is a formal affiliation with an institution committed to evidence, accountability, and community-centred development. Members help shape CHRSD's future."
+  />
+
+  <!-- WHAT MEMBERSHIP MEANS -->
+  <section class="section section--alt">
+    <div class="container meaning">
+      <div>
+        <p class="overline">Why membership matters</p>
+        <h2>More than a subscription</h2>
+        <p class="lead" style="margin-top:14px">
+          CHRSD is a membership organisation. Institutional Members attend our Annual
+          General Meeting, vote on governance matters, and receive full financial accounts.
+          This is accountability in both directions — we report to our members, and our
+          members hold us to account.
+        </p>
+        <p style="margin-top:16px;color:var(--color-slate)">
+          All membership fees are unrestricted — they go directly into our programme
+          funds, not into overhead or salaries. We publish a breakdown in our annual
+          audited accounts.
+        </p>
+      </div>
+      <div class="meaning-stats">
+        {[
+          { n: '54', l: 'Years as a membership organisation' },
+          { n: '120+', l: 'Current members' },
+          { n: '100%', l: 'Of fees go to programmes' },
+        ].map((s) => (
+          <div class="mstat">
+            <span class="mstat__n">{s.n}</span>
+            <span class="mstat__l">{s.l}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section class="section">
+    <div class="container">
+      <p class="overline">Membership tiers</p>
+      <h2>Choose your level of involvement</h2>
+      <div class="tiers">
+        {tiers.map((t) => (
+          <article class:list={['tier', { 'tier--highlight': t.highlight }]}>
+            {t.highlight && <div class="tier__recommended">Most popular</div>}
+            <div class="tier__header">
+              <h3 class="tier__name">{t.name}</h3>
+              <p class="tier__tagline">{t.tagline}</p>
+              <div class="tier__fee">{t.fee}</div>
+            </div>
+            <ul class="tier__benefits">
+              {t.benefits.map((b: string) => (
+                <li>
+                  <span class="benefit__check" aria-hidden="true">✓</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+            <div class="tier__cta">
+              <a
+                href={`mailto:${site.email}?subject=${encodeURIComponent(`Membership enquiry: ${t.name}`)}`}
+                class:list={['btn', t.highlight ? 'btn--solid' : 'btn--outline', 'btn--md']}
+              >
+                {t.cta}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="overline">Frequently asked questions</p>
+      <h2>Membership questions</h2>
+      <div class="faqs">
+        {faqs.map((f) => (
+          <details class="faq">
+            <summary class="faq__q">{f.q}</summary>
+            <p class="faq__a">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--dark">
+    <div class="container cta__inner">
+      <div>
+        <p class="overline">Ready to join?</p>
+        <h2 style="color:#fff;margin-top:10px">Enquire about membership</h2>
+        <p style="color:rgba(255,255,255,0.82);margin-top:12px;max-width:52ch">
+          Send us an email with your preferred tier and we will send you a membership
+          application form, direct payment details, and a copy of CHRSD's constitution.
+        </p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;flex-shrink:0">
+        <Button href={`mailto:${site.email}?subject=Membership%20enquiry`} variant="solid" external>Email us</Button>
+        <Button href="/get-involved/contact-us/" variant="outline">Use contact form</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Meaning */
+  .meaning { display: grid; grid-template-columns: 1fr auto; gap: 56px; align-items: start; }
+  .meaning h2 { margin-top: 12px; }
+  .meaning-stats { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden; background: #fff; flex-shrink: 0; }
+  .mstat { padding: 28px 44px; border-bottom: 1px solid var(--color-border-green); text-align: center; }
+  .mstat:last-child { border-bottom: none; }
+  .mstat__n { display: block; font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--color-institutional); line-height: 1; }
+  .mstat__l { display: block; font-size: 12px; color: var(--color-slate); margin-top: 6px; max-width: 120px; text-align: center; line-height: 1.4; }
+
+  /* Tiers */
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; align-items: start; }
+  .tier {
+    background: #fff; border: 1px solid var(--color-border-green); border-radius: var(--radius);
+    padding: 32px; position: relative; transition: box-shadow var(--dur) var(--ease);
+  }
+  .tier:hover { box-shadow: var(--shadow-card-hover); }
+  .tier--highlight {
+    border-color: var(--color-institutional); border-width: 2px;
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .tier__recommended {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--color-institutional); color: #fff;
+    font-family: var(--font-display); font-weight: 700; font-size: 12px;
+    padding: 5px 16px; border-radius: var(--radius-pill); white-space: nowrap;
+  }
+  .tier__header { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border-green); }
+  .tier__name { font-size: 20px; color: var(--color-forest); margin-bottom: 6px; }
+  .tier__tagline { font-size: 14px; color: var(--color-slate); margin-bottom: 14px; }
+  .tier__fee { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: var(--color-institutional); }
+  .tier__benefits { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 10px; }
+  .tier__benefits li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--color-slate); line-height: 1.5; }
+  .benefit__check { color: var(--color-institutional); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .tier__cta .btn { width: 100%; justify-content: center; }
+
+  /* FAQ */
+  .faqs { display: flex; flex-direction: column; gap: 0; margin-top: 36px; border: 1px solid var(--color-border-green); border-radius: var(--radius); overflow: hidden; }
+  .faq { border-bottom: 1px solid var(--color-border-green); background: #fff; }
+  .faq:last-child { border-bottom: none; }
+  .faq__q {
+    list-style: none; cursor: pointer; padding: 20px 24px;
+    font-family: var(--font-display); font-weight: 600; font-size: 17px; color: var(--color-forest);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .faq__q::-webkit-details-marker { display: none; }
+  .faq__q::after { content: '+'; font-size: 20px; color: var(--color-institutional); flex-shrink: 0; }
+  details[open] .faq__q::after { content: '−'; }
+  .faq__a { padding: 0 24px 20px; font-size: 15px; color: var(--color-slate); line-height: 1.7; }
+
+  /* CTA */
+  .cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+
+  @media (max-width: 1024px) {
+    .tiers { grid-template-columns: 1fr; }
+    .tier--highlight { transform: none; }
+  }
+  @media (max-width: 860px) {
+    .meaning { grid-template-columns: 1fr; }
+    .meaning-stats { flex-direction: row; }
+    .mstat { border-bottom: none; border-right: 1px solid var(--color-border-green); }
+    .mstat:last-child { border-right: none; }
+    .cta__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .meaning-stats { flex-direction: column; }
+    .mstat { border-right: none; border-bottom: 1px solid var(--color-border-green); }
+  }
+</style>
