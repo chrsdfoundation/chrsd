@@ -1,0 +1,19 @@
+{
+  "name": "chrsd-website",
+  "type": "module",
+  "version": "2.0.0",
+  "description": "CHRSD Foundation — Institutional website built with Astro + Decap CMS",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.18",
+    "sharp": "^0.33.5"
+  }
+}
