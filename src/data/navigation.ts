@@ -25,10 +25,10 @@ export const site = {
   name: 'CHRSD',
   legalName: 'Centre for Humanitarian Research and Social Development Foundation',
   shortName: 'CHRS Development',
-  founded: 1972,
+  founded: 2023,
   tagline: "There's always a way",
   url: 'https://www.chrsd.org',
-  donateUrl: 'https://donate.chrsd.org',
+  donateUrl: '/donate/',
   careersUrl: 'https://careers.chrsd.org/',
   tenderUrl: 'https://tender.chrsd.org/',
   email: 'info@chrsd.org',
@@ -175,7 +175,7 @@ export const footerColumns = [
   {
     title: 'Get Involved',
     links: [
-      { label: 'Donate', url: site.donateUrl, external: true },
+      { label: 'Donate', url: site.donateUrl },
       { label: 'Volunteer', url: '/get-involved/volunteer/' },
       { label: 'Partner With Us', url: '/get-involved/partnership/' },
       { label: 'Careers', url: site.careersUrl, external: true },
