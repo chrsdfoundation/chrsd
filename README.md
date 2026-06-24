@@ -156,4 +156,4 @@ routing, components, and design system are all in place to do so quickly.
 
 ---
 
-Reg. No. S-14480/2026 · Founded 1972 · Dhaka, Bangladesh
+Reg. No. S-14480/2026 · Founded 2023 · Dhaka, Bangladesh
