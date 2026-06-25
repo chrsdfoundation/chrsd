@@ -1,15 +1,14 @@
 ---
-// Validated baseline metrics from the latest annual report (Phase 5, 1.3 —
-// no "0" placeholders). Values count up when scrolled into view.
+// Programme metrics aligned with CHRSD's three active national submissions.
 const stats = [
-  { value: 2.3, suffix: 'M+', label: 'Households', desc: 'Escaped extreme poverty via verified pathways' },
-  { value: 16, suffix: 'M+', label: 'Microfinance Users', desc: 'Financial inclusion at scale' },
-  { value: 15, suffix: 'M+', label: 'School Graduates', desc: 'Shaping future generations' },
+  { value: 250, suffix: 'M', label: 'Trees — national target', desc: 'NSADMP afforestation target across all divisions of Bangladesh' },
+  { value: 65566, suffix: '+', label: 'Primary schools', desc: 'Government schools targeted by the SDAMSMP digital attendance programme' },
+  { value: 1.2, suffix: 'M', label: 'Garment workers', desc: 'RMG workers targeted by the AI Vision Care Initiative' },
 ];
 ---
 <section class="section section--dark stats" style="--bg-dark: var(--color-forest)">
   <div class="container">
-    <p class="overline">Unlocking potential</p>
+    <p class="overline">Programme scale</p>
     <div class="stats__grid" data-stats>
       {stats.map((s) => (
         <a class="stat" href="/impact/live-impact-counters/">
@@ -18,7 +17,7 @@ const stats = [
             data-target={s.value}
             data-suffix={s.suffix}
             aria-label={`${s.value}${s.suffix} ${s.label}`}
-          >0{s.suffix}</span>
+          >{s.value}{s.suffix}</span>
           <span class="stat__label">{s.label}</span>
           <span class="stat__desc">{s.desc}</span>
         </a>
@@ -49,19 +48,22 @@ const stats = [
   const wrap = document.querySelector('[data-stats]');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  function fmt(v: number): string {
+    if (v >= 1000) return Math.round(v).toLocaleString('en-US');
+    return v % 1 !== 0 ? v.toFixed(1) : v.toFixed(0);
+  }
   function runCount(el: HTMLElement) {
     const target = parseFloat(el.dataset.target || '0');
     const suffix = el.dataset.suffix || '';
-    const decimals = target % 1 !== 0 ? 1 : 0;
-    if (reduce) { el.textContent = target.toFixed(decimals) + suffix; return; }
+    if (reduce) { el.textContent = fmt(target) + suffix; return; }
     const duration = 1600;
     const start = performance.now();
     function tick(now: number) {
       const p = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      el.textContent = fmt(target * eased) + suffix;
       if (p < 1) requestAnimationFrame(tick);
-      else el.textContent = target.toFixed(decimals) + suffix;
+      else el.textContent = fmt(target) + suffix;
     }
     requestAnimationFrame(tick);
   }

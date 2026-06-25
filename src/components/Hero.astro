@@ -5,26 +5,35 @@ const slides = [
   {
     image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1600&q=70&auto=format&fit=crop',
     alt: 'A community health worker walks with families through a riverside village at sunrise.',
-    headline: "There's always a way",
-    sub: 'Scaling human potential through localised resilience and data-driven development.',
+    headline: 'Protecting Human Rights and Advancing Social Development in Bangladesh',
+    sub: 'CHRSD works with climate-vulnerable and underserved communities through field programmes, applied research, and data-backed implementation monitoring.',
     credit: 'Sarker Protick',
-    cta: { label: 'Explore Our Impact', href: '/impact/' },
+    creditLocation: 'Coastal Bangladesh',
+    creditDate: '2026',
+    creditProgram: 'Community Outreach',
+    cta: { label: 'Partner With Us', href: '/get-involved/partnership/' },
   },
   {
     image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1600&q=70&auto=format&fit=crop',
     alt: 'Young women plant tree saplings along an embankment to build climate resilience.',
     headline: 'Roots that hold the land',
-    sub: 'Community tree planting and climate adaptation across coastal Bangladesh.',
+    sub: 'Community tree planting and climate adaptation supporting Bangladesh\'s national 25 crore tree pledge.',
     credit: 'CHRSD Field Team',
+    creditLocation: 'Sonaimuri, Noakhali',
+    creditDate: 'June 2026',
+    creditProgram: 'NSADMP',
     cta: { label: 'See Our Work', href: '/our-work/' },
   },
   {
     image: 'https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=1600&q=70&auto=format&fit=crop',
     alt: 'A teacher leads a bright classroom of children raising their hands to answer.',
     headline: 'Evidence into action',
-    sub: 'Where real-time data meets human resilience to engineer systemic change.',
+    sub: 'Technology-verified programme delivery — from biometric school attendance to satellite-tracked afforestation.',
     credit: 'CHRSD Field Team',
-    cta: { label: 'Read the Evidence', href: '/impact/case-studies/' },
+    creditLocation: 'Dhaka Division',
+    creditDate: '2025',
+    creditProgram: 'SDAMSMP',
+    cta: { label: 'View Our Reports', href: '/impact/annual-reports/' },
   },
 ];
 ---
@@ -48,7 +57,12 @@ const slides = [
           <div class="hero__cta">
             <Button href={slide.cta.href} variant="solid" size="lg">{slide.cta.label}</Button>
           </div>
-          <p class="hero__credit">Photo: {slide.credit}</p>
+          <p class="hero__credit">
+            <span>Photo: {slide.credit}</span>
+            {slide.creditLocation && <span> · {slide.creditLocation}</span>}
+            {slide.creditDate && <span> · {slide.creditDate}</span>}
+            {slide.creditProgram && <span> · {slide.creditProgram}</span>}
+          </p>
         </div>
       </div>
     ))}
