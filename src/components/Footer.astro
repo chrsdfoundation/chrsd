@@ -17,6 +17,7 @@ const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
         <input id="nl-email" type="email" name="email" placeholder="you@example.org" required autocomplete="email" />
         <button type="submit" class="news__btn">Subscribe</button>
         <p class="news__status" role="status" aria-live="polite" data-status></p>
+        <p class="news__consent">By subscribing you agree to our <a href="/privacy-policy/">Privacy Policy</a>. Unsubscribe at any time.</p>
       </form>
     </div>
   </div>
@@ -93,6 +94,8 @@ const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
   }
   .news__btn:hover { background: var(--color-ink); }
   .news__status { flex-basis: 100%; font-size: 14px; color: #fff; min-height: 1em; margin: 0; }
+  .news__consent { flex-basis: 100%; font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; }
+  .news__consent a { color: rgba(255,255,255,0.8); text-decoration: underline; }
 
   .footer__main { padding-block: 64px; }
   .footer__grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }

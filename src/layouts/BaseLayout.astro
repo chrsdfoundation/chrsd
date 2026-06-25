@@ -14,7 +14,7 @@ interface Props {
 }
 const {
   title,
-  description = 'CHRSD — Centre for Humanitarian Research and Social Development. Scaling human potential through localised resilience and data-driven development.',
+  description = 'CHRSD — Centre for Humanitarian Research and Social Development Foundation. Human rights advocacy, climate resilience, and community development in Bangladesh.',
   image = '/images/og-default.jpg',
   noindex = false,
 } = Astro.props;
@@ -26,7 +26,7 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -39,6 +39,39 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={new URL(image, site.url).href} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, site.url).href} />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="bn" href={new URL('/bn' + Astro.url.pathname, site.url).href} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+
+    <!-- JSON-LD: Organisation -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "NGO",
+      "name": site.legalName,
+      "alternateName": site.name,
+      "url": site.url,
+      "logo": new URL('/images/chrsd-seal.png', site.url).href,
+      "foundingDate": String(site.founded),
+      "description": "Human rights advocacy, climate resilience, and community development in Bangladesh.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "29 Toyenbee Circular Road (5th Floor)",
+        "addressLocality": "Dhaka",
+        "addressCountry": "BD"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": site.email,
+        "telephone": site.phone,
+        "contactType": "general"
+      },
+      "sameAs": Object.values(site.social)
+    })} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
