@@ -14,7 +14,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@astrojs/netlify": "^8.0.0",
+    "@astrojs/netlify": "^6.6.5",
     "@astrojs/node": "^9.0.0",
     "@astrojs/react": "^4.0.0",
     "@astrojs/rss": "^4.0.11",
