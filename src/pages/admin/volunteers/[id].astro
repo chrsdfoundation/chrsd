@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const { id } = Astro.params;
+---
+
+<BaseLayout title="Volunteer — CHRSD Admin" description="View volunteer profile">
+  <div style="min-height:100vh;background:#f9fafb;">
+    <nav style="background:#1a4a6e;padding:0 24px;display:flex;align-items:center;gap:16px;height:56px;">
+      <a href="/admin" style="color:white;text-decoration:none;font-weight:700;">CHRSD Admin</a>
+      <span style="color:rgba(255,255,255,0.5);">/</span>
+      <a href="/admin/volunteers" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.875rem;">Volunteers</a>
+      <span style="color:rgba(255,255,255,0.5);">/</span>
+      <span style="color:rgba(255,255,255,0.85);font-size:0.875rem;" id="vol-name">…</span>
+      <div style="flex:1;" />
+      <form method="POST" action="/api/auth/logout">
+        <button type="submit" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:0.8125rem;">Sign Out</button>
+      </form>
+    </nav>
+
+    <main style="padding:32px 24px;max-width:800px;margin:0 auto;">
+      <div id="vol-details" style="color:#9ca3af;">Loading…</div>
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  const id = window.location.pathname.split('/').pop()!;
+
+  async function load() {
+    const res = await fetch(`/api/volunteers/${id}`);
+    const el = document.getElementById('vol-details')!;
+    if (!res.ok) { el.innerHTML = '<p style="color:#dc2626;">Not found.</p>'; return; }
+    const v = await res.json();
+    document.getElementById('vol-name')!.textContent = v.fullName;
+
+    el.innerHTML = `
+      <div style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:32px;">
+        <h1 style="font-size:1.375rem;font-weight:700;color:#1e293b;margin-bottom:4px;">${v.fullName}</h1>
+        <p style="color:#6b7280;margin-bottom:24px;">${v.availability?.replace(/_/g,' ')} · ${v.isActive ? 'Active' : 'Inactive'}</p>
+        <dl style="display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;">
+          ${v.email ? `<div><dt style="font-size:0.75rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;">Email</dt><dd style="margin:2px 0 0;color:#1e293b;">${v.email}</dd></div>` : ''}
+          ${v.phone ? `<div><dt style="font-size:0.75rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;">Phone</dt><dd style="margin:2px 0 0;color:#1e293b;">${v.phone}</dd></div>` : ''}
+          ${v.district ? `<div><dt style="font-size:0.75rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;">District</dt><dd style="margin:2px 0 0;color:#1e293b;">${v.district}</dd></div>` : ''}
+          ${v.educationLevel ? `<div><dt style="font-size:0.75rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;">Education</dt><dd style="margin:2px 0 0;color:#1e293b;">${v.educationLevel}</dd></div>` : ''}
+          ${v.skills?.length ? `<div style="grid-column:span 2"><dt style="font-size:0.75rem;color:#9ca3af;text-transform:uppercase;letter-spacing:.05em;">Skills</dt><dd style="margin:4px 0 0;display:flex;flex-wrap:wrap;gap:6px;">${v.skills.map((s: string) => `<span style="background:#e0f2fe;color:#0369a1;padding:2px 8px;border-radius:10px;font-size:0.8125rem;">${s}</span>`).join('')}</dd></div>` : ''}
+        </dl>
+        ${v.notes ? `<div style="margin-top:20px;padding-top:20px;border-top:1px solid #f3f4f6;"><p style="font-size:0.875rem;color:#6b7280;">${v.notes}</p></div>` : ''}
+      </div>
+    `;
+  }
+
+  load();
+</script>

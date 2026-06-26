@@ -1,19 +1,47 @@
 {
-  "name": "chrsd-website",
-  "type": "module",
+  "name": "chrsd",
   "version": "2.0.0",
-  "description": "CHRSD Foundation — Institutional website built with Astro + Decap CMS",
+  "type": "module",
+  "description": "CHRSD Foundation — Institutional website built with Astro 5 SSR + Admin Panel",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@astrojs/node": "^9.0.0",
+    "@astrojs/react": "^4.0.0",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.2.1",
-    "astro": "^4.16.18",
+    "@aws-sdk/client-s3": "^3.0.0",
+    "@aws-sdk/s3-request-presigner": "^3.0.0",
+    "@lucia-auth/adapter-drizzle": "^1.1.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@tiptap/extension-image": "^2.0.0",
+    "@tiptap/extension-link": "^2.0.0",
+    "@tiptap/react": "^2.0.0",
+    "@tiptap/starter-kit": "^2.0.0",
+    "astro": "^5.0.0",
+    "drizzle-orm": "^0.36.0",
+    "lucia": "^3.2.0",
+    "nanoid": "^5.0.0",
+    "oslo": "^1.2.1",
+    "pdf-lib": "^1.17.1",
+    "postgres": "^3.4.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "satori": "^0.11.0",
     "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "drizzle-kit": "^0.28.0",
+    "typescript": "^5.6.3"
   }
 }
