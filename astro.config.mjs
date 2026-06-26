@@ -1,14 +1,12 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import node from '@astrojs/node';
+import netlify from '@astrojs/netlify';
 import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://www.chrsd.org',
   output: 'server',
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: netlify(),
   integrations: [
     sitemap(),
     react(),
