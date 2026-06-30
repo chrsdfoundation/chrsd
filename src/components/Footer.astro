@@ -1,5 +1,60 @@
 ---
-import { site, footerColumns } from '@data/navigation';
+// Fetch settings from backend API
+const apiUrl = 'http://localhost:8000/api/settings';
+let settings = {};
+try {
+  const response = await fetch(apiUrl);
+  const data = await response.json();
+  settings = data.data || {};
+} catch (error) {
+  console.log('Settings API unavailable, using defaults');
+}
+
+// Fallback values
+const site = {
+  legalName: settings.org_name || 'Centre for Humanitarian Research and Social Development Foundation',
+  phone: settings.contact_phone || '+880-2-47122566',
+  email: settings.contact_email || 'info@chrsd.org',
+  address: settings.contact_address || 'Dhaka, Bangladesh',
+  social: {
+    facebook: settings.social_facebook || 'https://www.facebook.com/chrsd.foundation',
+    x: settings.social_twitter || 'https://x.com/chrsdfbd',
+    instagram: settings.social_instagram || 'https://www.instagram.com/chrs.df',
+    youtube: settings.social_youtube || 'https://www.youtube.com/@CHRSD-org',
+    linkedin: settings.social_linkedin || 'https://www.linkedin.com/company/chrsdfoundation',
+  }
+};
+
+// Navigation columns (static for now)
+const footerColumns = [
+  {
+    title: 'About',
+    links: [
+      { label: 'Our Mission', url: '/about-us/about_chrsd/' },
+      { label: 'Team', url: '/about-us/team/' },
+      { label: 'Governance', url: '/about-us/governance-and-good-practices/policy/' },
+      { label: 'Awards', url: '/about-us/chrsd-awards-and-recognitions/' },
+    ]
+  },
+  {
+    title: 'Work',
+    links: [
+      { label: 'Programs', url: '/our-work/' },
+      { label: 'Impact', url: '/impact/' },
+      { label: 'Resources', url: '/resources/library/' },
+    ]
+  },
+  {
+    title: 'Connect',
+    links: [
+      { label: 'Blog', url: '/stay-informed/blog/' },
+      { label: 'News', url: '/stay-informed/news/' },
+      { label: 'Get Involved', url: '/get-involved/' },
+      { label: 'Contact', url: '/get-involved/contact-us/' },
+    ]
+  }
+];
+
 const year = new Date().getFullYear();
 const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
 ---
@@ -26,9 +81,25 @@ const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
   <div class="footer__main">
     <div class="container footer__grid">
       <div class="footer__brand">
-        <div class="footer__logo"><span aria-hidden="true">C</span> CHRSD</div>
+        <div class="footer__logo-container">
+          <img src="/chrsd-seal.png" alt="CHRSD Logo" class="footer__logo-img" />
+          <div class="footer__logo-text">CHRSD</div>
+        </div>
         <p class="footer__about">{site.legalName}</p>
-        <p class="footer__founded">Building pathways out of extreme poverty since {site.founded}.</p>
+        <div class="footer__contact-info">
+          <div class="contact-item">
+            <span class="contact-icon" aria-hidden="true">☎</span>
+            <span>Phone: <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}>{site.phone}</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon" aria-hidden="true">✉</span>
+            <span>Email: <a href={`mailto:${site.email}`}>{site.email}</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon" aria-hidden="true">📍</span>
+            <span>Address: {site.address}</span>
+          </div>
+        </div>
       </div>
 
       {footerColumns.map((col) => (
@@ -51,21 +122,20 @@ const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
   <!-- Legal bar -->
   <div class="footer__legal">
     <div class="container legal__inner">
-      <div class="legal__contact">
-        <p>{site.address}</p>
-        <p>
-          <a href={`mailto:${site.email}`}>{site.email}</a> &nbsp;|&nbsp;
-          <a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`}>{site.phone}</a>
-        </p>
-        <p class="legal__copy">&copy; {year} CHRSD. All rights reserved. &nbsp;|&nbsp; Reg No. {site.regNo}</p>
+      <div class="legal__top-row">
+        <div class="legal__govt-container">
+          <img src="/bdgovt.png" alt="Bangladesh Government Logo" class="legal__govt-logo" />
+          <p class="legal__govt">Registered by BANGLADESH Govt. under the Societies Registration Act, 1860.</p>
+        </div>
+        <ul class="legal__social" aria-label="Social media">
+          <li><a href={site.social.facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer">FB</a></li>
+          <li><a href={site.social.x} aria-label="X" target="_blank" rel="noopener noreferrer">X</a></li>
+          <li><a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer">IG</a></li>
+          <li><a href={site.social.youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer">YT</a></li>
+          <li><a href={site.social.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">IN</a></li>
+        </ul>
       </div>
-      <ul class="legal__social" aria-label="Social media">
-        <li><a href={site.social.facebook} aria-label="Facebook" target="_blank" rel="noopener noreferrer">FB</a></li>
-        <li><a href={site.social.x} aria-label="X" target="_blank" rel="noopener noreferrer">X</a></li>
-        <li><a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer">IG</a></li>
-        <li><a href={site.social.youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer">YT</a></li>
-        <li><a href={site.social.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">IN</a></li>
-      </ul>
+      <p class="legal__copy">Copyright &copy; {year} CHRSD Foundation - All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -99,10 +169,15 @@ const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
 
   .footer__main { padding-block: 64px; }
   .footer__grid { display: grid; grid-template-columns: 1.6fr repeat(3, 1fr); gap: 40px; }
-  .footer__logo { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: #fff; display: flex; align-items: center; gap: 10px; }
-  .footer__logo span { width: 36px; height: 36px; display: grid; place-items: center; background: var(--color-institutional); border-radius: 8px; font-size: 20px; }
-  .footer__about { margin-top: 16px; font-size: 14px; color: rgba(255, 255, 255, 0.7); max-width: 30ch; }
-  .footer__founded { margin-top: 12px; font-size: 14px; color: rgba(255, 255, 255, 0.6); max-width: 32ch; }
+  .footer__logo-container { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer__logo-img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+  .footer__logo-text { font-family: var(--font-display); font-weight: 800; font-size: 24px; color: #fff; }
+  .footer__about { font-size: 14px; color: rgba(255, 255, 255, 0.7); max-width: 35ch; line-height: 1.5; }
+  .footer__contact-info { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, 0.75); }
+  .contact-icon { font-size: 14px; margin-top: 2px; flex-shrink: 0; }
+  .contact-item a { color: rgba(255, 255, 255, 0.9); text-decoration: none; }
+  .contact-item a:hover { text-decoration: underline; }
 
   .footer__heading { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 16px; }
   .footer__col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 11px; }
@@ -110,11 +185,13 @@ const newsletterEndpoint = import.meta.env.PUBLIC_NEWSLETTER_ENDPOINT || '';
   .footer__col a:hover { color: #fff; }
 
   .footer__legal { border-top: 1px solid rgba(255, 255, 255, 0.12); padding-block: 28px; }
-  .legal__inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .legal__contact p { font-size: 13px; color: rgba(255, 255, 255, 0.65); line-height: 1.7; }
-  .legal__contact a { color: rgba(255, 255, 255, 0.85); }
-  .legal__copy { margin-top: 6px; }
-  .legal__social { list-style: none; padding: 0; display: flex; gap: 10px; }
+  .legal__inner { display: flex; flex-direction: column; gap: 16px; }
+  .legal__top-row { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .legal__govt-container { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .legal__govt-logo { width: 48px; height: 48px; flex-shrink: 0; object-fit: cover; border-radius: 50%; }
+  .legal__govt { font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.6; margin: 0; text-align: left; }
+  .legal__copy { font-size: 13px; color: rgba(255, 255, 255, 0.65); margin: 0; line-height: 1.6; text-align: center; width: 100%; }
+  .legal__social { list-style: none; padding: 0; display: flex; gap: 10px; flex-shrink: 0; justify-content: flex-end; }
   .legal__social a {
     width: 38px; height: 38px; display: grid; place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 50%;
