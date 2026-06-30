@@ -25,10 +25,10 @@ export const site = {
   name: 'CHRSD',
   legalName: 'Centre for Humanitarian Research and Social Development Foundation',
   shortName: 'CHRS Development',
-  founded: 1972,
+  founded: 2023,
   tagline: "There's always a way",
   url: 'https://www.chrsd.org',
-  donateUrl: 'https://donate.chrsd.org',
+  donateUrl: '/donate/',
   careersUrl: 'https://careers.chrsd.org/',
   tenderUrl: 'https://tender.chrsd.org/',
   email: 'info@chrsd.org',
@@ -44,7 +44,7 @@ export const site = {
   },
 };
 
-// ---- Primary 5-pillar navigation (Phase 2.2 + 2.3) ----
+// ---- Primary navigation — 4 top-level buckets ----
 export const navigation: NavPillar[] = [
   {
     label: 'About',
@@ -110,43 +110,24 @@ export const navigation: NavPillar[] = [
     url: '/impact/',
     groups: [
       {
-        group: 'Data Engine',
+        group: 'Data & Research',
         items: [
           { label: 'Live Impact Counters', url: '/impact/live-impact-counters/' },
           { label: 'GIS Tree Tracking Maps', url: '/impact/gis-maps/' },
           { label: 'Institutional Case Studies', url: '/impact/case-studies/' },
-        ],
-      },
-      {
-        group: 'Publications',
-        items: [
           { label: 'Annual Progress Reports', url: '/impact/annual-reports/' },
           { label: 'Research Papers', url: '/impact/research-papers/' },
           { label: 'Policy Briefings', url: '/impact/policy-briefings/' },
         ],
       },
-    ],
-  },
-  {
-    label: 'Stay Informed',
-    url: '/stay-informed/',
-    groups: [
       {
         group: 'News & Media',
         items: [
           { label: 'Latest News', url: '/stay-informed/news/' },
-          { label: 'Press Releases', url: '/stay-informed/press-releases/' },
           { label: 'Blog', url: '/stay-informed/blog/' },
           { label: 'Events', url: '/stay-informed/events/' },
           { label: 'Gallery', url: '/stay-informed/gallery/' },
-        ],
-      },
-      {
-        group: 'Resources & Learning',
-        items: [
-          { label: 'Online Courses', url: '/resources/online-courses/' },
-          { label: 'Training Programs', url: '/resources/training-programs/' },
-          { label: 'Resource Library', url: '/resources/library/' },
+          // TODO: add /stay-informed/press-releases/ when page is created
         ],
       },
     ],
@@ -166,6 +147,14 @@ export const navigation: NavPillar[] = [
           { label: 'Contact Us', url: '/get-involved/contact-us/' },
         ],
       },
+      {
+        group: 'Resources & Learning',
+        items: [
+          { label: 'Online Courses', url: '/resources/online-courses/' },
+          { label: 'Training Programs', url: '/resources/training-programs/' },
+          { label: 'Resource Library', url: '/resources/library/' },
+        ],
+      },
     ],
   },
 ];
@@ -175,7 +164,7 @@ export const footerColumns = [
   {
     title: 'Get Involved',
     links: [
-      { label: 'Donate', url: site.donateUrl, external: true },
+      { label: 'Donate', url: site.donateUrl },
       { label: 'Volunteer', url: '/get-involved/volunteer/' },
       { label: 'Partner With Us', url: '/get-involved/partnership/' },
       { label: 'Careers', url: site.careersUrl, external: true },

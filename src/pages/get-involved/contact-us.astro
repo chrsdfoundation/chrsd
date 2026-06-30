@@ -86,6 +86,191 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '';
       </form>
     </div>
   </section>
+
+  <!-- EMAIL DIRECTORY -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="dir-header">
+        <p class="overline">Contacts &amp; routing reference</p>
+        <h2>Email Directory</h2>
+        <p class="dir-lead">All CHRSD addresses at chrsd.org — click any address to compose, or use the copy button.</p>
+      </div>
+
+      <div class="dir-categories">
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Public-facing &amp; General Contact</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'info@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:info@chrsd.org">info@chrsd.org</a></div>
+              <div class="dir-desc">General inquiries from public</div>
+              <span class="dir-route">forward to comms team</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'contact@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:contact@chrsd.org">contact@chrsd.org</a></div>
+              <div class="dir-desc">Website contact form destination</div>
+              <span class="dir-route">alias for info@</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Communications &amp; Media</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'media@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:media@chrsd.org">media@chrsd.org</a></div>
+              <div class="dir-desc">Press &amp; journalist inquiries</div>
+              <span class="dir-route">comms / PR team</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'press@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:press@chrsd.org">press@chrsd.org</a></div>
+              <div class="dir-desc">Press releases &amp; statements</div>
+              <span class="dir-route">alias or same as media@</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'newsletter@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:newsletter@chrsd.org">newsletter@chrsd.org</a></div>
+              <div class="dir-desc">Subscription &amp; email campaigns</div>
+              <span class="dir-route">mailing list platform</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Fundraising &amp; Partnerships</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'donate@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:donate@chrsd.org">donate@chrsd.org</a></div>
+              <div class="dir-desc">Donation queries &amp; receipts</div>
+              <span class="dir-route">finance &amp; donor relations</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'grants@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:grants@chrsd.org">grants@chrsd.org</a></div>
+              <div class="dir-desc">Grant applications &amp; reporting</div>
+              <span class="dir-route">programs / grants manager</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'partnerships@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:partnerships@chrsd.org">partnerships@chrsd.org</a></div>
+              <div class="dir-desc">Corporate &amp; NGO collaborations</div>
+              <span class="dir-route">executive / BD team</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Programs &amp; Fieldwork</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'programs@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:programs@chrsd.org">programs@chrsd.org</a></div>
+              <div class="dir-desc">Project inquiries &amp; beneficiary support</div>
+              <span class="dir-route">program managers</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'field@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:field@chrsd.org">field@chrsd.org</a></div>
+              <div class="dir-desc">On-ground team communications</div>
+              <span class="dir-route">regional coordinators</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Human Resources &amp; Volunteers</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'careers@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:careers@chrsd.org">careers@chrsd.org</a></div>
+              <div class="dir-desc">Job applications &amp; recruitment</div>
+              <span class="dir-route">HR team</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'volunteer@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:volunteer@chrsd.org">volunteer@chrsd.org</a></div>
+              <div class="dir-desc">Volunteer signup &amp; coordination</div>
+              <span class="dir-route">volunteer manager</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'hr@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:hr@chrsd.org">hr@chrsd.org</a></div>
+              <div class="dir-desc">Staff internal HR matters</div>
+              <span class="dir-route">HR director (confidential)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Finance, Legal &amp; Compliance</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'finance@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:finance@chrsd.org">finance@chrsd.org</a></div>
+              <div class="dir-desc">Invoices, payments &amp; audits</div>
+              <span class="dir-route">CFO / finance team</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'legal@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:legal@chrsd.org">legal@chrsd.org</a></div>
+              <div class="dir-desc">Contracts, MoUs &amp; compliance</div>
+              <span class="dir-route">legal counsel</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'compliance@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:compliance@chrsd.org">compliance@chrsd.org</a></div>
+              <div class="dir-desc">Regulatory &amp; ethics reporting</div>
+              <span class="dir-route">compliance officer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Technology, IT &amp; Security</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'it@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:it@chrsd.org">it@chrsd.org</a></div>
+              <div class="dir-desc">Internal tech support &amp; helpdesk</div>
+              <span class="dir-route">IT administrator</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'security@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:security@chrsd.org">security@chrsd.org</a></div>
+              <div class="dir-desc">Cybersecurity &amp; data breach alerts</div>
+              <span class="dir-route">security team / CISO</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dir-category">
+          <p class="dir-cat-label">Executive &amp; Governance</p>
+          <div class="dir-cards">
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'board@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:board@chrsd.org">board@chrsd.org</a></div>
+              <div class="dir-desc">Board of directors communications</div>
+              <span class="dir-route">board secretary</span>
+            </div>
+            <div class="dir-card">
+              <button class="dir-copy" onclick="copyEmail(this,'ed@chrsd.org')" type="button">Copy</button>
+              <div class="dir-email"><a href="mailto:ed@chrsd.org">ed@chrsd.org</a></div>
+              <div class="dir-desc">Executive director office</div>
+              <span class="dir-route">executive assistant</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="dir-footer">All addresses @chrsd.org &middot; Click any address to compose a message</p>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -129,9 +314,92 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '';
 
   @media (max-width: 900px) { .contact { grid-template-columns: 1fr; gap: 36px; } }
   @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } .contact__form { padding: 24px; } }
+
+  /* Email Directory */
+  .dir-header { margin-bottom: 40px; }
+  .dir-header h2 { margin-top: 12px; }
+  .dir-lead { color: var(--color-slate); margin-top: 10px; font-size: 15px; }
+
+  .dir-categories { display: flex; flex-direction: column; gap: 36px; }
+
+  .dir-cat-label {
+    font-family: var(--font-display); font-weight: 700; font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-donate);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .dir-cat-label::before {
+    content: ''; display: inline-block; width: 18px; height: 2px;
+    background: var(--color-donate); border-radius: 2px; flex-shrink: 0;
+  }
+
+  .dir-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+
+  .dir-card {
+    background: #fff; border: 1px solid var(--color-border-green);
+    border-radius: var(--radius); padding: 16px 18px 14px;
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative; overflow: hidden;
+    transition: box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    cursor: default;
+  }
+  .dir-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--color-donate); opacity: 0;
+    transition: opacity var(--dur) var(--ease);
+    border-radius: var(--radius) 0 0 var(--radius);
+  }
+  .dir-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-2px); border-color: transparent; }
+  .dir-card:hover::before { opacity: 1; }
+
+  .dir-email { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--color-forest); word-break: break-all; }
+  .dir-email a { color: inherit; text-decoration: none; }
+  .dir-email a:hover { color: var(--color-donate); }
+  .dir-desc { font-size: 13px; color: var(--color-slate); line-height: 1.4; }
+  .dir-route {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--color-tint); color: var(--color-institutional);
+    font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px;
+    margin-top: 2px; width: fit-content;
+  }
+  .dir-route::before { content: '→'; }
+
+  .dir-copy {
+    position: absolute; top: 10px; right: 10px;
+    background: none; border: 1px solid var(--color-border-green);
+    border-radius: 6px; padding: 3px 8px;
+    font-size: 11px; font-family: var(--font-display); font-weight: 600;
+    color: var(--color-slate); cursor: pointer;
+    opacity: 0; transition: opacity var(--dur), background var(--dur), color var(--dur);
+  }
+  .dir-card:hover .dir-copy { opacity: 1; }
+  .dir-copy:hover { background: var(--color-forest); color: #fff; border-color: var(--color-forest); }
+  .dir-copy.copied { background: var(--color-tint); color: var(--color-institutional); border-color: var(--color-tint); opacity: 1; }
+
+  .dir-footer {
+    text-align: center; margin-top: 36px; padding-top: 20px;
+    border-top: 1px solid var(--color-border-green);
+    font-size: 13px; color: var(--color-slate); letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 500px) { .dir-cards { grid-template-columns: 1fr; } }
 </style>
 
 <script>
+  function copyEmail(btn: HTMLButtonElement, email: string) {
+    navigator.clipboard.writeText(email).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+    });
+  }
+  (window as any).copyEmail = copyEmail;
+
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const status = form?.querySelector<HTMLElement>('[data-status]');
 

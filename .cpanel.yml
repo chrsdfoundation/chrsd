@@ -1,4 +1,7 @@
 ---
 deployment:
   tasks:
-    - echo test
+    - export DEPLOYPATH=/home/chrsdorg/repositories/chrsd-websitev2
+    - cd $DEPLOYPATH && npm ci --legacy-peer-deps
+    - cd $DEPLOYPATH && npm run build
+    - cp $DEPLOYPATH/.env.production /home/chrsdorg/nodevenv/chrsd-websitev2/20/.env 2>/dev/null || true

@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+const { id } = Astro.params;
+---
+
+<BaseLayout title="Edit Content — CHRSD Admin" description="Edit content item">
+  <div style="min-height:100vh;background:#f9fafb;">
+    <nav style="background:#1a4a6e;padding:0 24px;display:flex;align-items:center;gap:16px;height:56px;">
+      <a href="/admin" style="color:white;text-decoration:none;font-weight:700;">CHRSD Admin</a>
+      <span style="color:rgba(255,255,255,0.5);">/</span>
+      <a href="/admin/content" style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.875rem;">Content</a>
+      <span style="color:rgba(255,255,255,0.5);">/</span>
+      <span style="color:rgba(255,255,255,0.85);font-size:0.875rem;" id="page-title">Edit</span>
+      <div style="flex:1;" />
+      <form method="POST" action="/api/auth/logout">
+        <button type="submit" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:0.8125rem;">Sign Out</button>
+      </form>
+    </nav>
+
+    <main style="padding:32px 24px;max-width:900px;margin:0 auto;">
+      <div id="editor-root" style="color:#9ca3af;">Loading…</div>
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  import { createElement } from 'react';
+  import { createRoot } from 'react-dom/client';
+
+  const id = window.location.pathname.split('/').pop()!;
+
+  async function mount() {
+    const res = await fetch(`/api/content/${id}`);
+    if (!res.ok) {
+      document.getElementById('editor-root')!.innerHTML = '<p style="color:#dc2626;">Content not found.</p>';
+      return;
+    }
+    const item = await res.json();
+    document.getElementById('page-title')!.textContent = item.title;
+
+    const { default: ContentEditor } = await import('../../../components/admin/ContentEditor');
+
+    const root = createRoot(document.getElementById('editor-root')!);
+    root.render(
+      createElement('div', null,
+        createElement('h2', { style: { fontSize: '1.25rem', fontWeight: 700, marginBottom: 4, color: '#1e293b' } }, item.title),
+        createElement('p', { style: { fontSize: '0.8125rem', color: '#6b7280', marginBottom: 20 } }, `${item.type} · /${item.slug} · ${item.status}`),
+        createElement(ContentEditor, { contentId: id, initialContent: item.body })
+      )
+    );
+  }
+
+  mount();
+</script>

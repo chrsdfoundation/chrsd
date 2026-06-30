@@ -7,42 +7,50 @@ const categories = [
   {
     label: 'Government & Institutional',
     partners: [
-      { name: 'Ministry of Environment, Forest & Climate Change', country: 'Bangladesh', type: 'Programme partner' },
-      { name: 'Ministry of Primary and Mass Education', country: 'Bangladesh', type: 'Programme partner' },
-      { name: 'Local Government Division', country: 'Bangladesh', type: 'Implementation partner' },
-      { name: 'Department of Forests', country: 'Bangladesh', type: 'Technical partner' },
-      { name: 'District Administrations — 14 districts', country: 'Bangladesh', type: 'Field implementation' },
+      { name: 'Ministry of Environment, Forest & Climate Change', country: 'Bangladesh', type: 'Programme partner', logo: null },
+      { name: 'Ministry of Primary and Mass Education', country: 'Bangladesh', type: 'Programme partner', logo: null },
+      { name: 'Directorate of Primary Education', country: 'Bangladesh', type: 'Implementation partner', logo: '/images/partners/dpe.png' },
+      { name: 'Local Government Division', country: 'Bangladesh', type: 'Implementation partner', logo: null },
+      { name: 'Department of Forests', country: 'Bangladesh', type: 'Technical partner', logo: null },
+      { name: 'District Administrations — 14 districts', country: 'Bangladesh', type: 'Field implementation', logo: null },
     ],
   },
   {
     label: 'Technology & Innovation',
     partners: [
-      { name: 'Nevronus Systems Ltd.', country: 'Bangladesh', type: 'Strategic consortium partner — GIS, satellite & digital systems' },
+      { name: 'Nevronus Systems Ltd.', country: 'Bangladesh', type: 'Strategic consortium partner — GIS, satellite & digital systems', logo: '/images/partners/nevronus.png' },
+      { name: 'Lunera Eye Care', country: 'Bangladesh', type: 'Technology partner — AI-assisted optical diagnostics & eyewear', logo: '/images/partners/lunera.png' },
+    ],
+  },
+  {
+    label: 'Health & Specialist',
+    partners: [
+      { name: 'Spark of Tooth', country: 'Bangladesh', type: 'Dental partner — community oral health and dental care programmes', logo: '/images/partners/spark-of-tooth.png' },
     ],
   },
   {
     label: 'Civil Society & NGO',
     partners: [
-      { name: 'Manusher Jonno Foundation', country: 'Bangladesh', type: 'Advocacy partner' },
-      { name: 'BRAC', country: 'Bangladesh', type: 'Field coordination' },
-      { name: 'Transparency International Bangladesh', country: 'Bangladesh', type: 'Governance partner' },
-      { name: 'Ain o Salish Kendra (ASK)', country: 'Bangladesh', type: 'Legal aid partner' },
+      { name: 'Manusher Jonno Foundation', country: 'Bangladesh', type: 'Advocacy partner', logo: null },
+      { name: 'BRAC', country: 'Bangladesh', type: 'Field coordination', logo: null },
+      { name: 'Transparency International Bangladesh', country: 'Bangladesh', type: 'Governance partner', logo: null },
+      { name: 'Ain o Salish Kendra (ASK)', country: 'Bangladesh', type: 'Legal aid partner', logo: null },
     ],
   },
   {
     label: 'Academic & Research',
     partners: [
-      { name: 'University of Dhaka — Department of Environmental Science', country: 'Bangladesh', type: 'Research partner' },
-      { name: 'BIDS (Bangladesh Institute of Development Studies)', country: 'Bangladesh', type: 'Research partner' },
-      { name: 'International Centre for Climate Change and Development (ICCCAD)', country: 'Bangladesh', type: 'Climate research partner' },
+      { name: 'University of Dhaka — Department of Environmental Science', country: 'Bangladesh', type: 'Research partner', logo: null },
+      { name: 'BIDS (Bangladesh Institute of Development Studies)', country: 'Bangladesh', type: 'Research partner', logo: null },
+      { name: 'International Centre for Climate Change and Development (ICCCAD)', country: 'Bangladesh', type: 'Climate research partner', logo: null },
     ],
   },
   {
     label: 'International & Multilateral',
     partners: [
-      { name: 'UNDP Bangladesh', country: 'United Nations', type: 'Funding & technical partner' },
-      { name: 'UN Women Bangladesh', country: 'United Nations', type: 'Gender programme partner' },
-      { name: 'UNICEF Bangladesh', country: 'United Nations', type: 'Child rights partner' },
+      { name: 'UNDP Bangladesh', country: 'United Nations', type: 'Funding & technical partner', logo: null },
+      { name: 'UN Women Bangladesh', country: 'United Nations', type: 'Gender programme partner', logo: null },
+      { name: 'UNICEF Bangladesh', country: 'United Nations', type: 'Child rights partner', logo: null },
     ],
   },
 ];
@@ -77,7 +85,7 @@ const categories = [
         <div class="approach-stats">
           {[
             { n: '20+', l: 'Active partners' },
-            { n: '5', l: 'Partnership categories' },
+            { n: '7', l: 'Partnership categories' },
             { n: '100%', l: 'Formalised with MOU' },
           ].map((s) => (
             <div class="astat">
@@ -103,8 +111,11 @@ const categories = [
             <div class="partner-list">
               {cat.partners.map((p) => (
                 <article class="partner">
-                  <div class="partner__logo-placeholder" aria-hidden="true">
-                    <span>{p.name.split(' ').slice(0, 2).map((w: string) => w[0]).join('')}</span>
+                  <div class:list={['partner__logo-placeholder', { 'partner__logo-placeholder--img': p.logo }]} aria-hidden="true">
+                    {p.logo
+                      ? <img src={p.logo} alt={p.name} class="partner__logo-img" />
+                      : <span>{p.name.split(' ').slice(0, 2).map((w: string) => w[0]).join('')}</span>
+                    }
                   </div>
                   <div class="partner__info">
                     <h4 class="partner__name">{p.name}</h4>
@@ -168,11 +179,15 @@ const categories = [
   }
   .partner:hover { box-shadow: var(--shadow-card-hover); }
   .partner__logo-placeholder {
-    width: 44px; height: 44px; border-radius: var(--radius-sm); flex-shrink: 0;
+    width: 56px; height: 56px; border-radius: var(--radius-sm); flex-shrink: 0;
     background: var(--color-tint); border: 1px solid var(--color-border-green);
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .partner__logo-placeholder--img {
+    background: #fff; padding: 4px;
   }
   .partner__logo-placeholder span { font-family: var(--font-display); font-weight: 800; font-size: 14px; color: var(--color-forest); }
+  .partner__logo-img { width: 100%; height: 100%; object-fit: contain; }
   .partner__name { font-size: 14px; font-weight: 600; color: var(--color-forest); line-height: 1.4; margin-bottom: 4px; }
   .partner__country { font-size: 12px; color: var(--color-slate); }
   .partner__type { font-size: 12px; color: var(--color-institutional); font-weight: 600; margin-top: 4px; }

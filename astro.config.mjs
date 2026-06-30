@@ -1,13 +1,20 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import node from '@astrojs/node';
+import react from '@astrojs/react';
 
-// https://astro.build/config
 export default defineConfig({
   site: 'https://www.chrsd.org',
-  integrations: [sitemap()],
+  output: 'server',
+  adapter: node({
+    mode: 'standalone',
+  }),
+  integrations: [
+    sitemap(),
+    react(),
+  ],
   image: {
-    // Allow remote demo imagery; replace/remove for production CDN setup.
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'media.chrsd.org'],
   },
   build: {
     inlineStylesheets: 'auto',

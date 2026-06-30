@@ -1,0 +1,51 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const user = Astro.locals.user!;
+
+const navItems = [
+  { href: "/admin/content", label: "Content", icon: "📄", roles: ["SUPER_ADMIN", "PROGRAM_MANAGER", "EDITOR"] },
+  { href: "/admin/volunteers", label: "Volunteers", icon: "👥", roles: ["SUPER_ADMIN", "PROGRAM_MANAGER", "VOLUNTEER_COORDINATOR"] },
+  { href: "/admin/media", label: "Media", icon: "🖼️", roles: ["SUPER_ADMIN", "PROGRAM_MANAGER", "EDITOR", "VOLUNTEER_COORDINATOR"] },
+  { href: "/admin/certificates/generate", label: "Certificates", icon: "🎓", roles: ["SUPER_ADMIN", "PROGRAM_MANAGER", "VOLUNTEER_COORDINATOR"] },
+  { href: "/admin/users", label: "Users", icon: "⚙️", roles: ["SUPER_ADMIN"] },
+  { href: "/admin/audit", label: "Audit Log", icon: "📋", roles: ["SUPER_ADMIN"] },
+];
+
+const visibleNav = navItems.filter(item => item.roles.includes(user.role));
+---
+
+<BaseLayout title="Admin Dashboard — CHRSD Foundation" description="CHRSD admin dashboard">
+  <div style="min-height:100vh;background:#f9fafb;">
+    <nav style="background:#1a4a6e;padding:0 24px;display:flex;align-items:center;gap:24px;height:56px;">
+      <span style="color:white;font-weight:700;font-size:1rem;">CHRSD Admin</span>
+      {visibleNav.map(item => (
+        <a href={item.href} style="color:rgba(255,255,255,0.85);text-decoration:none;font-size:0.875rem;display:flex;align-items:center;gap:6px;">
+          <span>{item.icon}</span>{item.label}
+        </a>
+      ))}
+      <div style="flex:1;" />
+      <span style="color:rgba(255,255,255,0.7);font-size:0.8125rem;">{user.fullName} · {user.role.replace(/_/g, " ")}</span>
+      <form method="POST" action="/api/auth/logout" style="display:inline;">
+        <button type="submit" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:6px 14px;border-radius:5px;cursor:pointer;font-size:0.8125rem;">Sign Out</button>
+      </form>
+    </nav>
+
+    <main style="padding:32px 24px;max-width:1100px;margin:0 auto;">
+      <h1 style="font-size:1.5rem;font-weight:700;color:#1e293b;margin-bottom:8px;">Dashboard</h1>
+      <p style="color:#6b7280;margin-bottom:32px;">Welcome back, {user.fullName}.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+        {visibleNav.map(item => (
+          <a
+            href={item.href}
+            style="background:white;border:1px solid #e5e7eb;border-radius:10px;padding:24px;text-decoration:none;display:flex;flex-direction:column;gap:10px;"
+          >
+            <span style="font-size:2rem;">{item.icon}</span>
+            <span style="font-weight:600;color:#1e293b;font-size:1rem;">{item.label}</span>
+          </a>
+        ))}
+      </div>
+    </main>
+  </div>
+</BaseLayout>
